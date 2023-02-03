@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Nesting support added. I current throws errors in VSCode
+  You can temporarily disable CSS validation to hide errors if you want by adding this to your settings.json:
+  "css.validate": false,"
+  **************************************************************
+  Tailwind's Nesting docs: https://tailwindcss.com/docs/using-with-preprocessors#nesting
+  More to come on the VS Code issue: https://github.com/microsoft/vscode/issues/147824
+  **************************************************************
+  Example:
+  .test-class {
+    @apply bg-red-500;
+    & p {
+      @apply bg-blue-500;
+    }
+  }
+*/
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h4 {
+    /* @apply font-bold; */
+  }
+
+  h5 {
+    @apply text-sm;
+  }
+
+  h6 {
+    @apply text-xs;
+  }
+}

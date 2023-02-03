@@ -1,0 +1,97 @@
+{
+  "general": {
+    "name": "Seed Project",
+    "domain": "domain.com",
+    "companyName": "dappd, llc"
+  },
+  "wagmi": {
+    "defaultChain": 56,
+    "supportedChains": [97, 56],
+    "supportedConnectors": ["metamask", "injected", "walletConnect", "coinbase"],
+    "autoConnect": true
+  },
+  "contracts": {
+    "disableEthers": true
+  },
+  "social": {
+    "twitter": "dappd",
+    "facebook": null,
+    "instagram": null,
+    "linkedin": null,
+    "youtube": null,
+    "telegram": null,
+    "discord": null,
+    "github": null
+  },
+  "seo": {
+    "addSiteName": true,
+    "canonical": "https://domain.com",
+    "robots": "noindex,nofollow",
+    "metadata": {
+      "title": null,
+      "description": null,
+      "siteName": "Dappd Seed App",
+      "ogImage": null,
+      "ogImageHeight": null,
+      "ogImageWidth": null,
+      "ogType": null,
+      "twitterHandle": null
+    }
+  },
+  "theme": {
+    "defaultTextColor": "",
+    "defaultBackgroundColor": "",
+    "page": {
+      "blank": false,
+      "showNav": true,
+      "mobileNavOnly": false,
+      "showAppHeader": true,
+      "constrainAppHeader": false,
+      "showAppContent": true,
+      "showAppFooter": true,
+      "fixedAppFooter": false,
+      "showConnectButton": true,
+      "admin": false,
+      "protect": false,
+      "redirect": false,
+      "header": "",
+      "className": null,
+      "bgImage": null,
+      "bgColor": null,
+      "scrollContent": false,
+      "showBackButton": false,
+      "backButtonLink": "/",
+      "stickyHeader": false
+    },
+    "content": {
+      "protect": false,
+      "className": "",
+      "constrain": false,
+      "admin": false,
+      "pagePadding": false,
+      "redirect": false,
+      "contentPosition": null
+    },
+    "section": {
+      "id": null,
+      "className": null,
+      "constrain": true,
+      "constrainRelative": false,
+      "bgImage": null,
+      "bgPosition": "center",
+      "bgSize": "cover",
+      "bgRepeat": "no-repeat",
+      "bgOverlay": true,
+      "bgOverlayColor": "bg-black",
+      "bgOverlayOpacity": "bg-opacity-50"
+    },
+    "appHeader": {
+      "bgColor": "",
+      "sticky": false,
+      "stickyOnMobile": true,
+      "showBackButton": false,
+      "backButtonLink": "/",
+      "constrain": false
+    }
+  }
+}

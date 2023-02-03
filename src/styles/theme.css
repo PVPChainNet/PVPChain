@@ -1,0 +1,356 @@
+/*  ------------------------------------------------- */
+/*  App General */
+/*  ------------------------------------------------- */
+.app-container {
+  @apply max-w-6xl px-8 mx-auto;
+}
+
+.app-container--5xl {
+  @apply max-w-5xl px-8 mx-auto;
+}
+
+.app-section {
+  @apply py-8 md:py-12;
+}
+
+.app-gradient {
+  @apply bg-gradient-to-t from-gray-300 via-gray-50 to-gray-300 shadow-inner;
+}
+
+.app-seperator {
+  @apply w-full border-t border-gray-100 border-opacity-20;
+}
+
+.app-border {
+  @apply border border-white border-opacity-50;
+}
+
+.app-border--gray {
+  @apply border border-gray-100 border-opacity-50;
+}
+
+.app-full-width {
+  width: 100vw;
+  margin-inline-start: 50%;
+  transform: translateX(-50%);
+}
+/*  ------------------------------------------------- */
+/*  Page and Header General */
+/*  ------------------------------------------------- */
+.app-header-padding {
+  @apply px-4 sm:px-6;
+}
+
+.app-footer-padding {
+  @apply px-4 sm:px-6;
+}
+
+.app-page-padding {
+  @apply p-4 sm:p-6;
+}
+.app-constrain {
+  @apply max-w-5xl mx-auto w-full;
+}
+
+/*  ------------------------------------------------- */
+/*  Forms */
+/*  ------------------------------------------------- */
+.app-form {
+}
+
+/*  ------------------------------------------------- */
+/*  Buttons */
+/*  ------------------------------------------------- */
+.app-btn {
+  @apply rounded-xl px-3 py-2 md:px-5 md:py-3 flex items-center select-none drop-shadow whitespace-nowrap leading-6;
+}
+
+.app-btn--full {
+  @apply w-full mx-auto justify-center;
+}
+
+.app-btn--round {
+  @apply rounded-3xl;
+}
+
+.app-btn--primary {
+  @apply bg-white text-black;
+}
+
+.app-btn--gradient {
+  @apply bg-white text-black bg-gradient-to-br from-slate-400 via-white to-slate-200;
+}
+
+.app-btn--inverse {
+  @apply text-white bg-black;
+}
+.app-btn--secondary {
+  @apply bg-gray-300 text-gray-500;
+}
+
+.app-btn--tertiary {
+  @apply bg-amber-200 text-amber-700 font-semibold;
+}
+
+.app-btn--disabled {
+  @apply bg-gray-300 text-gray-400 cursor-not-allowed hover:text-gray-400 hover:bg-gray-300;
+}
+.app-btn--success {
+  @apply bg-green-500 text-green-50;
+}
+
+.app-btn--fail {
+  @apply bg-red-500 text-red-50;
+}
+
+.app-btn--warning {
+  @apply bg-orange-500 text-orange-50;
+}
+
+.app-btn--gold-star {
+  @apply bg-amber-500 text-amber-50;
+}
+
+.app-slanted-bg {
+  @apply relative;
+}
+
+.app-slanted-bg:after {
+  content: '';
+  display: block;
+  background: #f3f4f6;
+  opacity: 5%;
+  border-top-right-radius: 10px;
+  width: 375%;
+  height: 2000px;
+  position: absolute;
+  right: -100%;
+  z-index: 0;
+  transform: rotate(246deg);
+}
+
+.app-slanted-bg-2 {
+  @apply relative;
+}
+
+.app-slanted-bg-2:after {
+  content: '';
+  display: block;
+  background: #f3f4f6;
+  opacity: 10%;
+  border-top-right-radius: 5px;
+  width: 201%;
+  height: 560px;
+  position: absolute;
+  left: -90%;
+  z-index: 0;
+  transform: rotate(13deg);
+}
+
+/*  ------------------------------------------------- */
+/*  Menu Styles  */
+/*  ------------------------------------------------- */
+.app-nav-sidebar {
+  @apply bg-gray-800 w-full max-w-[340px] relative;
+}
+
+.app-nav-sidebar--desktop {
+  @apply hidden md:block overflow-hidden;
+}
+
+.app-nav-sidebar--mobile {
+  @apply absolute top-0 left-0 bottom-0 z-50 md:hidden max-w-[240px] transition-all duration-200 ease-in opacity-100;
+}
+
+.app-nav-items {
+  @apply flex items-center;
+}
+
+.app-nav-item {
+  @apply text-base flex items-center grow px-8 py-3 mx-4 my-1 rounded-xl text-white hover:text-gray-600 hover:bg-white;
+}
+
+.app-nav-item:hover .app-nav-item-icon {
+  @apply hidden;
+}
+.app-nav-item:hover .app-nav-item-icon--active {
+  @apply block;
+}
+
+.app-nav-item.app-nav-item--active .app-nav-item-icon {
+  @apply hidden;
+}
+
+.app-nav-item.app-nav-item--active .app-nav-item-icon--active {
+  @apply block;
+}
+
+.app-nav-item--active {
+  @apply bg-white text-gray-600;
+}
+
+.app-nav-item--active .app-nav-item-text {
+  @apply bg-white text-gray-600;
+}
+
+.app-nav-item-icon {
+  @apply mr-2;
+}
+
+.app-nav-item-icon svg {
+  @apply h-6 w-6;
+}
+
+.app-nav-item-text {
+  @apply font-semibold leading-4;
+}
+
+.app-separator {
+  @apply w-full border-t border-gray-100 border-opacity-20;
+}
+
+.app-nav-mobile-overlay {
+  @apply absolute inset-0 z-40 bg-black bg-opacity-20 md:hidden;
+}
+
+.app-nav-menu-icon {
+  @apply flex items-center md:hidden ml-3 bg-white text-black p-2 rounded;
+}
+
+/*  ------------------------------------------------- */
+/* Progress bar styles */
+/*  ------------------------------------------------- */
+.app-progress {
+  @apply w-full h-6 drop-shadow-sm;
+}
+
+.app-progress::-webkit-progress-bar {
+  @apply bg-white;
+}
+
+.app-progress::-webkit-progress-value {
+  @apply bg-white;
+}
+
+.app-progress::-moz-progress-bar {
+  @apply bg-white;
+}
+
+/*  ------------------------------------------------- */
+/* Loading indicator */
+/*  ------------------------------------------------- */
+.processing-ring {
+  width: 80px;
+  height: 80px;
+}
+
+.processing-ring--small {
+  width: 40px;
+  height: 40px;
+}
+
+.processing-ring--large {
+  width: 120px;
+  height: 120px;
+}
+
+.processing-ring--inline {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.processing-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  animation: processing-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border: 8px solid #fff;
+  border-color: #fff transparent transparent transparent;
+}
+
+.processing-ring--brand div {
+  border-color: #1b1b1b transparent transparent transparent !important;
+}
+
+.processing-ring--dark div {
+  border-color: #333333 transparent transparent transparent !important;
+}
+
+.processing-ring--small div {
+  border-width: 5px;
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+}
+
+.processing-ring--inline div {
+  border-width: 3px;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+}
+
+.processing-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.processing-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.processing-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes processing-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*  ------------------------------------------------- */
+/* Scrollbars */
+/*  ------------------------------------------------- */
+/* Firefox */
+* {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #f3f4f6; /* scroll thumb and track */
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.6em;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+*::-webkit-scrollbar-thumb {
+  @apply bg-black rounded-lg cursor-pointer border-solid border-2 border-white;
+}
+
+/* Modal Scrollbars */
+.app-modal *::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.app-modal *::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.app-modal *::-webkit-scrollbar-thumb {
+  @apply bg-black rounded-lg cursor-pointer  border-solid border-2 border-white;
+}
+
+/*  ------------------------------------------------- */
+/*  Page Styles  */
+/*  ------------------------------------------------- */
+.app-page-header {
+  @apply mt-11 text-[32px] leading-10 -tracking-[0.03em] font-semibold;
+}

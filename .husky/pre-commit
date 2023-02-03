@@ -1,0 +1,65 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+function end(){
+  echo -e "${CYAN}--------------------------------------------------"
+  echo -e "End Pre-Commit Hook"
+  echo -e "--------------------------------------------------${NC}"
+}
+
+echo -e "${CYAN}--------------------------------------------------"
+echo -e "Begin Pre-Commit Hook"
+echo -e "--------------------------------------------------${NC}"
+
+echo -e "${YELLOW}--------------------------------------------------"
+echo -e "Running npm lint"
+echo -e "--------------------------------------------------${NC}"
+
+if npm run lint; then
+  echo -e "${GREEN}--------------------------------------------------"
+  echo -e "\"npm lint\" passed!"
+  echo -e "--------------------------------------------------${NC}"
+
+else
+  echo -e "${RED}**************************************************"
+  echo -e "Pre-Commit Check Command failed!"
+  echo -e "**************************************************"
+  echo -e "--------------------------------------------------"
+  echo -e "npm lint failed"
+  echo -e "See the terminal for specific error details. Warnings can be ignored (not recommended)."
+  echo -e "--------------------------------------------------${NC}"
+  end
+  exit 1
+fi
+
+echo -e "${YELLOW}--------------------------------------------------"
+echo -e "Running npm pretty:ci"
+echo -e "--------------------------------------------------${NC}"
+
+if npm run pretty:ci; then
+    echo -e "${GREEN}--------------------------------------------------"
+    echo -e "\"npm pretty:ci\" passed!"
+    echo -e "--------------------------------------------------${NC}"
+else
+    echo ""
+    echo -e "${RED}**************************************************"
+    echo -e "Pre-Commit Check Failed!"
+    echo -e "**************************************************"
+    echo -e "--------------------------------------------------"
+    echo -e "\"npm pretty:ci\" failed"
+    echo -e "The Prettier check failed. Please run \"npm run pretty\" to fix the issue(s)."
+    echo -e "--------------------------------------------------${NC}"
+    echo -e "${BLUE}Also, please configure \"format-on-save\" for Prettier to have your IDE do this automatically."
+    echo -e "https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode${NC}"
+    echo -e "${RED}--------------------------------------------------${NC}"
+    end
+    exit 1
+fi
+
+end

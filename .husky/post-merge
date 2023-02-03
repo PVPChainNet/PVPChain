@@ -1,0 +1,69 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+function changed {
+  git diff --name-only HEAD@{1} HEAD | grep "^$1" > /dev/null 2>&1
+}
+
+function end(){
+  echo -e "${CYAN}--------------------------------------------------"
+  echo -e "End Post-Merge Hook"
+  echo -e "--------------------------------------------------${NC}"
+}
+
+echo -e "${CYAN}--------------------------------------------------"
+echo -e "Begin Post-Merge Hook"
+echo -e "--------------------------------------------------${NC}"
+
+echo -e "${YELLOW}--------------------------------------------------"
+echo -e "Checking For Package Changes"
+echo -e "--------------------------------------------------${NC}"
+
+if test -f 'yarn.lock'; then
+  if changed 'yarn.lock'; then
+    echo -e "${RED}--------------------------------------------------"
+    echo -e "Packages have changed, running \"yarn install\""
+    echo -e "--------------------------------------------------${NC}"
+
+    yarn install
+
+    echo -e "${GREEN}**************************************************"
+    echo -e "Packages Installed!"
+    echo -e "**************************************************"
+  else
+    echo -e "${GREEN}**************************************************"
+    echo -e "Packages have not changed, skipping \"yarn install\""
+    echo -e "**************************************************"
+    end
+    exit 1
+  fi
+fi
+
+if test -f 'package-lock.json'; then
+  if changed 'package-lock.json'; then
+    echo -e "${RED}--------------------------------------------------"
+    echo -e "Packages have changed, running \"npm install\""
+    echo -e "--------------------------------------------------${NC}"
+
+    npm install
+
+    echo -e "${GREEN}**************************************************"
+    echo -e "Packages Installed!"
+    echo -e "**************************************************"
+
+  else
+    echo -e "${GREEN}**************************************************"
+    echo -e "Packages have not changed, skipping \"npm install\""
+    echo -e "**************************************************"
+    end
+    exit 1
+  fi
+fi
+
+end

@@ -1,0 +1,10 @@
+**/.vscode
+**/.next
+**/node_modules
+**/.yarn
+**/config/ABIs
+artifacts
+cache
+coverage
+typechain-types
+dist

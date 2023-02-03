@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+function end(){
+  echo -e "${CYAN}--------------------------------------------------"
+  echo -e "End Pre-Push Hook"
+  echo -e "--------------------------------------------------${NC}"
+}
+
+echo -e "${CYAN}--------------------------------------------------"
+echo -e "Begin Pre-Push Hook"
+echo -e "--------------------------------------------------${NC}"
+
+echo -e "${YELLOW}--------------------------------------------------"
+echo -e "Running npm build"
+echo -e "--------------------------------------------------${NC}"
+
+if npm run build; then
+  echo -e "${GREEN}--------------------------------------------------"
+  echo -e "\"npm build\" passed!"
+  echo -e "A production build was generated."
+  echo -e "--------------------------------------------------${NC}"
+
+else
+  echo -e "${RED}**************************************************"
+  echo -e "Pre-Push Check Failed!"
+  echo -e "**************************************************"
+  echo -e "--------------------------------------------------"
+  echo -e "\"npm build\" failed"
+  echo -e "See the terminal for specific error details. Warnings can be ignored (not recommended)."
+  echo -e "--------------------------------------------------${NC}"
+  end
+  exit 1
+fi
+
+end
