@@ -7,6 +7,6 @@
  * @returns {string} - The sliced address
  */
 export default function handleAddress(address: string, short = false): string {
-  const formattedAddress = address ? `${address.slice(0, 4)}...${address.slice(-4)}` : 'unknown';
+  const formattedAddress = address ? `${address.slice(0, 8)}...${address.slice(-6)}` : 'unknown';
   return short ? formattedAddress.slice(4, 12) : formattedAddress;
 }

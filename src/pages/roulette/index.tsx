@@ -8,6 +8,7 @@ import {Game} from '../../typescript/contracts';
 import {useContractRead, useContractWrite} from 'wagmi';
 import {BigNumber, ethers} from 'ethers';
 import {toast} from 'react-toastify';
+import {useRouter} from 'next/router';
 
 type TableT = {
   Token: string;
@@ -22,6 +23,8 @@ type TableT = {
 
 const Home: NextPage = () => {
   // const {address, isConnected} = useAccount();
+
+  const router = useRouter();
 
   const [tableWatching, setTableWatching] = useState<number>(-1);
   const [tables, setTables] = useState<TableT[]>([]);
@@ -130,12 +133,14 @@ const Home: NextPage = () => {
         },
       });
     } else {
-      joinGame?.({
-        recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther((parseFloat(formatBuyIn(table)) + parseFloat(minBuyIn)).toString()),
-        },
-      });
+      const path = '/roulette/games/' + table.gameID;
+      router.push(path);
+      // joinGame?.({
+      //   recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
+      //   recklesslySetUnpreparedOverrides: {
+      //     value: ethers.utils.parseEther((parseFloat(formatBuyIn(table)) + parseFloat(minBuyIn)).toString()),
+      //   },
+      // });
     }
   };
 
