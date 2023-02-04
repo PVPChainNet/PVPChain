@@ -120,7 +120,7 @@ const Home: NextPage = () => {
   };
 
   const tableClick = (table: TableT, tableIndex: number) => {
-    if (table.startTimes === '0') {
+    if (table.numberOfPlayers === '0') {
       startGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
         recklesslySetUnpreparedOverrides: {
