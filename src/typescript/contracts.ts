@@ -13,11 +13,10 @@
  *  }
  */
 export const Game = {
-  address: '0x3940AC8796d93dacF425031D009f4C88C8E8415F',
+  address: '0x8A33eca55f2ff3fEdf4EbBbCd0d4515529ebDDc5',
   chainId: 56,
   abi: [
     {inputs: [], stateMutability: 'nonpayable', type: 'constructor'},
-    {inputs: [{internalType: 'int256', name: 'linkWei', type: 'int256'}], name: 'InvalidLinkWeiPrice', type: 'error'},
     {
       inputs: [
         {internalType: 'address', name: 'have', type: 'address'},
@@ -26,14 +25,14 @@ export const Game = {
       name: 'OnlyCoordinatorCanFulfill',
       type: 'error',
     },
-    {inputs: [], name: 'WrongGasValueToCoverFee', type: 'error'},
     {
       anonymous: false,
       inputs: [
-        {indexed: true, internalType: 'address', name: 'token', type: 'address'},
-        {indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256'},
+        {indexed: false, internalType: 'uint256', name: 'tableId', type: 'uint256'},
+        {indexed: false, internalType: 'uint256', name: 'gameId', type: 'uint256'},
+        {indexed: false, internalType: 'address', name: 'loser', type: 'address'},
       ],
-      name: 'DistributeTokenVRFFees',
+      name: 'GameEnded',
       type: 'event',
     },
     {
@@ -142,6 +141,7 @@ export const Game = {
       outputs: [
         {internalType: 'bool', name: 'hasEnded', type: 'bool'},
         {internalType: 'uint256', name: 'tableId', type: 'uint256'},
+        {internalType: 'address', name: 'loser', type: 'address'},
         {internalType: 'uint256', name: 'pot', type: 'uint256'},
         {internalType: 'uint256', name: 'startTime', type: 'uint256'},
         {internalType: 'address', name: 'initiator', type: 'address'},
@@ -152,23 +152,24 @@ export const Game = {
       type: 'function',
     },
     {
-      inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
-      name: 'getAdjustedPot',
-      outputs: [{internalType: 'uint256', name: '', type: 'uint256'}],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
       inputs: [{internalType: 'uint256', name: 'gameId', type: 'uint256'}],
       name: 'getGameInfo',
       outputs: [
         {internalType: 'bool', name: 'gameEnded', type: 'bool'},
         {internalType: 'uint256', name: 'tableId', type: 'uint256'},
         {internalType: 'address[]', name: 'players', type: 'address[]'},
+        {internalType: 'address', name: 'loser', type: 'address'},
         {internalType: 'uint256', name: 'pot', type: 'uint256'},
         {internalType: 'uint256', name: 'startTime', type: 'uint256'},
-        {internalType: 'uint256', name: 'adjustedPot', type: 'uint256'},
+        {internalType: 'uint256', name: 'timeRemaining', type: 'uint256'},
       ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'uint256', name: 'gameId', type: 'uint256'}],
+      name: 'getLoserForGame',
+      outputs: [{internalType: 'address', name: '', type: 'address'}],
       stateMutability: 'view',
       type: 'function',
     },
@@ -176,6 +177,20 @@ export const Game = {
       inputs: [],
       name: 'getOwner',
       outputs: [{internalType: 'address', name: '', type: 'address'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'uint256', name: 'gameId', type: 'uint256'}],
+      name: 'getPlayersForGame',
+      outputs: [{internalType: 'address[]', name: '', type: 'address[]'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
+      name: 'getPlayersForTable',
+      outputs: [{internalType: 'address[]', name: '', type: 'address[]'}],
       stateMutability: 'view',
       type: 'function',
     },
@@ -195,12 +210,39 @@ export const Game = {
     },
     {
       inputs: [
+        {internalType: 'uint256', name: 'gameId', type: 'uint256'},
+        {internalType: 'address', name: 'player', type: 'address'},
+      ],
+      name: 'isPlayerInGame',
+      outputs: [{internalType: 'bool', name: '', type: 'bool'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {internalType: 'uint256', name: 'tableId', type: 'uint256'},
+        {internalType: 'address', name: 'player', type: 'address'},
+      ],
+      name: 'isPlayerInTable',
+      outputs: [{internalType: 'bool', name: '', type: 'bool'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
         {internalType: 'uint256', name: 'tableId', type: 'uint256'},
         {internalType: 'uint256', name: 'ref', type: 'uint256'},
       ],
       name: 'joinGame',
       outputs: [],
       stateMutability: 'payable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'listGameIDs',
+      outputs: [{internalType: 'uint256[]', name: 'gameIDs', type: 'uint256[]'}],
+      stateMutability: 'view',
       type: 'function',
     },
     {
@@ -213,7 +255,7 @@ export const Game = {
         {internalType: 'uint32[]', name: 'durations', type: 'uint32[]'},
         {internalType: 'uint256[]', name: 'numberOfPlayers', type: 'uint256[]'},
         {internalType: 'uint256[]', name: 'pots', type: 'uint256[]'},
-        {internalType: 'uint256[]', name: 'adjustedPots', type: 'uint256[]'},
+        {internalType: 'uint256[]', name: 'gameIDs', type: 'uint256[]'},
         {internalType: 'uint256[]', name: 'startTimes', type: 'uint256[]'},
       ],
       stateMutability: 'view',
