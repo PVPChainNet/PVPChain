@@ -5,15 +5,15 @@
 replicaCount: 1
 
 image:
-  repository: ""
+  repository: ''
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: ''
 
 imagePullSecrets:
   - name: image-pull-secret
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: ''
+fullnameOverride: ''
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -22,11 +22,12 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: ''
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
 securityContext:
@@ -43,22 +44,23 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"
+  className: 'nginx'
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: ""
+    - host: ''
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: ""
+    - secretName: ''
       hosts:
-        - ""
+        - ''
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following

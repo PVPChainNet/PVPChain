@@ -8,12 +8,12 @@ image:
   repository: registry.dappd.net/dappd-website-v2
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "main"
+  tag: 'main'
 
 imagePullSecrets:
   - name: docker-config-json
-nameOverride: "dappd-website"
-fullnameOverride: "dappd-website"
+nameOverride: 'dappd-website'
+fullnameOverride: 'dappd-website'
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -22,11 +22,12 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: ''
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
 securityContext:
@@ -43,10 +44,10 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"
+  className: 'nginx'
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: kubetest.dappd.net
@@ -58,7 +59,8 @@ ingress:
       hosts:
         - kubetest.dappd.net
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -84,4 +86,4 @@ tolerations: []
 affinity: {}
 
 registry: registry.dappd.net
-docker_auth_token: "abc"
+docker_auth_token: 'abc'

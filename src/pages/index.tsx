@@ -112,15 +112,17 @@ const Home: NextPage = () => {
   };
 
   const timeRemainingString = (table: TableT) => {
-    if (table.startTimes === '0') {
+    if (table.numberOfPlayers === '0') {
       return 'Start Game';
+    } else if (table.numberOfPlayers === '1') {
+      return 'Join Game';
     } else {
       return 'Duration: ' + table.duration + ' seconds';
     }
   };
 
   const tableClick = (table: TableT, tableIndex: number) => {
-    if (table.startTimes === '0') {
+    if (table.numberOfPlayers === '0') {
       startGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
         recklesslySetUnpreparedOverrides: {
