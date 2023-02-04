@@ -3,8 +3,10 @@
 **/node_modules
 **/.yarn
 **/config/ABIs
+**/chart
 artifacts
 cache
 coverage
 typechain-types
 dist
+Jenkinsfile
