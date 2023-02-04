@@ -166,7 +166,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
   };
 
   const getCheckbox = (player: string) => {
-    if (gameInfo.gameEnded) {
+    if (gameInfo.gameEnded && gameInfo.loser !== ethers.constants.AddressZero) {
       if (player == gameInfo.loser) {
         return <MdIndeterminateCheckBox className="mt-2 mr-4" />;
       } else {
@@ -188,9 +188,11 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
           </code>
           <code className="mb-4">Duration: {tableInfo.duration}s</code>
           <code className="mb-8">Time Remaining: {showTimeRemaining()}</code>
-          <button className="border border-white mb-8" onClick={() => join()}>
-            Join Game
-          </button>
+          {gameInfo.gameEnded === false && (
+            <button className="border border-white mb-8" onClick={() => join()}>
+              Join Game
+            </button>
+          )}
           <div className="w-full">
             <code className="mb-8">
               Players ({gameInfo.players.length}/{tableInfo.maxPlayers}):
