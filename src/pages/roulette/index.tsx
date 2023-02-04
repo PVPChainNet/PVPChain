@@ -116,11 +116,8 @@ const Home: NextPage = () => {
   const timeRemainingString = (table: TableT) => {
     if (table.numberOfPlayers === '0') {
       return 'Start Game';
-    } else if (table.numberOfPlayers === '1') {
-      return 'Join Game';
     } else {
-      const secondsPassed = Date.now() / 1000 - parseFloat(table.startTimes);
-      return 'Time Left: ' + Math.max(0, parseFloat(table.duration) - secondsPassed) + ' seconds';
+      return 'Join Game';
     }
   };
 

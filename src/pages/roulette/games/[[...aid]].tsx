@@ -53,6 +53,10 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     gameID: '0',
   });
 
+  const formatAmount = (amount: string) => {
+    return ethers.utils.formatUnits(amount || '0', 18);
+  };
+
   const formatBuyIn = () => {
     return ethers.utils.formatUnits(tableInfo.buyIn || '0', 18);
   };
@@ -147,14 +151,6 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     },
   });
 
-  const showTimeRemaining = () => {
-    if (BigNumber.from(gameInfo.timeRemaining).eq(ethers.constants.MaxUint256)) {
-      return 'Waiting For More Players';
-    } else {
-      return gameInfo.timeRemaining + 's';
-    }
-  };
-
   const join = () => {
     joinGame?.();
     // joinGame?.({
@@ -177,17 +173,47 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     }
   };
 
+  const getAmountToWin = (): string => {
+    return (
+      (
+        (parseFloat(formatAmount(tableInfo.buyIn)) * parseFloat(tableInfo.maxPlayers) * 0.975) /
+        (parseFloat(tableInfo.maxPlayers) - 1)
+      ).toFixed(7) +
+      ' ' +
+      tokenName()
+    );
+  };
+
+  const getUserFinalStats = (player: string) => {
+    if (gameInfo.gameEnded && gameInfo.loser !== ethers.constants.AddressZero) {
+      if (player == gameInfo.loser) {
+        return '- ' + parseFloat(formatAmount(tableInfo.buyIn)).toFixed(3) + ' ' + tokenName();
+      } else {
+        return '+ ' + getAmountToWin();
+      }
+    } else {
+      return '';
+    }
+  };
+
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <PageContent contentPosition="center">
         <h1 className="text-4xl font-bold absolute top-10">Game {aid}</h1>
         <hr />
         <div className="mt-10 flex flex-col text-center text-xl">
-          <code className="mb-4">
+          <code className="mb-8">
             Buy In: {formatBuyIn()} {tokenName()}
           </code>
-          <code className="mb-4">Duration: {tableInfo.duration}s</code>
-          <code className="mb-8">Time Remaining: {showTimeRemaining()}</code>
+          <code className="mb-8">
+            {' '}
+            {/** Make it fetch platformFee from contract */}
+            Amount To Win: {getAmountToWin()}
+          </code>
+          <code className="mb-8">
+            Chance To Win:{' '}
+            {((100 * (parseFloat(tableInfo.maxPlayers) - 1)) / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%
+          </code>
           {gameInfo.gameEnded === false && (
             <button className="border border-white mb-8" onClick={() => join()}>
               Join Game
@@ -200,7 +226,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
             {gameInfo.players.map((player, i) => {
               return (
                 <div key={i} className="flex flex-row mt-4">
-                  {getCheckbox(player)} {handleAddress(player)}
+                  {getCheckbox(player)} {handleAddress(player)} &nbsp; &nbsp; {getUserFinalStats(player)}
                 </div>
               );
             })}
