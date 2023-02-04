@@ -3,13 +3,13 @@ import {useProvider} from 'wagmi';
 import {Provider} from '@wagmi/core';
 
 import {getConfigValue} from '@/typescript/types/DappdConfigT';
-import {AllContractsT, ContractsT, ContractT, DEFAULT_CHAIN} from '@/typescript/types/ContractT';
-import {CONTRACTS} from '@/typescript/contracts';
+import {DEFAULT_CHAIN} from '@/typescript/types/ContractT';
+import {Game} from '@/typescript/contracts';
 
-type UseContractReturnT = {
-  contracts: ContractsT;
+type Contract = {
+  address: string;
+  abi: string;
   defaultChain: number;
-  provider: Provider;
 };
 
 type UseContractsPropsT = {
@@ -18,30 +18,15 @@ type UseContractsPropsT = {
 
 export function useContracts(
   {disableEthers = getConfigValue('contracts.disableEthers', false)}: UseContractsPropsT = {disableEthers: false}
-): UseContractReturnT {
+): Contract {
   const defaultChain = DEFAULT_CHAIN;
   const provider = useProvider({chainId: defaultChain});
-  const contracts: {[key in AllContractsT]: ContractT} = {} as ContractsT;
-
-  /*
-   * Create contracts
-   */
-  // Loop through all contracts defined in the contracts file and create them
-  CONTRACTS.forEach((contract: ContractT) => {
-    // Add an ethers instance to the contract if not disabled
-    if (!disableEthers && (contract.address || contract.abi)) {
-      const contractInstance = new ethers.Contract(contract.address, contract.abi, provider);
-      contract.ethers = contractInstance;
-    } else {
-      contract.ethers = false;
-    }
-
-    // TODO: Add a WAGMI useContract instance to the contract?
-
-    // Add the contract to the final contracts object
-    contracts[contract.name as AllContractsT] = contract;
-  });
+  const contracts: Contract = {address: '', abi: '', defaultChain: 56};
 
   // We're through here, return UseContractReturnT
-  return {contracts, defaultChain, provider};
+  return {
+    address: Game.address,
+    abi: '',
+    defaultChain: Game.chainId,
+  };
 }
