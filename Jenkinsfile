@@ -71,8 +71,8 @@ spec:
     }
 
     environment {
-        repo = "${repo}"
-        branch = "${GIT_BRANCH}"
+        repo = "${repo}".toLowerCase()
+        branch = "${GIT_BRANCH}".toLowerCase()
         commit_hash = "${GIT_COMMIT}"
         image_registry = "${registry}"
         image_repo = "${registry}/${repo}"
