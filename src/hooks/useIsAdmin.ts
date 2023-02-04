@@ -1,10 +1,10 @@
 import {useState} from 'react';
 
-import {useContracts, useUserWallet} from '@/hooks';
+// import {useContracts, useUserWallet} from '@/hooks';
 
 export const useIsAdmin = () => {
-  const {address} = useUserWallet();
-  const {contracts} = useContracts();
+  // const {address} = useUserWallet();
+  // const {contracts} = useContracts();
 
   // State
   const [isCheckingAdmin, setIsCheckingAdmin] = useState(false);
@@ -16,19 +16,19 @@ export const useIsAdmin = () => {
   const checkIsAdmin = () => {
     setIsCheckingAdmin(true);
     const doCheck = async () => {
-      try {
-        if (address && contracts.defaultContract.ethers) {
-          const owner: string = await contracts.defaultContract.ethers.getOwner();
-          setIsAdmin(owner === address);
-        } else {
-          setIsAdmin(false);
-        }
-      } catch (error) {
-        console.error('Error Checking Admin', error);
-        setIsAdmin(false);
-      } finally {
-        setIsCheckingAdmin(false);
-      }
+      // try {
+      //   if (address && contracts.defaultContract.ethers) {
+      //     const owner: string = await contracts.defaultContract.ethers.getOwner();
+      //     setIsAdmin(owner === address);
+      //   } else {
+      setIsAdmin(false);
+      //   }
+      // } catch (error) {
+      //   console.error('Error Checking Admin', error);
+      //   setIsAdmin(false);
+      // } finally {
+      //   setIsCheckingAdmin(false);
+      // }
     };
 
     doCheck();
