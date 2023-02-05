@@ -129,7 +129,7 @@ const Home: NextPage = () => {
         },
       });
     } else {
-      const path = '/roulette/games/' + table.gameID;
+      const path = '/winnertakesall/games/' + table.gameID;
       router.push(path);
       // joinGame?.({
       //   recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
