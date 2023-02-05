@@ -170,7 +170,7 @@ const Home: NextPage = () => {
           })}
         </div>
         {isConnected && (
-          <Link href={'/roulette/history'} className="border border-white p-2 mb-24 ">
+          <Link href={'/winnertakesall/history'} className="border border-white p-2 mb-24 ">
             View Game History
           </Link>
         )}

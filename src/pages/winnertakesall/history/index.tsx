@@ -92,7 +92,7 @@ const Home: NextPage = () => {
             }
           })}
 
-          <Link href={'/roulette'} className="border border-white p-2 absolute bottom-4">
+          <Link href={'/winnertakesall'} className="border border-white p-2 absolute bottom-4">
             Go Back
           </Link>
         </div>
