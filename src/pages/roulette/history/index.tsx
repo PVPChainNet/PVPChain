@@ -2,9 +2,9 @@ import {NextPage} from 'next';
 
 import PageContent from '@/components/page/content';
 import Page from '@/components/page';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
-import {History} from '../../../typescript/contracts';
+import {History, Game} from '../../../typescript/contracts';
 import {useAccount, useContractRead} from 'wagmi';
 import {ethers} from 'ethers';
 import Link from 'next/link';
@@ -21,7 +21,10 @@ type HistoryT = {
 const Home: NextPage = () => {
   const {address, isConnected} = useAccount();
 
-  const [history, setHistory] = useState<HistoryT[]>();
+  const [history, setHistory] = useState<HistoryT[]>([]);
+
+  /** Add This To Read Function Or Launch A Helper Contract */
+  //   const [pendingGameIDs, setPendingGameIDs] = useState<number[]>([]);
 
   const readConfig = {
     address: History.address,
@@ -68,29 +71,39 @@ const Home: NextPage = () => {
         <h1 className="text-4xl font-bold absolute top-10">Russian Roulette History</h1>
         <hr />
         <div className="w-full text-xl text-brand-8 flex flex-col items-center">
-          {history?.map((entry, i) => {
-            if (entry.lost) {
-              return (
-                <div key={i} className="flex flex-row justify-between w-1/2 border border-red-400 mb-4">
-                  <code>{new Date(parseFloat(entry.time) * 1000).toDateString()}</code>
-                  <code> LOSS </code>
-                  <code>
-                    Buy In: {formatBuyIn(entry)} {tokenName(entry)}
-                  </code>
-                </div>
-              );
-            } else {
-              return (
-                <div key={i} className="flex flex-row justify-between w-1/2 border border-green-400 mb-4">
-                  <code>{new Date(parseFloat(entry.time) * 1000).toDateString()}</code>
-                  <code> WIN </code>
-                  <code>
-                    Buy In: {formatBuyIn(entry)} {tokenName(entry)}
-                  </code>
-                </div>
-              );
-            }
-          })}
+          {history
+            ?.slice(0)
+            .reverse()
+            .map((entry, i) => {
+              if (entry.lost) {
+                return (
+                  <div key={i} className="flex flex-row justify-between w-1/2 border border-red-400 mb-4">
+                    <code>
+                      {new Date(parseFloat(entry.time) * 1000).toLocaleDateString()}{' '}
+                      {new Date(parseFloat(entry.time) * 1000).toLocaleTimeString()}
+                    </code>
+                    <code> LOSS </code>
+                    <code>
+                      Buy In: {formatBuyIn(entry)} {tokenName(entry)}
+                    </code>
+                    <code>{entry.gameId}</code>
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={i} className="flex flex-row justify-between w-1/2 border border-green-400 mb-4">
+                    <code>
+                      {new Date(parseFloat(entry.time) * 1000).toLocaleDateString()}{' '}
+                      {new Date(parseFloat(entry.time) * 1000).toLocaleTimeString()}
+                    </code>
+                    <code> WIN </code> {/** Add in a check for pending gameIDs, show pending not win */}
+                    <code>
+                      Buy In: {formatBuyIn(entry)} {tokenName(entry)}
+                    </code>
+                  </div>
+                );
+              }
+            })}
 
           <Link href={'/roulette'} className="border border-white p-2 absolute bottom-4">
             Go Back

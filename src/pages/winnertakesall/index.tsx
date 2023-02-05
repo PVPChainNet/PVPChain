@@ -168,12 +168,19 @@ const Home: NextPage = () => {
               </div>
             );
           })}
+          {isConnected && (
+            <Link
+              href={'/winnertakesall/history'}
+              className="cursor-pointer border border-solid border-white text-center m-10 flex flex-col p-4"
+            >
+              View Game History
+            </Link>
+          )}
         </div>
-        {isConnected && (
-          <Link href={'/winnertakesall/history'} className="border border-white p-2 mb-24 ">
-            View Game History
-          </Link>
-        )}
+
+        <Link href={'/'} className="border border-white p-2 absolute bottom-4">
+          Go Back
+        </Link>
       </PageContent>
     </Page>
   );
