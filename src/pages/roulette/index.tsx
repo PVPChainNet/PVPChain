@@ -5,10 +5,11 @@ import Page from '@/components/page';
 import {useState} from 'react';
 
 import {Game} from '../../typescript/contracts';
-import {useContractRead, useContractWrite} from 'wagmi';
+import {useAccount, useContractRead, useContractWrite} from 'wagmi';
 import {BigNumber, ethers} from 'ethers';
 import {toast} from 'react-toastify';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 
 type TableT = {
   Token: string;
@@ -22,11 +23,10 @@ type TableT = {
 };
 
 const Home: NextPage = () => {
-  // const {address, isConnected} = useAccount();
+  const {isConnected} = useAccount();
 
   const router = useRouter();
 
-  const [tableWatching, setTableWatching] = useState<number>(-1);
   const [tables, setTables] = useState<TableT[]>([]);
   const [minBuyIn, setMinBuyIn] = useState<string>('');
 
@@ -70,7 +70,6 @@ const Home: NextPage = () => {
           });
         }
         setTables(allTables);
-        console.log(allTables);
       }
     },
   });
@@ -141,10 +140,16 @@ const Home: NextPage = () => {
     }
   };
 
-  const renderTables = () => {
-    if (tableWatching === -1) {
-      return (
-        <div className="w-full text-xl text-brand-8 grid grid-cols-4 grid-rows-4 items-center mt-24">
+  const goToHistory = () => {
+    router.push('/roulette/history');
+  };
+
+  return (
+    <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
+      <PageContent contentPosition="center">
+        <h1 className="text-4xl font-bold absolute top-10">Russian Roulette</h1>
+        <hr />
+        <div className="w-full text-xl text-brand-8 grid grid-cols-4 grid-rows-3 items-center mt-24">
           {tables.map((table, i) => {
             return (
               <div
@@ -164,28 +169,11 @@ const Home: NextPage = () => {
             );
           })}
         </div>
-      );
-    } else {
-      return (
-        <div
-          className="cursor-pointer border border-solid border-white text-center text-brand-8 text-xl items-center p-2"
-          onClick={() => setTableWatching(-1)}
-        >
-          Watching Table #{tableWatching}
-        </div>
-      );
-    }
-  };
-
-  return (
-    <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <PageContent contentPosition="center">
-        <h1 className="text-4xl font-bold absolute top-10">Russian Roulette</h1>
-        <hr />
-        {/* <div className="w-full text-xl text-brand-8 grid grid-cols-4 grid-rows-4 items-center"> */}
-
-        {renderTables()}
-        {/* </div> */}
+        {isConnected && (
+          <Link href={'/roulette/history'} className="border border-white p-2 mb-24 ">
+            View Game History
+          </Link>
+        )}
       </PageContent>
     </Page>
   );

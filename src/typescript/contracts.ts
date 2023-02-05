@@ -523,3 +523,129 @@ export const Game = {
     },
   ],
 } as const;
+
+export const History = {
+  address: '0x764F174c3969233Bb230a2dFF12c86102D913409',
+  chainId: 56,
+  abi: [
+    {
+      anonymous: false,
+      inputs: [
+        {indexed: true, internalType: 'address', name: 'oldOwner', type: 'address'},
+        {indexed: true, internalType: 'address', name: 'newOwner', type: 'address'},
+      ],
+      name: 'OwnerSet',
+      type: 'event',
+    },
+    {
+      inputs: [
+        {internalType: 'address', name: 'user', type: 'address'},
+        {internalType: 'uint256', name: 'buyIn', type: 'uint256'},
+        {internalType: 'address', name: 'token', type: 'address'},
+        {internalType: 'uint256', name: 'gameId', type: 'uint256'},
+        {internalType: 'uint256', name: 'versionNo', type: 'uint256'},
+      ],
+      name: 'addData',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'address', name: 'newOwner', type: 'address'}],
+      name: 'changeOwner',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'game',
+      outputs: [{internalType: 'address', name: '', type: 'address'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {internalType: 'address', name: '', type: 'address'},
+        {internalType: 'uint256', name: '', type: 'uint256'},
+      ],
+      name: 'gameIdToUserNonce',
+      outputs: [{internalType: 'uint256', name: '', type: 'uint256'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {internalType: 'address', name: '', type: 'address'},
+        {internalType: 'uint256', name: '', type: 'uint256'},
+      ],
+      name: 'games',
+      outputs: [
+        {internalType: 'uint256', name: 'buyIn', type: 'uint256'},
+        {internalType: 'address', name: 'token', type: 'address'},
+        {internalType: 'uint256', name: 'gameId', type: 'uint256'},
+        {internalType: 'uint256', name: 'time', type: 'uint256'},
+        {internalType: 'uint256', name: 'versionNo', type: 'uint256'},
+        {internalType: 'bool', name: 'lost', type: 'bool'},
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'getOwner',
+      outputs: [{internalType: 'address', name: '', type: 'address'}],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'address', name: 'user', type: 'address'}],
+      name: 'getUserData',
+      outputs: [
+        {internalType: 'uint256[]', name: 'buyIns', type: 'uint256[]'},
+        {internalType: 'address[]', name: 'tokens', type: 'address[]'},
+        {internalType: 'uint256[]', name: 'gameIds', type: 'uint256[]'},
+        {internalType: 'uint256[]', name: 'times', type: 'uint256[]'},
+        {internalType: 'uint256[]', name: 'versionNos', type: 'uint256[]'},
+        {internalType: 'bool[]', name: 'losts', type: 'bool[]'},
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {internalType: 'address', name: 'user', type: 'address'},
+        {internalType: 'uint256', name: 'start', type: 'uint256'},
+        {internalType: 'uint256', name: 'end', type: 'uint256'},
+      ],
+      name: 'getUserDataPaginated',
+      outputs: [
+        {internalType: 'uint256[]', name: 'buyIns', type: 'uint256[]'},
+        {internalType: 'address[]', name: 'tokens', type: 'address[]'},
+        {internalType: 'uint256[]', name: 'gameIds', type: 'uint256[]'},
+        {internalType: 'uint256[]', name: 'times', type: 'uint256[]'},
+        {internalType: 'uint256[]', name: 'versionNos', type: 'uint256[]'},
+        {internalType: 'bool[]', name: 'losts', type: 'bool[]'},
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'address', name: 'newGame', type: 'address'}],
+      name: 'setGame',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {internalType: 'address', name: 'user', type: 'address'},
+        {internalType: 'uint256', name: 'gameId', type: 'uint256'},
+      ],
+      name: 'setLost',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+  ],
+} as const;
