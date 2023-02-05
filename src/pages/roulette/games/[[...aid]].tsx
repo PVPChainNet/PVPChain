@@ -3,11 +3,12 @@ import PageContent from '../../../components/page/content';
 import Page from '../../../components/page';
 import Link from 'next/link';
 import {Game} from '../../../typescript/contracts';
-import {useAccount, useContractRead, useContractWrite, usePrepareContractWrite} from 'wagmi';
+import {useAccount, useBlockNumber, useContractRead, useContractWrite, usePrepareContractWrite} from 'wagmi';
 import {toast} from 'react-toastify';
 import {BigNumber, ethers} from 'ethers';
 import {useState} from 'react';
-import {MdCheckBox, MdOutlineCheckBoxOutlineBlank, MdIndeterminateCheckBox} from 'react-icons/md';
+import {MdCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md';
+import {BiMessageSquareX} from 'react-icons/bi';
 import handleAddress from '@/root/src/typescript/utils/handleAddress';
 
 type HomePagePropsT = {props: {aid: number}};
@@ -19,7 +20,6 @@ type GameInfoT = {
   loser: string;
   pot: string;
   startTime: string;
-  timeRemaining: string;
 };
 
 type TableInfoT = {
@@ -32,6 +32,7 @@ type TableInfoT = {
 };
 
 const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const {address, isConnected} = useAccount();
   const [minBuyIn, setMinBuyIn] = useState<string>('0');
 
   const [gameInfo, setGameInfo] = useState<GameInfoT>({
@@ -41,7 +42,6 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     loser: '',
     pot: '0',
     startTime: '0',
-    timeRemaining: '0',
   });
 
   const [tableInfo, setTableInfo] = useState<TableInfoT>({
@@ -51,6 +51,11 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     duration: '0',
     gasToCallRandom: '0',
     gameID: '0',
+  });
+
+  const {data: blockNumber} = useBlockNumber({
+    chainId: 56,
+    watch: gameInfo.players.length >= 2,
   });
 
   const formatAmount = (amount: string) => {
@@ -96,6 +101,50 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     },
   });
 
+  const {config: leaveConfig} = usePrepareContractWrite({
+    ...readConfig,
+    functionName: 'refundGame',
+    enabled: gameInfo.tableId !== '0',
+    args: [BigNumber.from(gameInfo.tableId)],
+  });
+
+  const {write: leaveGame} = useContractWrite({
+    ...leaveConfig,
+    onSettled: (data, error) => {
+      if (error) {
+        console.log(error);
+        toast.error('Error Leaving Game');
+      } else if (data) {
+        toast.info('Leave Request Submitted');
+        data.wait().then(() => {
+          toast.success('Left Game!');
+        });
+      }
+    },
+  });
+
+  const {config: endConfig} = usePrepareContractWrite({
+    ...readConfig,
+    functionName: 'endGame',
+    enabled: gameInfo.tableId !== '0',
+    args: [BigNumber.from(gameInfo.tableId)],
+  });
+
+  const {write: endGame} = useContractWrite({
+    ...endConfig,
+    onSettled: (data, error) => {
+      if (error) {
+        console.log(error);
+        toast.error('Error Ending Game');
+      } else if (data) {
+        toast.info('End Game Request Submitted');
+        data.wait().then(() => {
+          toast.success('Ended Game!');
+        });
+      }
+    },
+  });
+
   useContractRead({
     ...readConfig,
     functionName: 'minBuyInGas',
@@ -124,7 +173,6 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
           loser: data[3].toString(),
           pot: data[4].toString(),
           startTime: data[5].toString(),
-          timeRemaining: data[6].toString(),
         });
       }
     },
@@ -153,18 +201,20 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
   const join = () => {
     joinGame?.();
-    // joinGame?.({
-    //     recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
-    //     recklesslySetUnpreparedOverrides: {
-    //       value: ethers.utils.parseEther((parseFloat(formatBuyIn(table)) + parseFloat(minBuyIn)).toString()),
-    //     },
-    //   });
+  };
+
+  const leave = () => {
+    leaveGame?.();
+  };
+
+  const endEarly = () => {
+    endGame?.();
   };
 
   const getCheckbox = (player: string) => {
     if (gameInfo.gameEnded && gameInfo.loser !== ethers.constants.AddressZero) {
       if (player == gameInfo.loser) {
-        return <MdIndeterminateCheckBox className="mt-2 mr-4" />;
+        return <BiMessageSquareX className="mt-2 mr-4" />;
       } else {
         return <MdCheckBox className="mt-2 mr-4" />;
       }
@@ -184,16 +234,44 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     );
   };
 
+  const getAmountWon = (): string => {
+    return (parseFloat(formatAmount(gameInfo.pot)) / (gameInfo.players.length - 1)).toFixed(7) + ' ' + tokenName();
+  };
+
   const getUserFinalStats = (player: string) => {
+    const start = isConnected ? (player === address ? '(You)' : '') : '';
     if (gameInfo.gameEnded && gameInfo.loser !== ethers.constants.AddressZero) {
       if (player == gameInfo.loser) {
-        return '- ' + parseFloat(formatAmount(tableInfo.buyIn)).toFixed(3) + ' ' + tokenName();
+        return start + ' - ' + parseFloat(formatAmount(tableInfo.buyIn)).toFixed(3) + ' ' + tokenName();
       } else {
-        return '+ ' + getAmountToWin();
+        return start + ' + ' + getAmountWon();
       }
     } else {
-      return '';
+      return start;
     }
+  };
+
+  const shouldDisplayEndEarly = (): boolean => {
+    return gameInfo.players.length >= 2 && blocksLeftUntilEarlyEnding() === 0 && gameInfo.gameEnded === false;
+  };
+
+  const blocksLeftUntilEarlyEnding = (): number => {
+    if (!blockNumber) {
+      return 300;
+    }
+    const endBlock = parseFloat(gameInfo.startTime) + parseFloat(tableInfo.duration);
+    return endBlock > blockNumber ? endBlock - blockNumber : 0;
+  };
+
+  const isUserInGame = (): boolean => {
+    if (isConnected) {
+      for (let i = 0; i < gameInfo.players.length; i++) {
+        if (gameInfo.players[i] == address) {
+          return true;
+        }
+      }
+      return false;
+    } else return false;
   };
 
   return (
@@ -214,9 +292,25 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
             Chance To Win:{' '}
             {((100 * (parseFloat(tableInfo.maxPlayers) - 1)) / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%
           </code>
-          {gameInfo.gameEnded === false && (
+          {gameInfo.players.length >= 2 &&
+            gameInfo.gameEnded === false &&
+            isUserInGame() == true &&
+            blocksLeftUntilEarlyEnding() > 0 && (
+              <code className="mb-8">Can End Early In: {blocksLeftUntilEarlyEnding() * 3}s</code>
+            )}
+          {shouldDisplayEndEarly() && isUserInGame() == true && (
+            <button className="border border-white mb-8" onClick={() => endEarly()}>
+              End Game Early
+            </button>
+          )}
+          {gameInfo.gameEnded === false && isUserInGame() == false && (
             <button className="border border-white mb-8" onClick={() => join()}>
               Join Game
+            </button>
+          )}
+          {isUserInGame() && gameInfo.players.length == 1 && (
+            <button className="border border-white mb-8" onClick={() => leave()}>
+              Leave Game
             </button>
           )}
           <div className="w-full">

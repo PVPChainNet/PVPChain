@@ -13,10 +13,14 @@
  *  }
  */
 export const Game = {
-  address: '0x8A33eca55f2ff3fEdf4EbBbCd0d4515529ebDDc5',
+  address: '0xD45d3e16E107f49216089760c169d93d029A1c9c',
   chainId: 56,
   abi: [
-    {inputs: [], stateMutability: 'nonpayable', type: 'constructor'},
+    {
+      inputs: [{internalType: 'uint256', name: 'versionNo_', type: 'uint256'}],
+      stateMutability: 'nonpayable',
+      type: 'constructor',
+    },
     {
       inputs: [
         {internalType: 'address', name: 'have', type: 'address'},
@@ -101,15 +105,11 @@ export const Game = {
       type: 'function',
     },
     {
-      inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
-      name: 'destroyGame',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
-      name: 'donateToPot',
+      inputs: [
+        {internalType: 'uint256', name: 'tableId', type: 'uint256'},
+        {internalType: 'uint256', name: 'amount', type: 'uint256'},
+      ],
+      name: 'donateToGamePot',
       outputs: [],
       stateMutability: 'payable',
       type: 'function',
@@ -144,7 +144,6 @@ export const Game = {
         {internalType: 'address', name: 'loser', type: 'address'},
         {internalType: 'uint256', name: 'pot', type: 'uint256'},
         {internalType: 'uint256', name: 'startTime', type: 'uint256'},
-        {internalType: 'address', name: 'initiator', type: 'address'},
         {internalType: 'uint256', name: 'requestTime', type: 'uint256'},
         {internalType: 'uint256', name: 'request', type: 'uint256'},
       ],
@@ -161,7 +160,6 @@ export const Game = {
         {internalType: 'address', name: 'loser', type: 'address'},
         {internalType: 'uint256', name: 'pot', type: 'uint256'},
         {internalType: 'uint256', name: 'startTime', type: 'uint256'},
-        {internalType: 'uint256', name: 'timeRemaining', type: 'uint256'},
       ],
       stateMutability: 'view',
       type: 'function',
@@ -205,6 +203,13 @@ export const Game = {
         {internalType: 'uint32', name: 'gasToCallRandom', type: 'uint32'},
         {internalType: 'uint256', name: 'gameID', type: 'uint256'},
       ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'history',
+      outputs: [{internalType: 'contract IHistory', name: '', type: 'address'}],
       stateMutability: 'view',
       type: 'function',
     },
@@ -302,6 +307,13 @@ export const Game = {
     {
       inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
       name: 'reRequestWords',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
+      name: 'refundGame',
       outputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
@@ -433,23 +445,6 @@ export const Game = {
       type: 'function',
     },
     {
-      inputs: [
-        {internalType: 'uint256', name: 'tableId', type: 'uint256'},
-        {internalType: 'uint256', name: 'ref', type: 'uint256'},
-      ],
-      name: 'startAndJoin',
-      outputs: [],
-      stateMutability: 'payable',
-      type: 'function',
-    },
-    {
-      inputs: [{internalType: 'uint256', name: 'tableId', type: 'uint256'}],
-      name: 'startGame',
-      outputs: [],
-      stateMutability: 'payable',
-      type: 'function',
-    },
-    {
       inputs: [],
       name: 'tableNonce',
       outputs: [{internalType: 'uint256', name: '', type: 'uint256'}],
@@ -499,6 +494,13 @@ export const Game = {
         {internalType: 'uint256', name: 'fee', type: 'uint256'},
         {internalType: 'address', name: 'feeRecipient', type: 'address'},
       ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'versionNo',
+      outputs: [{internalType: 'uint256', name: '', type: 'uint256'}],
       stateMutability: 'view',
       type: 'function',
     },

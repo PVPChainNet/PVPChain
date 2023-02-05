@@ -75,20 +75,20 @@ const Home: NextPage = () => {
     },
   });
 
-  const {write: startGame} = useContractWrite({
-    ...readConfig,
-    mode: 'recklesslyUnprepared',
-    functionName: 'startAndJoin',
-    onSettled: (data, error) => {
-      if (error) {
-        console.log(error);
-      } else if (data) {
-        data.wait().then(() => {
-          toast.success('Game Started');
-        });
-      }
-    },
-  });
+  // const {write: startGame} = useContractWrite({
+  //   ...readConfig,
+  //   mode: 'recklesslyUnprepared',
+  //   functionName: 'startAndJoin',
+  //   onSettled: (data, error) => {
+  //     if (error) {
+  //       console.log(error);
+  //     } else if (data) {
+  //       data.wait().then(() => {
+  //         toast.success('Game Started');
+  //       });
+  //     }
+  //   },
+  // });
 
   const {write: joinGame} = useContractWrite({
     ...readConfig,
@@ -105,7 +105,7 @@ const Home: NextPage = () => {
     },
   });
 
-  const formatBuyIn = (table: TableT) => {
+  const formatBuyIn = (table: TableT): string => {
     return ethers.utils.formatUnits(table.buyIn || '0', 18);
   };
 
@@ -123,7 +123,7 @@ const Home: NextPage = () => {
 
   const tableClick = (table: TableT, tableIndex: number) => {
     if (table.numberOfPlayers === '0') {
-      startGame?.({
+      joinGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
         recklesslySetUnpreparedOverrides: {
           value: ethers.utils.parseEther((parseFloat(formatBuyIn(table)) + parseFloat(minBuyIn)).toString()),
