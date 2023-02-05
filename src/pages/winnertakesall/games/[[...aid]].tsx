@@ -17,7 +17,7 @@ type GameInfoT = {
   gameEnded: boolean;
   tableId: string;
   players: string[];
-  loser: string;
+  winner: string;
   pot: string;
   startTime: string;
 };
@@ -39,7 +39,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     gameEnded: false,
     tableId: '0',
     players: [],
-    loser: '',
+    winner: '',
     pot: '0',
     startTime: '0',
   });
@@ -170,7 +170,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
           gameEnded: data[0] as boolean,
           tableId: data[1].toString(),
           players: data[2] as string[],
-          loser: data[3].toString(),
+          winner: data[3].toString(),
           pot: data[4].toString(),
           startTime: data[5].toString(),
         });
@@ -212,11 +212,11 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
   };
 
   const getCheckbox = (player: string) => {
-    if (gameInfo.gameEnded && gameInfo.loser !== ethers.constants.AddressZero) {
-      if (player == gameInfo.loser) {
-        return <BiMessageSquareX className="mt-2 mr-4" />;
-      } else {
+    if (gameInfo.gameEnded && gameInfo.winner !== ethers.constants.AddressZero) {
+      if (player == gameInfo.winner) {
         return <MdCheckBox className="mt-2 mr-4" />;
+      } else {
+        return <BiMessageSquareX className="mt-2 mr-4" />;
       }
     } else {
       return <MdOutlineCheckBoxOutlineBlank className="mt-2 mr-4" />;
@@ -225,26 +225,23 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
   const getAmountToWin = (): string => {
     return (
-      (
-        (parseFloat(formatAmount(tableInfo.buyIn)) * parseFloat(tableInfo.maxPlayers) * 0.975) /
-        (parseFloat(tableInfo.maxPlayers) - 1)
-      ).toFixed(7) +
+      (parseFloat(formatAmount(tableInfo.buyIn)) * parseFloat(tableInfo.maxPlayers) * 0.95).toFixed(4) +
       ' ' +
       tokenName()
     );
   };
 
   const getAmountWon = (): string => {
-    return (parseFloat(formatAmount(gameInfo.pot)) / (gameInfo.players.length - 1)).toFixed(7) + ' ' + tokenName();
+    return parseFloat(formatAmount(gameInfo.pot)).toFixed(7) + ' ' + tokenName();
   };
 
   const getUserFinalStats = (player: string) => {
     const start = isConnected ? (player === address ? '(You)' : '') : '';
-    if (gameInfo.gameEnded && gameInfo.loser !== ethers.constants.AddressZero) {
-      if (player == gameInfo.loser) {
-        return start + ' - ' + parseFloat(formatAmount(tableInfo.buyIn)).toFixed(3) + ' ' + tokenName();
-      } else {
+    if (gameInfo.gameEnded && gameInfo.winner !== ethers.constants.AddressZero) {
+      if (player == gameInfo.winner) {
         return start + ' + ' + getAmountWon();
+      } else {
+        return start + ' - ' + parseFloat(formatAmount(tableInfo.buyIn)).toFixed(3) + ' ' + tokenName();
       }
     } else {
       return start;
@@ -277,7 +274,8 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <PageContent contentPosition="center">
-        <h1 className="text-4xl font-bold absolute top-10">Game {aid}</h1>
+        <h1 className="text-4xl font-bold absolute top-10">Winner Takes All</h1>
+        <h1 className="text-3xl font-bold absolute top-24">Game {aid}</h1>
         <hr />
         <div className="mt-10 flex flex-col text-center text-xl">
           <code className="mb-8">
@@ -288,10 +286,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
             {/** Make it fetch platformFee from contract */}
             Amount To Win: {getAmountToWin()}
           </code>
-          <code className="mb-8">
-            Chance To Win:{' '}
-            {((100 * (parseFloat(tableInfo.maxPlayers) - 1)) / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%
-          </code>
+          <code className="mb-8">Chance To Win: {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%</code>
           {gameInfo.players.length >= 2 &&
             gameInfo.gameEnded === false &&
             isUserInGame() == true &&
@@ -327,7 +322,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
           </div>
         </div>
 
-        <Link href={'/roulette'} className="border border-white p-2 absolute bottom-4">
+        <Link href={'/winnertakesall'} className="border border-white p-2 absolute bottom-4">
           Go Back
         </Link>
       </PageContent>

@@ -71,9 +71,9 @@ const Home: NextPage = () => {
           {history?.map((entry, i) => {
             if (entry.won) {
               return (
-                <div key={i} className="flex flex-row justify-between w-1/2 border border-red-400 mb-4">
+                <div key={i} className="flex flex-row justify-between w-1/2 border border-green-400 mb-4">
                   <code>{new Date(parseFloat(entry.time) * 1000).toDateString()}</code>
-                  <code> LOSS </code>
+                  <code> WIN </code>
                   <code>
                     Buy In: {formatBuyIn(entry)} {tokenName(entry)}
                   </code>
@@ -81,9 +81,9 @@ const Home: NextPage = () => {
               );
             } else {
               return (
-                <div key={i} className="flex flex-row justify-between w-1/2 border border-green-400 mb-4">
+                <div key={i} className="flex flex-row justify-between w-1/2 border border-red-400 mb-4">
                   <code>{new Date(parseFloat(entry.time) * 1000).toDateString()}</code>
-                  <code> WIN </code>
+                  <code> LOSS </code>
                   <code>
                     Buy In: {formatBuyIn(entry)} {tokenName(entry)}
                   </code>

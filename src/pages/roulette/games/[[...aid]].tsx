@@ -277,7 +277,8 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <PageContent contentPosition="center">
-        <h1 className="text-4xl font-bold absolute top-10">Game {aid}</h1>
+        <h1 className="text-4xl font-bold absolute top-10">Russian Roulette</h1>
+        <h4 className="text-3xl font-bold absolute top-24">Game {aid}</h4>
         <hr />
         <div className="mt-10 flex flex-col text-center text-xl">
           <code className="mb-8">
