@@ -100,6 +100,7 @@ const Home: NextPage = () => {
                     <code>
                       Buy In: {formatBuyIn(entry)} {tokenName(entry)}
                     </code>
+                    <code>{entry.gameId}</code>
                   </div>
                 );
               }

@@ -72,21 +72,25 @@ const Home: NextPage = () => {
             if (entry.won) {
               return (
                 <div key={i} className="flex flex-row justify-between w-1/2 border border-green-400 mb-4">
-                  <code>{new Date(parseFloat(entry.time) * 1000).toDateString()}</code>
+                  {new Date(parseFloat(entry.time) * 1000).toLocaleDateString()}{' '}
+                  {new Date(parseFloat(entry.time) * 1000).toLocaleTimeString()}
                   <code> WIN </code>
                   <code>
                     Buy In: {formatBuyIn(entry)} {tokenName(entry)}
                   </code>
+                  <code>{entry.gameId}</code>
                 </div>
               );
             } else {
               return (
                 <div key={i} className="flex flex-row justify-between w-1/2 border border-red-400 mb-4">
-                  <code>{new Date(parseFloat(entry.time) * 1000).toDateString()}</code>
+                  {new Date(parseFloat(entry.time) * 1000).toLocaleDateString()}{' '}
+                  {new Date(parseFloat(entry.time) * 1000).toLocaleTimeString()}
                   <code> LOSS </code>
                   <code>
                     Buy In: {formatBuyIn(entry)} {tokenName(entry)}
                   </code>
+                  <code>{entry.gameId}</code>
                 </div>
               );
             }
