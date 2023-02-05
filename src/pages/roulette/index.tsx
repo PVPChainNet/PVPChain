@@ -116,7 +116,7 @@ const Home: NextPage = () => {
     if (table.numberOfPlayers === '0') {
       return 'Start Game';
     } else {
-      return 'Join Game';
+      return 'Join or Spectate Game';
     }
   };
 
@@ -138,10 +138,6 @@ const Home: NextPage = () => {
       //   },
       // });
     }
-  };
-
-  const goToHistory = () => {
-    router.push('/roulette/history');
   };
 
   return (
