@@ -14,8 +14,11 @@ const Home: NextPage = () => {
         </div>
 
         <div className="w-full text-xl text-brand-8 flex flex-col items-center">
-          <Link href={'/roulette'} className="border border-white p-4">
+          <Link href={'/roulette'} className="border border-white p-4 mb-8">
             Russian Roulette
+          </Link>
+          <Link href={'/winnertakesall'} className="border border-white p-4">
+            Winner Takes All
           </Link>
         </div>
       </PageContent>
