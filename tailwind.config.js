@@ -15,7 +15,7 @@ module.exports = {
         'white-main': '#F6F7F9',
         'white-darker': '#F6F7F980',
         'brand-green': '#A3F777',
-        'brand-blue': '#3A7CF8'
+        'brand-blue': '#3A7CF8',
       },
       dropShadow: {
         'brand-shadow-1': '0px 4px 4px rgba(0, 0, 0, 0.25);',
