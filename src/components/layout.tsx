@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import PageContext from '../contexts/PageContext';
 import {getConfigValue, getThemeValue} from '../typescript/types/DappdConfigT';
+import Nav from './nav';
 
 type LayoutProps = {
   children: ReactNode;
@@ -30,7 +31,10 @@ export default function Layout({children}: LayoutProps) {
       <Head>
         <link rel="canonical" href={canonicalURL} />
       </Head>
-      {children}
+      <div className="flex">
+        <Nav />
+        <main className="flex-grow p-4">{children}</main>
+      </div>
     </>
   );
 }

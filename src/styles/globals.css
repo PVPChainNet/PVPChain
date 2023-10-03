@@ -20,26 +20,48 @@
 */
 
 @layer base {
-  h1 {
-    @apply text-3xl;
+  body {
+    @apply bg-slate-main text-white-main;
   }
-  h2 {
-    @apply text-2xl;
-  }
+}
 
-  h3 {
-    @apply text-xl;
-  }
-
-  h4 {
-    /* @apply font-bold; */
-  }
-
-  h5 {
-    @apply text-sm;
-  }
-
-  h6 {
-    @apply text-xs;
-  }
+h1 {
+  font-size: 64px;
+  font-weight: 500;
+}
+h2 {
+  font-size: 56px;
+  font-weight: 500;
+}
+h3 {
+  font-size: 56px;
+  font-weight: 300;
+}
+h4 {
+  font-size: 48px;
+  font-weight: 500;
+}
+.title24 {
+  font-size: 24px;
+  font-weight: 300;
+}
+.title20 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.body20 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.body18 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.body16Medium {
+  font-size: 16px;
+  font-weight: 500;
+}
+.body16Regular {
+  font-size: 16px;
+  font-weight: 400;
 }

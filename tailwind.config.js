@@ -14,6 +14,7 @@ module.exports = {
         'slate-light': '#232636',
         'white-main': '#F6F7F9',
         'white-darker': '#F6F7F980',
+        'black-main': '#1D1E22',
         'brand-green': '#A3F777',
         'brand-blue': '#3A7CF8',
       },
@@ -26,7 +27,8 @@ module.exports = {
       fontFamily: {
         // Font stack based on
         // https://melchoyce.github.io/fontstacks/examples/open-sans.html
-        'open-sans': ['"Open Sans"', '"Segoe UI"', 'Tahoma', '"sans-serif"'],
+        //'open-sans': ['"Open Sans"', '"Segoe UI"', 'Tahoma', '"sans-serif"'],
+        sans: ['"IBM Plex Sans"', 'sans-serif'],
       },
       scale: {
         0: '0',
