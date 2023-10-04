@@ -1,22 +1,26 @@
-'use client';
-import {useState} from 'react';
 import Image from 'next/image';
 import MenuItem from '../buttons/MenuItem';
 import {menuItemsPVP, menuItemsPVH, menuItemsLottery, menuItemsRevenue} from '@/typescript/menuItems';
 import ActionButton from '../buttons/ActionButton';
+import Tooltip from '../utility/Tooltip';
+import Link from 'next/link';
+//import { on } from 'events';
 
-export default function Nav() {
-  const [isOpen, setIsOpen] = useState(true);
+interface NavProps {
+  onToggle: () => void;
+  isOpen: boolean;
+}
 
+export default function Nav({onToggle, isOpen}: NavProps) {
   return (
     <nav
-      className={`fixed h-full px-6 w-0 bg-slate-light transition-all duration-300 z-30 ${
-        isOpen ? 'w-[324px]' : 'px-0'
+      className={`fixed h-full bg-slate-light transition-all duration-300 z-30 ${
+        isOpen ? 'w-[324px] px-6' : 'w-0 px-0'
       }`}
     >
       {/* toggle button */}
       <div className="z-10 absolute top-10 -right-5">
-        <button onClick={() => setIsOpen(!isOpen)}>
+        <button onClick={onToggle}>
           {isOpen ? (
             <div className="w-6 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center">
               <Image
@@ -42,13 +46,16 @@ export default function Nav() {
       </div>
 
       <div className={`${isOpen ? 'block' : 'hidden'}`}>
-        <Image src={'/images/logos/pvp_logo.svg'} width={132} height={56} alt={'PVP Logo'} />
+        <Link href="/">
+          <Image src={'/images/logos/pvp_logo.svg'} width={132} height={56} alt={'PVP Logo'} />
+        </Link>
         <hr className="my-6 text-white-main opacity-20" />
 
         {/* PVP Games */}
         <div className="flex gap-[6px]">
           <p className="body16Medium">PvP Games</p>
-          <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} />
+          <Tooltip text="PvP games are games where you play against other players." />
+          {/* <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} /> */}
         </div>
         <ul className="my-4 flex flex-col gap-3">
           {menuItemsPVP.map((menuItem, index) => (
@@ -61,7 +68,7 @@ export default function Nav() {
         {/* PvH Games */}
         <div className="flex gap-[6px]">
           <p>PvH Games</p>
-          <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} />
+          <Tooltip text="PvH games are games where you play against the house." />
         </div>
         <ul className="my-4 flex flex-col gap-3">
           {menuItemsPVH.map((menuItem, index) => (
@@ -74,7 +81,7 @@ export default function Nav() {
         {/* Lottery */}
         <div className="flex gap-[6px]">
           <p>Lottery</p>
-          <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} />
+          <Tooltip text="The Lottery is a pool of money that anyone can win." />
         </div>
         <div className="flex justify-between">
           <p>Current Pot</p>
@@ -91,7 +98,7 @@ export default function Nav() {
         {/* Revenue Pool */}
         <div className="flex gap-[6px]">
           <p>Revenue Pool</p>
-          <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} />
+          <Tooltip text="The Revenue Pool is where you can buy and sell points." />
         </div>
         <ul className="my-4 flex flex-col gap-3">
           {menuItemsRevenue.map((menuItem, index) => (

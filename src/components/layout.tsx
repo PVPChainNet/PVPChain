@@ -1,7 +1,6 @@
-import {ReactNode, useContext, useEffect} from 'react';
+import {ReactNode, useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Head from 'next/head';
-
 import PageContext from '../contexts/PageContext';
 import {getConfigValue, getThemeValue} from '../typescript/types/DappdConfigT';
 import Nav from './nav';
@@ -13,6 +12,11 @@ type LayoutProps = {
 export default function Layout({children}: LayoutProps) {
   const router = useRouter();
   const {setBgClass, setTextClass} = useContext(PageContext);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   const _pathSliceLength = Math.min.apply(Math, [
     router.asPath.indexOf('?') > 0 ? router.asPath.indexOf('?') : router.asPath.length,
@@ -31,9 +35,9 @@ export default function Layout({children}: LayoutProps) {
       <Head>
         <link rel="canonical" href={canonicalURL} />
       </Head>
-      <div className="flex">
-        <Nav />
-        <main className="flex-grow p-4">{children}</main>
+      <div>
+        <Nav onToggle={toggleSidebar} isOpen={isOpen} />
+        <main className={`transition-all duration-300 ${isOpen ? 'ml-[324px]' : ''}`}>{children}</main>
       </div>
     </>
   );
