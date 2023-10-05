@@ -103,8 +103,20 @@ export default function Page({
       >
         {showNav && !blank ? (
           <>
-            {!mobileNavOnly && <Nav />}
-            <NavMobile />
+            {!mobileNavOnly && (
+              <Nav
+                onToggle={function (): void {
+                  throw new Error('Function not implemented.');
+                }}
+                isOpen={false}
+              />
+            )}
+            <NavMobile
+              onToggle={function (): void {
+                throw new Error('Function not implemented.');
+              }}
+              isOpen={false}
+            />
           </>
         ) : null}
         <div className="flex flex-col grow relative min-h-screen">

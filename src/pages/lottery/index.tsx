@@ -6,7 +6,7 @@ export default function Lottery() {
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <div className="mt-24 mx-[4.5rem]">
         <h4 className="text-brand-green mb-11">The Lottery</h4>
-        <section className="rounded-lg bg-slate-light flex flex-row justify-around gap-8 max-w-6xl">
+        <section className="rounded-lg bg-slate-light flex flex-col lg:flex-row justify-around gap-8 max-w-6xl">
           {/* left col */}
           <div className="flex flex-col ml-16 my-16">
             <p className="title24">Current Jackpot</p>
