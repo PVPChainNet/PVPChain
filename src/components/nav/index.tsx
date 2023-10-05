@@ -24,7 +24,7 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
     >
       {/* toggle button */}
       <div className="z-10 absolute top-10 -right-5">
-        <button onClick={toggleSidebar}>
+        <button onClick={toggleSidebar} className="shake">
           {sidebarStateActive ? (
             <div className="w-6 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center">
               <Image

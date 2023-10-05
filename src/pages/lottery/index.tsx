@@ -11,19 +11,25 @@ export default function Lottery() {
         <div className="mt-24 mx-[4.5rem]">
           <h4 className="text-brand-green mb-11">The Lottery</h4>
           <section
-            className={`rounded-lg bg-slate-light flex flex-col ${
-              sidebarStateActive ? 'xl:flex-row' : 'lg:flex-row'
-            } justify-around gap-8 max-w-6xl`}
+            className={`${sidebarStateActive ? 'contentContainerWithSidebar' : 'contentContainerWithoutSidebar'}`}
           >
             {/* left col */}
-            <div className="flex flex-col ml-16 my-16">
+            <div
+              className={`${
+                sidebarStateActive ? 'contentContainerColumnWithSidebar' : 'contentContainerColumnWithoutSidebar'
+              }`}
+            >
               <p className="title24">Current Jackpot</p>
               <h1>$1,200,550.40</h1>
               <p className="title20">Next drawing at 12:00 GMT</p>
               <p className="title20">My Current Tickets: 126</p>
             </div>
             {/* right col */}
-            <div className="flex flex-col mr-16 my-16">
+            <div
+              className={`${
+                sidebarStateActive ? 'contentContainerColumnWithSidebar' : 'contentContainerColumnWithoutSidebar'
+              }`}
+            >
               <p className="title24">Ticket Rates</p>
               <div className="flex flex-row mt-6">
                 <input
