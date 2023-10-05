@@ -2,6 +2,7 @@ import {ReactNode, useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Head from 'next/head';
 import PageContext from '../contexts/PageContext';
+import {SidebarProvider} from '../contexts/SidebarContext';
 import {getConfigValue, getThemeValue} from '../typescript/types/DappdConfigT';
 import Nav from './nav';
 
@@ -12,11 +13,11 @@ type LayoutProps = {
 export default function Layout({children}: LayoutProps) {
   const router = useRouter();
   const {setBgClass, setTextClass} = useContext(PageContext);
-  const [isOpen, setIsOpen] = useState(true);
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  // const [isOpen, setIsOpen] = useState(true);
+  // const toggleSidebar = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   const _pathSliceLength = Math.min.apply(Math, [
     router.asPath.indexOf('?') > 0 ? router.asPath.indexOf('?') : router.asPath.length,
@@ -36,8 +37,12 @@ export default function Layout({children}: LayoutProps) {
         <link rel="canonical" href={canonicalURL} />
       </Head>
       <div>
-        <Nav onToggle={toggleSidebar} isOpen={isOpen} />
-        <main className={`transition-all duration-300 ${isOpen ? 'ml-[324px]' : ''}`}>{children}</main>
+        <SidebarProvider>
+          <Nav />
+          <main>{children}</main>
+          {/* <Nav onToggle={toggleSidebar} isOpen={isOpen} /> */}
+          {/* <main className={`transition-all duration-300 ${isOpen ? 'sidebarActive' : ''}`}>{children}</main> */}
+        </SidebarProvider>
       </div>
     </>
   );

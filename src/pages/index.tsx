@@ -1,13 +1,14 @@
 import {NextPage} from 'next';
 import Link from 'next/link';
-
 // import PageContent from '@/components/page/content';
 import Page from '@/components/page';
+import {useSidebar} from '@/contexts/SidebarContext';
 
 const Home: NextPage = () => {
+  const sidebarStateActive = useSidebar();
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div /* className="ml-[300px]" */>
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'}`}>
         <div className="relative mt-28 ml-12">
           <h2>
             The world&apos;s first <span className="text-brand-green">decentralized</span>,{' '}

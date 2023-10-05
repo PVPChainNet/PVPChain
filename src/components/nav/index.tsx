@@ -4,24 +4,28 @@ import {menuItemsPVP, menuItemsPVH, menuItemsLottery, menuItemsRevenue} from '@/
 import ActionButton from '../buttons/ActionButton';
 import Tooltip from '../utility/Tooltip';
 import Link from 'next/link';
-//import { on } from 'events';
+import {useSidebar, useSidebarUpdate} from '@/contexts/SidebarContext';
 
-interface NavProps {
+/* interface NavProps {
   onToggle: () => void;
   isOpen: boolean;
-}
+} */
 
-export default function Nav({onToggle, isOpen}: NavProps) {
+export default function Nav(/* {onToggle, isOpen}: NavProps */) {
+  //NOTE: replaced the props with the context hooks
+  const sidebarStateActive = useSidebar();
+  const toggleSidebar = useSidebarUpdate();
+
   return (
     <nav
       className={`fixed h-full bg-slate-light transition-all duration-300 z-30 ${
-        isOpen ? 'w-[324px] px-6' : 'w-0 px-0'
+        sidebarStateActive ? 'w-[324px] px-6' : 'w-0 px-0'
       }`}
     >
       {/* toggle button */}
       <div className="z-10 absolute top-10 -right-5">
-        <button onClick={onToggle}>
-          {isOpen ? (
+        <button onClick={toggleSidebar}>
+          {sidebarStateActive ? (
             <div className="w-6 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center">
               <Image
                 src={'/images/icons/caret_darker_right.svg'}
@@ -45,7 +49,7 @@ export default function Nav({onToggle, isOpen}: NavProps) {
         </button>
       </div>
 
-      <div className={`${isOpen ? 'block' : 'hidden'}`}>
+      <div className={`${sidebarStateActive ? 'block' : 'hidden'}`}>
         <Link href="/">
           <Image src={'/images/logos/pvp_logo.svg'} width={132} height={56} alt={'PVP Logo'} />
         </Link>

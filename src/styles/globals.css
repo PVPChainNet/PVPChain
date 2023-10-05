@@ -23,6 +23,9 @@
   body {
     @apply bg-slate-main text-white-main;
   }
+  .sidebarActive {
+    @apply ml-[324px] transition-all duration-300;
+  }
 }
 
 h1 {
