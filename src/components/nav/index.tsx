@@ -115,7 +115,7 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
         {/* action buttons */}
         <div className="absolute bottom-0 w-[276px] mb-2">
           <div className="flex flex-col gap-4">
-            <ActionButton color="blue" link="/connect" text="Buy/Sell Points" />
+            <ActionButton color="blue" link="/points" text="Buy/Sell Points" />
             <ActionButton color="green" link="/profile" text="Profile" />
           </div>
         </div>

@@ -28,6 +28,20 @@
   }
 }
 
+.contentContainerWithSidebar {
+  @apply rounded-lg bg-slate-light flex flex-col xl:flex-row justify-around gap-8 max-w-7xl;
+}
+.contentContainerWithoutSidebar {
+  @apply rounded-lg bg-slate-light flex flex-col lg:flex-row justify-around gap-8 max-w-7xl;
+}
+
+.contentContainerColumnWithSidebar {
+  @apply flex flex-col mx-4 my-4 xl:my-16;
+}
+.contentContainerColumnWithoutSidebar {
+  @apply flex flex-col mx-4 my-4 lg:my-16;
+}
+
 h1 {
   font-size: 64px;
   font-weight: 500;
@@ -77,20 +91,6 @@ h4 {
   font-size: 16px;
   font-weight: 400;
   line-height: 20.8px;
-}
-
-.contentContainerWithSidebar {
-  @apply rounded-lg bg-slate-light flex flex-col xl:flex-row justify-around gap-8 max-w-6xl;
-}
-.contentContainerWithoutSidebar {
-  @apply rounded-lg bg-slate-light flex flex-col lg:flex-row justify-around gap-8 max-w-6xl;
-}
-
-.contentContainerColumnWithSidebar {
-  @apply flex flex-col mx-4 my-4 xl:my-16;
-}
-.contentContainerColumnWithoutSidebar {
-  @apply flex flex-col mx-4 my-4 lg:my-16;
 }
 
 /* after 3 initial seconds, the toggle sidebar button will shake a couple times (which will take up 2.5 seconds), 

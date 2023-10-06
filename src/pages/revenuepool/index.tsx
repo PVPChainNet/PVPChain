@@ -53,21 +53,26 @@ export default function RevenuePool() {
               <h1>12,486,327</h1>
             </div>
           </section>
-          <section className={`my-6 rounded-lg bg-slate-light gap-8 max-w-6xl py-6`}>
-            <div className="flex justify-around">
-              <p className="title24">Your Stake: </p>
-              <p className="title24">10,000</p>
-            </div>
-            <hr className="my-10 text-white-main opacity-20 w-5/6 mx-auto" />
-            <div className="flex justify-around">
-              <p className="title24">Total Staked: </p>
-              <p className="title24">10,000</p>
-            </div>
-            <hr className="my-10 text-white-main opacity-20 w-5/6 mx-auto" />
-            <div className="flex justify-around">
-              <p className="title24">Your Revenue Share:: </p>
-              <p className="title24">5%</p>
-            </div>
+          <section className={`my-6 py-6 px-4 rounded-lg bg-slate-light gap-8 max-w-6xl`}>
+            <table className="w-full">
+              {/* <tr className="text-left border-t-2 h-20">
+                <th>Game History</th>
+                <th>Date Played</th>
+                <th>Amount Spent</th>
+              </tr> */}
+              <tr className="text-left border-gray-600 border-b-2 border-opacity-20 h-20 title24">
+                <td>Your Stake</td>
+                <td>10,000</td>
+              </tr>
+              <tr className="text-left border-gray-600 border-b-2 border-opacity-20 h-20 title24">
+                <td>Total Staked</td>
+                <td>200,000</td>
+              </tr>
+              <tr className="text-left border-gray-600 border-opacity-20 h-20 title24">
+                <td>Your Revenue Share</td>
+                <td>5%</td>
+              </tr>
+            </table>
           </section>
         </div>
       </div>
