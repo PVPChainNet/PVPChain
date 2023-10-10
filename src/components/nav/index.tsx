@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import MenuItem from '../buttons/MenuItem';
-import {menuItemsPVP, menuItemsPVH, menuItemsLottery, menuItemsRevenue} from '@/typescript/menuItems';
+import {menuItemsPVP, menuItemsPVH, menuItemsLottery, menuItemsRevenue, menuItemsHouse} from '@/typescript/menuItems';
 import ActionButton from '../buttons/ActionButton';
 import Tooltip from '../utility/Tooltip';
 import Link from 'next/link';
@@ -106,6 +106,19 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
         </div>
         <ul className="my-4 flex flex-col gap-3">
           {menuItemsRevenue.map((menuItem, index) => (
+            <li className="" key={index}>
+              <MenuItem link={menuItem.link} text={menuItem.name} />
+            </li>
+          ))}
+        </ul>
+
+        {/* The House */}
+        <div className="flex gap-[6px]">
+          <p>House Pool</p>
+          <Tooltip text="The Revenue Pool is where you can buy and sell points." />
+        </div>
+        <ul className="my-4 flex flex-col gap-3">
+          {menuItemsHouse.map((menuItem, index) => (
             <li className="" key={index}>
               <MenuItem link={menuItem.link} text={menuItem.name} />
             </li>

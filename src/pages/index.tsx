@@ -28,7 +28,7 @@ const Home: NextPage = () => {
               width={8}
               height={8}
               alt="Arrow right"
-              className="m-auto relative top-0 right-0"
+              className="m-auto relative top-4"
             />
           </div>
 

@@ -15,3 +15,4 @@ export const menuItemsPVH: MenuItem[] = [
 ];
 export const menuItemsLottery: MenuItem[] = [{name: 'Play Lottery', link: '/lottery'}];
 export const menuItemsRevenue: MenuItem[] = [{name: 'Join Pool', link: '/revenuepool'}];
+export const menuItemsHouse: MenuItem[] = [{name: 'The House', link: '/thehouse'}];
