@@ -2,6 +2,7 @@ import Page from '@/components/page';
 import {useSidebar} from '@/contexts/SidebarContext';
 import {useEffect, useState} from 'react';
 import ActionButtonItem from '../../components/buttons/ActionButton';
+import {use} from 'chai';
 
 interface PredictionMarketInfo {
   prizePool: number;
@@ -21,6 +22,8 @@ export default function PredictionMarket() {
   const [previousPredictionResult, setPreviousPredictionResult] = useState<PredictionMarketInfo>();
   const [livePredictionInfo, setLivePredictionInfo] = useState<PredictionMarketInfo>();
   const [upcomingPredictionInfo, setUpcomingPredictionInfo] = useState<PredictionMarketInfo>();
+  const [hasUserEnteredPrediction, setHasUserEnteredPrediction] = useState(false);
+  const [hasUserEnteredUp, setHasUserEnteredUp] = useState(false);
 
   {
     /* get prediction information */
@@ -32,9 +35,9 @@ export default function PredictionMarket() {
       lockedPrice: 1.1453,
       closedPrice: 1.1444,
       result: -0.0009,
-      payoutDown: 0.0009,
-      payoutUp: 0.0009,
-      wasDown: true,
+      payoutDown: 1.3,
+      payoutUp: 0.8,
+      wasDown: false,
     });
 
     //live prediction information
@@ -43,8 +46,8 @@ export default function PredictionMarket() {
       lockedPrice: 1.1453,
       closedPrice: 1.1444,
       result: -0.0009,
-      payoutDown: 0.0009,
-      payoutUp: 0.0009,
+      payoutDown: 1.3,
+      payoutUp: 0.8,
     });
 
     //upcoming prediction information
@@ -53,8 +56,8 @@ export default function PredictionMarket() {
       lockedPrice: 1.1453,
       closedPrice: 1.1444,
       result: -0.0009,
-      payoutDown: 0.0009,
-      payoutUp: 0.0009,
+      payoutDown: 1.3,
+      payoutUp: 0.8,
     });
 
     //set timer for live prediction
@@ -72,6 +75,11 @@ export default function PredictionMarket() {
 
   const handleModeChange = () => (e: any) => {
     setCurrentMode(e.target.value);
+  };
+
+  const handleEnterVote = (enterUp: boolean) => () => {
+    setHasUserEnteredPrediction(true);
+    setHasUserEnteredUp(enterUp);
   };
 
   return (
@@ -136,12 +144,12 @@ export default function PredictionMarket() {
                 </div>
                 <button
                   className={`flex justify-center gap-8 align-middle mt-10 mb-6 h-12 w-full rounded-lg ${
-                    previousPredictionResult?.wasDown === true ? 'bg-brand-pink' : 'bg-brand-green'
+                    previousPredictionResult?.wasDown ? 'bg-brand-pink' : 'bg-brand-green text-black-main'
                   }`}
                 >
                   {' '}
                   {/* result */}
-                  <p className="body16Medium my-auto">Result: </p>
+                  <p className={`body16Medium my-auto `}>Result: </p>
                   <p className="title20 my-auto">$-0.0009</p>
                 </button>
                 <p className="body20 text-center pt-4">Payouts</p>
@@ -151,14 +159,14 @@ export default function PredictionMarket() {
                       previousPredictionResult?.wasDown === false ? 'bg-opacity-50' : ''
                     }`}
                   >
-                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutDown}</p>
+                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutDown}x</p>
                   </div>
                   <div
                     className={`basis-1/2 bg-brand-green text-black rounded-r-lg w-full h-full flex justify-center align-middle ${
                       previousPredictionResult?.wasDown === true ? 'bg-opacity-50' : ''
                     }`}
                   >
-                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutUp}</p>
+                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutUp}x</p>
                   </div>
                 </div>
               </div>
@@ -196,14 +204,14 @@ export default function PredictionMarket() {
                       previousPredictionResult?.wasDown === false ? 'bg-opacity-50' : ''
                     }`}
                   >
-                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutDown}</p>
+                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutDown}x</p>
                   </div>
                   <div
                     className={`basis-1/2 bg-brand-green text-black rounded-r-lg w-full h-full flex justify-center align-middle ${
                       previousPredictionResult?.wasDown === true ? 'bg-opacity-50' : ''
                     }`}
                   >
-                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutUp}</p>
+                    <p className="body16Regular m-auto">{previousPredictionResult?.payoutUp}x</p>
                   </div>
                 </div>
               </div>
@@ -218,20 +226,39 @@ export default function PredictionMarket() {
             {/* upcoming prediction */}
             <div className="mt-12 w-[372px]">
               <p className="mb-2 title24">Upcoming</p>
-              <div className="bg-slate-light rounded-lg h-[380px] px-5 py-3">
+              <div
+                className={`bg-slate-light rounded-lg h-[380px] px-5 py-3 ${
+                  hasUserEnteredPrediction && hasUserEnteredUp ? 'border-2 border-brand-green' : ''
+                } ${hasUserEnteredPrediction && !hasUserEnteredUp ? 'border-2 border-brand-pink' : ''}`}
+              >
                 {' '}
                 {/* card */}
-                <div className="flex flex-row justify-between align-middle pt-3">
+                <div className={`flex flex-row justify-between align-middle pt-3`}>
                   {' '}
                   {/* prize pool row */}
                   <p className="title24 my-auto">Prize Pool: </p>
                   <p className="text-3xl font-medium uppercase my-auto">4.7700 BNB</p>
                 </div>
                 <hr className="border-gray-700 border-2 mx-0 mt-2" />
-                <div className="my-12 mx-10 flex flex-col gap-8">
-                  <ActionButtonItem text="Enter Up" color="blue" link="" />
-                  <ActionButtonItem text="Enter Down" color="pink" link="" />
-                </div>
+                {!hasUserEnteredPrediction ? (
+                  <div className="my-12 mx-10 flex flex-col gap-8">
+                    <button onClick={handleEnterVote(true)}>
+                      <ActionButtonItem text="Enter Up" color="blue" link="" />
+                    </button>
+                    <button onClick={handleEnterVote(false)}>
+                      <ActionButtonItem text="Enter Down" color="pink" link="" />
+                    </button>
+                  </div>
+                ) : (
+                  <div
+                    className={`w-full rounded-lg mt-14 py-8 text-center ${
+                      hasUserEnteredUp ? 'bg-brand-green text-black' : 'bg-brand-pink text-white-main'
+                    }`}
+                  >
+                    <p className="text-3xl font-medium mb-4">{hasUserEnteredUp ? 'Entered Up' : 'Entered Down'}</p>
+                    <p className="title20">Starting in: {timeRemainingMiliseconds}</p>
+                  </div>
+                )}
               </div>
             </div>
           </section>
