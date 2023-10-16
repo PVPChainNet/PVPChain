@@ -13,7 +13,9 @@ export default function ActionButtonItem({color, link, text}: ActionButtonProps)
       href={link}
       className={`flex justify-center align-middle h-[54px] w-full rounded-full ${
         color === 'blue' ? 'bg-brand-blue hover:bg-brand-blue-hover text-white-main' : ''
-      } ${color === 'green' ? 'bg-brand-green hover:bg-brand-green-hover text-black-main' : ''}`}
+      } ${color === 'pink' ? 'bg-brand-pink hover:bg-brand-pink-hover text-white-main' : ''} ${
+        color === 'green' ? 'bg-brand-green hover:bg-brand-green-hover text-black-main' : ''
+      }`}
     >
       <p className="font-medium text-[18px] my-auto">{text}</p>
     </Link>
