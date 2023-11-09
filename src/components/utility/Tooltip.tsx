@@ -9,13 +9,13 @@ const Tooltip = ({text}: TooltipProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative inline-block">
+    <div className="relative flex">
       <Image
         src="/images/icons/info_icon.svg"
         alt="Tooltip Icon"
         width={20}
         height={20}
-        className="w-6 h-6 cursor-pointer"
+        className="w-5 h-5 my-auto cursor-pointer"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       />

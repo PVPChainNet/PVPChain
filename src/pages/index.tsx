@@ -65,7 +65,7 @@ const Home: NextPage = () => {
               />
               <p className="mt-5 body20">Prediction Market</p>
             </div>
-            <div className="min-w-[554px]">
+            {/* <div className="min-w-[554px]">
               <Link href="/roulette">
                 <Image
                   src="/images/games/russian_roulette/background.png"
@@ -95,38 +95,39 @@ const Home: NextPage = () => {
                 alt="Prediction Market background"
               />
               <p className="mt-5 body20">Prediction Market</p>
-            </div>
+            </div> */}
           </div>
 
-          <p className="mb-6 text-2xl font-medium">PvP Games</p>
-          <div className="flex flex-row gap-6 mb-20">
+          <p className="mb-6 text-2xl font-medium">PvH Games</p>
+
+          <div className="flex flex-row gap-6 mb-20 relative overflow-hidden hover:overflow-x-scroll">
             {/* map over pvp games */}
-            <div>
+            <div className="min-w-[554px]">
               <Image
                 src="/images/games/russian_roulette/background.png"
                 width={554}
                 height={374}
                 alt="Russian Roulette background"
               />
-              <p className="mt-5 body20">Russian Roulette</p>
+              <p className="mt-5 body20">Wheel of Fortune</p>
             </div>
-            <div>
+            <div className="min-w-[554px]">
               <Image
                 src="/images/games/winner_takes_all/background.png"
                 width={554}
                 height={374}
                 alt="Winner Takes All background"
               />
-              <p className="mt-5 body20">Winner Takes All</p>
+              <p className="mt-5 body20">Slots</p>
             </div>
-            <div>
+            <div className="min-w-[554px]">
               <Image
                 src="/images/games/prediction_market/background.png"
                 width={554}
                 height={374}
                 alt="Prediction Market background"
               />
-              <p className="mt-5 body20">Prediction Market</p>
+              <p className="mt-5 body20">Coin Flip</p>
             </div>
           </div>
         </section>

@@ -10,8 +10,8 @@ export const menuItemsPVP: MenuItem[] = [
 ];
 export const menuItemsPVH: MenuItem[] = [
   {name: 'Wheel of Fortune', link: '/wheeloffortune'},
-  // {name: 'Another Game', link: '/'},
-  // {name: 'A Third Game', link: '/'},
+  {name: 'Slots', link: '/slots'},
+  {name: 'Coin Flip', link: '/coinflip'},
 ];
 export const menuItemsLottery: MenuItem[] = [{name: 'Play Lottery', link: '/lottery'}];
 export const menuItemsRevenue: MenuItem[] = [{name: 'Join Pool', link: '/revenuepool'}];
