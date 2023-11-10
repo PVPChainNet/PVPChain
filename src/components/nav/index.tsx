@@ -85,14 +85,21 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
           </ul>
 
           {/* Lottery */}
-          <div className="flex gap-[6px]">
-            <p>Lottery</p>
-            <Tooltip text="The Lottery is a pool of money that anyone can win." />
-          </div>
           <div className="flex justify-between">
+            <div className="flex gap-[6px]">
+              <p>Lottery</p>
+              <Tooltip text="The Lottery is a pool of money that anyone can win." />
+            </div>
+            <div className="flex gap-[6px]">
+              <p>Pot: </p>
+              <p className="font-light">$1,200,550.40</p>
+            </div>
+          </div>
+          {/* changed this to be on line (above) */}
+          {/* <div className="flex justify-between">
             <p>Current Pot</p>
             <p>$1,200,550.40</p>
-          </div>
+          </div> */}
           <ul className="my-4 flex flex-col gap-3">
             {menuItemsLottery.map((menuItem, index) => (
               <li className="" key={index}>
