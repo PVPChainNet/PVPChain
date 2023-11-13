@@ -11,6 +11,9 @@ import {toast} from 'react-toastify';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
+import {useSidebar} from '@/contexts/SidebarContext';
+import ActionButtonItem from '../../components/buttons/ActionButton';
+
 type TableT = {
   Token: string;
   buyIn: string;
@@ -23,6 +26,8 @@ type TableT = {
 };
 
 const Home: NextPage = () => {
+  const sidebarStateActive = useSidebar();
+
   const {isConnected} = useAccount();
 
   const router = useRouter();
@@ -146,42 +151,105 @@ const Home: NextPage = () => {
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <PageContent contentPosition="center">
-        <h1 className="text-4xl font-bold absolute top-10">Winner Takes All</h1>
-        <hr />
-        <div className="w-full text-xl text-brand-8 grid grid-cols-4 grid-rows-3 items-center mt-24">
-          {tables.map((table, i) => {
-            return (
-              <div
-                className="cursor-pointer border border-solid border-white text-center m-10 flex flex-col p-4"
-                key={i}
-                onClick={() => tableClick(table, i + 1)}
-              >
-                <code className="mb-5">Table {i + 1}</code>
-                <code>
-                  Buy In: {formatBuyIn(table)} {tokenName(table)}
-                </code>
-                <code>
-                  Players: {table.numberOfPlayers}/{table.maxPlayers}
-                </code>
-                <code>{timeRemainingString(table)}</code>
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} gameBGImage`}>
+        <div className="mt-24 mb-12 mx-[4.5rem]">
+          <h4 className="text-brand-green mb-11">Join a Table: Winner Takes All</h4>
+          <section
+            className={`${
+              sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
+            } mb-24`}
+          >
+            {/* game introduction section */}
+            {/* left side */}
+            <div className="basis-3/4">
+              <p className="title28">
+                <span className="text-[48px] font-thin text-brand-green">Winner Takes All</span> is a self-contained
+                lottery where one player wins big. In this game, players take turns pulling the trigger. Test your luck,
+                place fun wagers, and enjoy the suspense as you pray to live another day - it&apos;s all in good fun,
+                and your the odds are in your favor!
+              </p>
+            </div>
+            {/* right side */}
+            <div className="basis-1/4">
+              {/* responsive border */}
+              <div className={`mx-2 border-l-2 h-full my-auto hidden ${sidebarStateActive ? 'xl:block' : 'lg:block'}`}>
+                <div className="ml-8">
+                  <p className="title32">Details: </p>
+                  <p className="text-[24px] font-light">Minimum of 3 Players</p>
+                  <p className="text-[24px] font-light">No Upper Limit of Players</p>
+                </div>
               </div>
-            );
-          })}
-          {isConnected && (
-            <Link
-              href={'/winnertakesall/history'}
-              className="cursor-pointer border border-solid border-white text-center m-10 flex flex-col p-4"
-            >
-              View Game History
-            </Link>
-          )}
-        </div>
+              <div className={`my-2 border-t-2 w-full mx-auto block ${sidebarStateActive ? 'xl:hidden' : 'lg:hidden'}`}>
+                <div className="mt-8">
+                  <p className="title32">Details: </p>
+                  <p className="text-[24px] font-light">Minimum of 3 Players</p>
+                  <p className="text-[24px] font-light">No Upper Limit of Players</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section
+            className={`${
+              sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
+            }`}
+          >
+            {/* table selection section */}
+            <div className="w-full text-xl tableGrid min-h-[280px]">
+              {tables.map((table, i) => {
+                //   return (
+                //     <div
+                //       className="cursor-pointer border border-solid border-white text-center m-10 flex flex-col p-4"
+                //       key={i}
+                //       onClick={() => tableClick(table, i + 1)}
+                //     >
+                //       <code className="mb-5">Table {i + 1}</code>
+                //       <code>
+                //         Buy In: {formatBuyIn(table)} {tokenName(table)}
+                //       </code>
+                //       <code>
+                //         Players: {table.numberOfPlayers}/{table.maxPlayers}
+                //       </code>
+                //       <code>{timeRemainingString(table)}</code>
+                //     </div>
+                //   );
+                // })}
+                return (
+                  <div className="bg-slate-main rounded-lg p-8 flex flex-col" key={i}>
+                    <p className="text-2xl font-medium mb-8">Table {i + 1}</p>
+                    <div className="mr-4 flex justify-between text-xl">
+                      <p className="font-medium">Buy In: </p>
+                      <p className="font-light">
+                        {formatBuyIn(table)} {tokenName(table)}
+                      </p>
+                    </div>
+                    <div className="mr-4 flex justify-between text-xl">
+                      <p className="font-medium">Players: </p>
+                      <p className="font-light">
+                        {table.numberOfPlayers}/{table.maxPlayers}
+                      </p>
+                    </div>
+                    <div className="mt-12 mx-4" onClick={() => tableClick(table, i + 1)}>
+                      <ActionButtonItem text={timeRemainingString(table)} color={'blue'} link={''} />
+                    </div>
+                  </div>
+                );
+              })}
 
-        <Link href={'/'} className="border border-white p-2 absolute bottom-4">
-          Go Back
-        </Link>
-      </PageContent>
+              {isConnected && (
+                <Link
+                  href={'/winnertakesall/history'}
+                  className="cursor-pointer border border-solid border-white text-center m-10 flex flex-col p-4"
+                >
+                  View Game History
+                </Link>
+              )}
+            </div>
+          </section>
+          {/* <Link href={'/'} className="border border-white p-2 absolute bottom-4">
+            Go Back
+          </Link> */}
+        </div>
+      </div>
     </Page>
   );
 };
