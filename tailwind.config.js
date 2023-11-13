@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'game-bg-temp': 'url("/images/game-bg-temp.png")',
       },
       colors: {
         // Add colors here

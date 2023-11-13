@@ -35,11 +35,28 @@
   @apply rounded-lg bg-slate-light flex flex-col lg:flex-row justify-around gap-8 max-w-7xl;
 }
 
+.contentContainerWithSidebarNoBG {
+  @apply rounded-lg flex flex-col xl:flex-row justify-around gap-8 max-w-7xl;
+}
+.contentContainerWithoutSidebarNoBG {
+  @apply rounded-lg flex flex-col lg:flex-row justify-around gap-8 max-w-7xl;
+}
+
 .contentContainerColumnWithSidebar {
   @apply flex flex-col mx-4 my-4 xl:my-16;
 }
 .contentContainerColumnWithoutSidebar {
   @apply flex flex-col mx-4 my-4 lg:my-16;
+}
+
+.gameBGImage {
+  @apply bg-game-bg-temp bg-cover bg-no-repeat;
+}
+
+.tableGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
 }
 
 h1 {
@@ -61,6 +78,16 @@ h4 {
   font-size: 48px;
   font-weight: 500;
   line-height: 62.4px;
+}
+.title32 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 41.6px;
+}
+.title28 {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 36.4px;
 }
 .title24 {
   font-size: 24px;
