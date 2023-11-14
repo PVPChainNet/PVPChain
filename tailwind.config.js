@@ -7,10 +7,22 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'game-bg-temp': 'url("/images/game-bg-temp.png")',
       },
       colors: {
         // Add colors here
-        // example: 'brand-1': '#ff0000'
+        'slate-main': '#1C1F2E',
+        'slate-light': '#232636',
+        'slate-accent': '#363B52',
+        'white-main': '#F6F7F9',
+        'white-darker': '#F6F7F980',
+        'black-main': '#1D1E22',
+        'brand-green': '#A3F777',
+        'brand-green-hover': '#5df10e',
+        'brand-blue': '#3A7CF8',
+        'brand-blue-hover': '#095cf6',
+        'brand-pink': '#CF2CA2',
+        'brand-pink-hover': '#DA53B4',
       },
       dropShadow: {
         'brand-shadow-1': '0px 4px 4px rgba(0, 0, 0, 0.25);',
@@ -21,7 +33,8 @@ module.exports = {
       fontFamily: {
         // Font stack based on
         // https://melchoyce.github.io/fontstacks/examples/open-sans.html
-        'open-sans': ['"Open Sans"', '"Segoe UI"', 'Tahoma', '"sans-serif"'],
+        //'open-sans': ['"Open Sans"', '"Segoe UI"', 'Tahoma', '"sans-serif"'],
+        sans: ['"IBM Plex Sans"', 'sans-serif'],
       },
       scale: {
         0: '0',

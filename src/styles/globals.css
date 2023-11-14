@@ -20,26 +20,136 @@
 */
 
 @layer base {
-  h1 {
-    @apply text-3xl;
+  body {
+    @apply bg-slate-main text-white-main;
   }
-  h2 {
-    @apply text-2xl;
+  .sidebarActive {
+    @apply ml-[324px] transition-all duration-300;
   }
+}
 
-  h3 {
-    @apply text-xl;
-  }
+.contentContainerWithSidebar {
+  @apply rounded-lg bg-slate-light flex flex-col xl:flex-row justify-around gap-8 max-w-7xl;
+}
+.contentContainerWithoutSidebar {
+  @apply rounded-lg bg-slate-light flex flex-col lg:flex-row justify-around gap-8 max-w-7xl;
+}
 
-  h4 {
-    /* @apply font-bold; */
-  }
+.contentContainerWithSidebarNoBG {
+  @apply rounded-lg flex flex-col xl:flex-row justify-around gap-8 max-w-7xl;
+}
+.contentContainerWithoutSidebarNoBG {
+  @apply rounded-lg flex flex-col lg:flex-row justify-around gap-8 max-w-7xl;
+}
 
-  h5 {
-    @apply text-sm;
-  }
+.contentContainerColumnWithSidebar {
+  @apply flex flex-col mx-4 my-4 xl:my-16;
+}
+.contentContainerColumnWithoutSidebar {
+  @apply flex flex-col mx-4 my-4 lg:my-16;
+}
 
-  h6 {
-    @apply text-xs;
+.gameBGImage {
+  @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
+}
+
+.tableGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 83.2px;
+}
+h2 {
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 72.8px;
+}
+h3 {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 72.8px;
+}
+h4 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 62.4px;
+}
+.title32 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 41.6px;
+}
+.title28 {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 36.4px;
+}
+.title24 {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 31.2px;
+}
+.title20 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+}
+.body20 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+}
+.body18 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+}
+.body16Medium {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20.8px;
+}
+.body16Regular {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.8px;
+}
+
+/* after 3 initial seconds, the toggle sidebar button will shake a couple times (which will take up 2.5 seconds), 
+then will rest for 7.5 seconds, then repeat  */
+.shake {
+  animation: shake 10s ease-in-out infinite;
+  animation-delay: 3s;
+}
+@keyframes shake {
+  0% {
+    transform: translateX(0);
   }
+  5%,
+  15% {
+    transform: translateX(-3px);
+  }
+  10%,
+  20% {
+    transform: translateX(3px);
+  }
+  25% {
+    transform: translateX(0);
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

@@ -1,18 +1,13 @@
-import {NextPage} from 'next';
-
-import PageContent from '@/components/page/content';
 import Page from '@/components/page';
-import {useState} from 'react';
-
-import {Game} from '../../typescript/contracts';
-import {useAccount, useContractRead, useContractWrite} from 'wagmi';
-import {BigNumber, ethers} from 'ethers';
-import {toast} from 'react-toastify';
-import {useRouter} from 'next/router';
-import Link from 'next/link';
-
 import {useSidebar} from '@/contexts/SidebarContext';
 import ActionButtonItem from '../../components/buttons/ActionButton';
+import {useState} from 'react';
+import {useRouter} from 'next/router';
+import {BigNumber, ethers} from 'ethers';
+import {useAccount, useContractRead, useContractWrite} from 'wagmi';
+import {Game} from '../../typescript/contracts';
+import {toast} from 'react-toastify';
+import Link from 'next/link';
 
 type TableT = {
   Token: string;
@@ -25,7 +20,7 @@ type TableT = {
   startTimes: string;
 };
 
-const Home: NextPage = () => {
+export default function PredictionMarket() {
   const sidebarStateActive = useSidebar();
 
   const {isConnected} = useAccount();
@@ -80,20 +75,13 @@ const Home: NextPage = () => {
     },
   });
 
-  // const {write: startGame} = useContractWrite({
-  //   ...readConfig,
-  //   mode: 'recklesslyUnprepared',
-  //   functionName: 'startAndJoin',
-  //   onSettled: (data, error) => {
-  //     if (error) {
-  //       console.log(error);
-  //     } else if (data) {
-  //       data.wait().then(() => {
-  //         toast.success('Game Started');
-  //       });
-  //     }
-  //   },
-  // });
+  const formatBuyIn = (table: TableT): string => {
+    return ethers.utils.formatUnits(table.buyIn || '0', 18);
+  };
+
+  const tokenName = (table: TableT) => {
+    return table.Token === ethers.constants.AddressZero ? 'BNB' : 'Unknown';
+  };
 
   const {write: joinGame} = useContractWrite({
     ...readConfig,
@@ -110,22 +98,6 @@ const Home: NextPage = () => {
     },
   });
 
-  const formatBuyIn = (table: TableT): string => {
-    return ethers.utils.formatUnits(table.buyIn || '0', 18);
-  };
-
-  const tokenName = (table: TableT) => {
-    return table.Token === ethers.constants.AddressZero ? 'BNB' : 'Unknown';
-  };
-
-  const timeRemainingString = (table: TableT) => {
-    if (table.numberOfPlayers === '0') {
-      return 'Start Game';
-    } else {
-      return 'Join or Spectate Game';
-    }
-  };
-
   const tableClick = (table: TableT, tableIndex: number) => {
     if (table.numberOfPlayers === '0') {
       joinGame?.({
@@ -135,7 +107,7 @@ const Home: NextPage = () => {
         },
       });
     } else {
-      const path = '/roulette/games/' + table.gameID;
+      const path = '/predictionmarket/games/' + table.gameID;
       router.push(path);
       // joinGame?.({
       //   recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
@@ -146,6 +118,14 @@ const Home: NextPage = () => {
     }
   };
 
+  const timeRemainingString = (table: TableT) => {
+    if (table.numberOfPlayers === '0') {
+      return 'Start Game';
+    } else {
+      return 'Join or Spectate Game';
+    }
+  };
+
   // Event handler to update the selected value
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTableCurrency(event.target.value);
@@ -153,22 +133,25 @@ const Home: NextPage = () => {
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} gameBGImage`}>
+      <div
+        className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} min-h-screen gameBGImage`}
+      >
         <div className="mt-60 mb-12 mx-[4.5rem]">
           <section
             className={`${
               sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
             } mb-32`}
           >
-            {/* <PageContent contentPosition="center"> */}
             {/* game introduction section */}
             {/* left side */}
             <div className="basis-3/4">
               <p className="title28">
-                <span className="text-[48px] font-thin text-brand-green">Russian Roulette</span> is a dangerous and
-                deadly game of chance. In this game, players take turns pulling the trigger. Test your luck, place fun
-                wagers, and enjoy the suspense as you pray to live another day - it&apos;s all in good fun, and your the
-                odds are in your favor!
+                <span className="text-[48px] font-thin text-brand-green">Prediction Market</span> takes your bets and
+                rewards up or down. Dive into the world of digital assets and test your intuition - will your chosen
+                token rise (&apos;Up&apos;) or fall (&apos;Down&apos;) in value? It&apos;s an engaging way to explore
+                the dynamic crypto market without risking real money. Make your predictions and see if you&apos;ve got
+                what it takes to anticipate the crypto rollercoaster. Have fun while honing your crypto-savvy skills in
+                the Crypto Price Prediction Market!
               </p>
             </div>
             {/* right side */}
@@ -189,7 +172,7 @@ const Home: NextPage = () => {
             </div>
           </section>
           <div className="flex gap-4 align-middle mb-10">
-            <h4 className="text-brand-green">Join a Table </h4>
+            <h4 className="text-brand-green">Join a Market </h4>
             <select
               className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
               placeholder="ETH"
@@ -243,13 +226,11 @@ const Home: NextPage = () => {
             </div>
             {/* </PageContent> */}
           </section>
-          {/* <Link href={'/'} className="border border-white p-2 mt-10 bottom-4">
-            Go Back
-          </Link> */}
+          <div className="flex justify-center mx-auto max-w-[245px]">
+            <ActionButtonItem text="Enter Prediction Market" color="blue" link="predictionmarket/play" />
+          </div>
         </div>
       </div>
     </Page>
   );
-};
-
-export default Home;
+}

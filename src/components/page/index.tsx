@@ -13,8 +13,8 @@ import {getThemeValue} from '../../typescript/types/DappdConfigT';
 
 import AppFooter from '@/components/app/footer';
 import AppHeader from '@/components/app/header';
-import Nav from '@/components/nav/desktop';
-import NavMobile from '@/components/nav/mobile';
+import Nav from '@/root/src/components/nav';
+import NavMobile from '@/root/src/components/nav';
 import ConnectButton from '@/components/utility/ConnectButton';
 import Protected from '@/components/utility/Protected';
 
