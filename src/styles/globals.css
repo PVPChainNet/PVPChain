@@ -50,7 +50,7 @@
 }
 
 .gameBGImage {
-  @apply bg-game-bg-temp bg-cover bg-no-repeat;
+  @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
 }
 
 .tableGrid {

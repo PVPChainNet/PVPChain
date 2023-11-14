@@ -1,8 +1,11 @@
+import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next';
 import Page from '@/components/page';
 import {useSidebar} from '@/contexts/SidebarContext';
 import {useEffect, useState} from 'react';
 import ActionButtonItem from '../../../components/buttons/ActionButton';
 import {use} from 'chai';
+
+type HomePagePropsT = {props: {aid: number}};
 
 interface PredictionMarketInfo {
   prizePool: number;
@@ -14,7 +17,7 @@ interface PredictionMarketInfo {
   wasDown?: boolean;
 }
 
-export default function Play() {
+const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const sidebarStateActive = useSidebar();
 
   const [currentMode, setCurrentMode] = useState('BNB - 1 Day');
@@ -278,4 +281,19 @@ export default function Play() {
       </div>
     </Page>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async function ({params}) {
+  // Set default props, returning 0
+  const returnProps: HomePagePropsT = {props: {aid: 0}};
+  // console.log('params', params)
+  returnProps.props.aid = params?.aid ? parseInt(params.aid[0] as string) : 0;
+  // if returnProps.props.aid is not a number, return 0
+  if (isNaN(returnProps.props.aid)) {
+    returnProps.props.aid = 0;
+  }
+  // console.log('returnProps', returnProps)
+  return returnProps;
+};
+
+export default GamePage;

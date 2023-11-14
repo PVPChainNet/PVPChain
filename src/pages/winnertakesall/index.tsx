@@ -34,6 +34,7 @@ const Home: NextPage = () => {
 
   const [tables, setTables] = useState<TableT[]>([]);
   const [minBuyIn, setMinBuyIn] = useState<string>('');
+  const [tableCurrency, setTableCurrency] = useState<string>('');
 
   const readConfig = {
     address: WinnerTakesAll.address,
@@ -149,15 +150,19 @@ const Home: NextPage = () => {
     router.push('/roulette/history');
   };
 
+  // Event handler to update the selected value
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTableCurrency(event.target.value);
+  };
+
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <div className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} gameBGImage`}>
-        <div className="mt-24 mb-12 mx-[4.5rem]">
-          <h4 className="text-brand-green mb-11">Join a Table: Winner Takes All</h4>
+        <div className="mt-60 mb-12 mx-[4.5rem]">
           <section
             className={`${
               sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
-            } mb-24`}
+            } mb-32`}
           >
             {/* game introduction section */}
             {/* left side */}
@@ -188,6 +193,20 @@ const Home: NextPage = () => {
               </div>
             </div>
           </section>
+          <div className="flex gap-4 align-middle mb-10">
+            <h4 className="text-brand-green">Join a Table </h4>
+            <select
+              className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
+              placeholder="ETH"
+              value={tableCurrency}
+              onChange={handleSelectChange}
+            >
+              <option value="">Select a currency: </option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
           <section
             className={`${
               sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
