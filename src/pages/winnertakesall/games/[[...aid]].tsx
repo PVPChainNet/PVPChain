@@ -2,6 +2,7 @@ import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next';
 import PageContent from '../../../components/page/content';
 import Page from '../../../components/page';
 import Link from 'next/link';
+import {useSidebar} from '@/contexts/SidebarContext';
 import {WinnerTakesAll} from '../../../typescript/contracts';
 import {useAccount, useBlockNumber, useContractRead, useContractWrite, usePrepareContractWrite} from 'wagmi';
 import {toast} from 'react-toastify';
@@ -10,6 +11,7 @@ import {useState} from 'react';
 import {MdCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md';
 import {BiMessageSquareX} from 'react-icons/bi';
 import handleAddress from '@/root/src/typescript/utils/handleAddress';
+import ActionButtonItem from '@/root/src/components/buttons/ActionButton';
 
 type HomePagePropsT = {props: {aid: number}};
 
@@ -32,6 +34,7 @@ type TableInfoT = {
 };
 
 const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const sidebarStateActive = useSidebar();
   const {address, isConnected} = useAccount();
   const [minBuyIn, setMinBuyIn] = useState<string>('0');
 
@@ -273,17 +276,101 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <PageContent contentPosition="center">
-        <h1 className="text-4xl font-bold absolute top-10">Winner Takes All</h1>
+      <div
+        className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} min-h-screen gameBGImage`}
+      >
+        <div className="mt-24 mx-[4.5rem]">
+          <h4 className="text-brand-green mb-16">Winner Takes All - Game {aid}</h4>
+          <section
+            className={`${
+              sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
+            } mb-24`}
+          >
+            {/* left column */}
+            <div className="basis-3/4">
+              <h4 className="title32 mb-6">
+                Players: ({gameInfo.players.length}/{tableInfo.maxPlayers}):
+              </h4>
+              {/* table of players */}
+              <div className="addressGrid">
+                {gameInfo.players.map((player, i) => {
+                  return (
+                    <div key={i} className="w-[208px]">
+                      {getCheckbox(player)} {handleAddress(player)} &nbsp; &nbsp; {getUserFinalStats(player)}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            {/* right column */}
+            <div className="basis-1/4 mb-4">
+              {/* status section */}
+              <p className="text-[24px] font-medium mb-4">Status: </p>
+              <div className="ml-9 title20 flex flex-col gap-6">
+                {/* TODO: UPDATE STATUSES */}
+                <p>Joined - Table Full </p>
+                {gameInfo.players.length >= 2 &&
+                  gameInfo.gameEnded === false &&
+                  isUserInGame() == true &&
+                  blocksLeftUntilEarlyEnding() > 0 && (
+                    <code className="mb-8">Can End Early In: {blocksLeftUntilEarlyEnding() * 3}s</code>
+                  )}
+                {shouldDisplayEndEarly() && isUserInGame() == true && (
+                  <button className="border border-white mb-8" onClick={() => endEarly()}>
+                    End Game Early
+                  </button>
+                )}
+                {gameInfo.gameEnded === false && isUserInGame() == false && (
+                  // <button className="border border-white mb-8" onClick={() => join()}>
+                  //   Join Game
+                  // </button>
+                  <button className="w-full max-w-[244px]" onClick={() => join()}>
+                    <ActionButtonItem text="Join Game" color="blue" link={''} />
+                  </button>
+                )}
+                {isUserInGame() && gameInfo.players.length == 1 && (
+                  <button className="border border-white mb-8" onClick={() => leave()}>
+                    Leave Game
+                  </button>
+                )}
+              </div>
+              {/* details section */}
+              <p className="text-[24px] font-medium mt-8 mb-4">Details: </p>
+              <div className="ml-9 body18 flex flex-col gap-6">
+                <div className="flex gap-8 align-middle">
+                  <p>Players at Table: </p>
+                  <p>
+                    ({gameInfo.players.length}/{tableInfo.maxPlayers})
+                  </p>
+                </div>
+                <div className="flex gap-8 align-middle">
+                  <p>Buy In: </p>
+                  <p>
+                    {formatBuyIn()} {tokenName()}
+                  </p>
+                </div>
+                <div className="flex gap-8 align-middle">
+                  <p>Amount to Win: </p>
+                  <p>{getAmountToWin()}</p>
+                </div>
+                <div className="flex gap-8 align-middle">
+                  <p>Chance to Win: </p>
+                  <p>{(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        {/* <h1 className="text-4xl font-bold absolute top-10">Winner Takes All</h1>
         <h1 className="text-3xl font-bold absolute top-24">Game {aid}</h1>
-        <hr />
+        <hr /> */}
         <div className="mt-10 flex flex-col text-center text-xl">
           <code className="mb-8">
             Buy In: {formatBuyIn()} {tokenName()}
           </code>
           <code className="mb-8">
             {' '}
-            {/** Make it fetch platformFee from contract */}
+            {/* Make it fetch platformFee from contract */}
             Amount To Win: {getAmountToWin()}
           </code>
           <code className="mb-8">Chance To Win: {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%</code>
@@ -322,10 +409,10 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
           </div>
         </div>
 
-        <Link href={'/winnertakesall'} className="border border-white p-2 absolute bottom-4">
+        {/* <Link href={'/winnertakesall'} className="border border-white p-2 absolute bottom-4">
           Go Back
-        </Link>
-      </PageContent>
+        </Link> */}
+      </div>
     </Page>
   );
 };

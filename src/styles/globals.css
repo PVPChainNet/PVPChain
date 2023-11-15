@@ -59,6 +59,12 @@
   grid-gap: 1rem;
 }
 
+.addressGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+
 h1 {
   font-size: 64px;
   font-weight: 500;

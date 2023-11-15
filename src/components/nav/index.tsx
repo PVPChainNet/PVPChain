@@ -16,6 +16,14 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
   const sidebarStateActive = useSidebar();
   const toggleSidebar = useSidebarUpdate();
 
+  // function skipSong(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  //   throw new Error('Function not implemented.');
+  // }
+
+  // function muteMusic(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+  //   throw new Error('Function not implemented.');
+  // }
+
   return (
     <nav
       className={`fixed h-full bg-slate-light transition-all duration-300 z-30 ${
@@ -23,29 +31,41 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
       }`}
     >
       {/* toggle button */}
-      <div className="z-10 absolute top-10 -right-5">
+      <div className="z-10 absolute top-8 -right-8">
         <button onClick={toggleSidebar} className="shake">
           {sidebarStateActive ? (
-            <div className="w-6 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
+            <div className="w-10 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
               <Image
                 src={'/images/icons/caret_darker_right.svg'}
-                width={6}
-                height={12}
+                width={10}
+                height={18}
                 alt={'close icon'}
                 className="my-auto rotate-180"
               />
             </div>
           ) : (
-            <div className="w-6 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
+            <div className="w-10 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
               <Image
                 src={'/images/icons/caret_darker_right.svg'}
-                width={6}
-                height={12}
+                width={10}
+                height={18}
                 alt={'close icon'}
                 className="my-auto"
               />
             </div>
           )}
+        </button>
+      </div>
+
+      {/* music controls */}
+      <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-slate-light rounded-lg flex justify-evenly">
+        {/* skip song button */}
+        <button /* onClick={skipSong} */ title="Skip Song" className="hover:scale-110 transition-all">
+          <Image src={'/images/icons/skip.png'} width={24} height={24} alt={'skip song button'} className="my-auto" />
+        </button>
+        {/* mute music button */}
+        <button /* onClick={muteMusic} */ title="Mute Music" className="hover:scale-110 transition-all">
+          <Image src={'/images/icons/mute.png'} width={24} height={24} alt={'mute music button'} className="my-auto" />
         </button>
       </div>
 
