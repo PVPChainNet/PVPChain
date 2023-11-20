@@ -293,6 +293,28 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               </h4>
               {/* table of players */}
               <div className="addressGrid">
+                {/* temp data wheile players are none */}
+                <div className="flex gap-2 w-[208px]">
+                  <p>wallet address</p>
+                  <p className="font-bold">entry count</p>
+                </div>
+                <div className="flex gap-2 w-[208px]">
+                  <p>wallet address</p>
+                  <p className="font-bold">entry count</p>
+                </div>
+                <div className="flex gap-2 w-[208px]">
+                  <p>wallet address</p>
+                  <p className="font-bold">entry count</p>
+                </div>
+                <div className="flex gap-2 w-[208px]">
+                  <p>wallet address</p>
+                  <p className="font-bold">entry count</p>
+                </div>
+                <div className="flex gap-2 w-[208px]">
+                  <p>wallet address</p>
+                  <p className="font-bold">entry count</p>
+                </div>
+
                 {gameInfo.players.map((player, i) => {
                   return (
                     <div key={i} className="w-[208px]">

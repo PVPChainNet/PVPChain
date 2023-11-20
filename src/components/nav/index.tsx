@@ -5,24 +5,17 @@ import ActionButton from '../buttons/ActionButton';
 import Tooltip from '../utility/Tooltip';
 import Link from 'next/link';
 import {useSidebar, useSidebarUpdate} from '@/contexts/SidebarContext';
+import MusicControl from '../buttons/MusicControl';
 
 /* interface NavProps {
   onToggle: () => void;
   isOpen: boolean;
 } */
 
-export default function Nav(/* {onToggle, isOpen}: NavProps */) {
+export default function Nav() {
   //NOTE: replaced the props with the context hooks
   const sidebarStateActive = useSidebar();
   const toggleSidebar = useSidebarUpdate();
-
-  // function skipSong(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-  //   throw new Error('Function not implemented.');
-  // }
-
-  // function muteMusic(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-  //   throw new Error('Function not implemented.');
-  // }
 
   return (
     <nav
@@ -59,14 +52,8 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
 
       {/* music controls */}
       <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-slate-light rounded-lg flex justify-evenly">
-        {/* skip song button */}
-        <button /* onClick={skipSong} */ title="Skip Song" className="hover:scale-110 transition-all">
-          <Image src={'/images/icons/skip.png'} width={24} height={24} alt={'skip song button'} className="my-auto" />
-        </button>
-        {/* mute music button */}
-        <button /* onClick={muteMusic} */ title="Mute Music" className="hover:scale-110 transition-all">
-          <Image src={'/images/icons/mute.png'} width={24} height={24} alt={'mute music button'} className="my-auto" />
-        </button>
+        <MusicControl controlFunction={'skip'} />
+        <MusicControl controlFunction={'mute'} />
       </div>
 
       <div className={`${sidebarStateActive ? 'block' : 'hidden'}`}>
@@ -92,7 +79,7 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
           </ul>
 
           {/* PvH Games */}
-          <div className="flex gap-[6px]">
+          {/* <div className="flex gap-[6px]">
             <p>PvH Games</p>
             <Tooltip text="PvH games are games where you play against the house." />
           </div>
@@ -102,7 +89,7 @@ export default function Nav(/* {onToggle, isOpen}: NavProps */) {
                 <MenuItem link={menuItem.link} text={menuItem.name} />
               </li>
             ))}
-          </ul>
+          </ul> */}
 
           {/* Lottery */}
           <div className="flex justify-between">

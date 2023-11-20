@@ -277,6 +277,8 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     } else return false;
   };
 
+  //const tempPlayersDEV = 6;
+
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       {/* <PageContent contentPosition="center"> */}
@@ -295,8 +297,160 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               <h4 className="title32 mb-6">
                 Players: ({gameInfo.players.length}/{tableInfo.maxPlayers}):
               </h4>
-              {/* table of players */}
-              <div className="addressGrid">
+              {/* table */}
+              <div className="relative w-full h-full">
+                <div className="absolute h-[95%] w-[95%] -z-10 bg-slate-500 rounded-full"></div> {/* table bg */}
+                {/* table of players 3-6 players */}
+                {/* if 3 players */}
+                {gameInfo.players.length === 3 && (
+                  <div className="grid grid-rows-2 grid-cols-3 gap-y-8">
+                    <div className="col-start-2 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* top center */}
+                      <div className="flex w-20 h-20 rounded-full bg-red-300">
+                        <p className="m-auto">p1</p>
+                      </div>
+                    </div>
+                    <div className="col-start-1 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-orange-300">
+                        <p className="m-auto">p2</p>
+                      </div>
+                    </div>
+                    <div className="col-start-3 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row right */}
+                      <div className="flex w-20 h-20 rounded-full bg-indigo-300">
+                        <p className="m-auto">p3</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* if 4 players */}
+                {gameInfo.players.length == 4 && (
+                  <div className="grid grid-rows-3 grid-cols-3 gap-y-8">
+                    <div className="col-start-2 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* top center */}
+                      <div className="flex w-20 h-20 rounded-full bg-red-300">
+                        <p className="m-auto">p1</p>
+                      </div>
+                    </div>
+                    <div className="col-start-1 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-orange-300">
+                        <p className="m-auto">p2</p>
+                      </div>
+                    </div>
+                    <div className="col-start-3 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row right */}
+                      <div className="flex w-20 h-20 rounded-full bg-yellow-300">
+                        <p className="m-auto">p3</p>
+                      </div>
+                    </div>
+                    <div className="col-start-2 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 3rd row center */}
+                      <div className="flex w-20 h-20 rounded-full bg-indigo-300">
+                        <p className="m-auto">p4</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* if 5 players */}
+                {gameInfo.players.length == 5 && (
+                  <div className="grid grid-rows-3 grid-cols-9 gap-y-8">
+                    <div className="col-start-5 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* top center */}
+                      <div className="flex w-20 h-20 rounded-full bg-red-300">
+                        <p className="m-auto">p1</p>
+                      </div>
+                    </div>
+                    <div className="col-start-3 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-orange-300">
+                        <p className="m-auto">p2</p>
+                      </div>
+                    </div>
+                    <div className="col-start-7 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row right */}
+                      <div className="flex w-20 h-20 rounded-full bg-indigo-300">
+                        <p className="m-auto">p3</p>
+                      </div>
+                    </div>
+                    <div className="col-start-4 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 3rd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-yellow-300">
+                        <p className="m-auto">p4</p>
+                      </div>
+                    </div>
+                    <div className="col-start-6 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 3rd row right */}
+                      <div className="flex w-20 h-20 rounded-full bg-red-300">
+                        <p className="m-auto">p5</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* if 6 players */}
+                {/* {gameInfo.players.length == 6 && ( */}
+                {gameInfo.players.length == 6 && (
+                  <div className="grid grid-rows-3 grid-cols-3 gap-y-8">
+                    <div className="col-start-2 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* top center */}
+                      <div className="flex w-20 h-20 rounded-full bg-red-300">
+                        <p className="m-auto">p1</p>
+                      </div>
+                    </div>
+                    <div className="col-start-1 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-orange-300">
+                        <p className="m-auto">p2</p>
+                      </div>
+                    </div>
+                    <div className="col-start-3 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 2nd row right */}
+                      <div className="flex w-20 h-20 rounded-full bg-indigo-300">
+                        <p className="m-auto">p3</p>
+                      </div>
+                    </div>
+                    <div className="col-start-1 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 3rd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-pink-300">
+                        <p className="m-auto">p4</p>
+                      </div>
+                    </div>
+                    <div className="col-start-3 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 3rd row left */}
+                      <div className="flex w-20 h-20 rounded-full bg-yellow-300">
+                        <p className="m-auto">p5</p>
+                      </div>
+                    </div>
+                    <div className="col-start-2 h-20 w-full flex justify-center items-center">
+                      {' '}
+                      {/* 4th row center */}
+                      <div className="flex w-20 h-20 rounded-full bg-red-300">
+                        <p className="m-auto">p6</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* <div className="addressGrid">
                 {gameInfo.players.map((player, i) => {
                   return (
                     <div key={i} className="w-[208px]">
@@ -304,7 +458,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
             {/* right column */}
             <div className="basis-1/4 mb-4">

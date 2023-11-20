@@ -63,6 +63,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-scripts": "5.0.1",
+    "react-sound": "^1.2.0",
     "react-toastify": "^9.1.1",
     "recharts": "2.1.16",
     "run-script-os": "^1.1.6",

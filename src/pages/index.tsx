@@ -99,9 +99,12 @@ const Home: NextPage = () => {
           </div>
 
           <p className="mb-6 text-2xl font-medium">PvH Games</p>
+          <div className="min-h-[20rem]">
+            <p>Player vs. House games are coming soon!</p>
+          </div>
 
-          <div className="flex flex-row gap-6 mb-20 relative overflow-hidden hover:overflow-x-scroll">
-            {/* map over pvp games */}
+          {/* <div className="flex flex-row gap-6 mb-20 relative overflow-hidden hover:overflow-x-scroll">
+            {/* map over pvp games 
             <div className="min-w-[554px]">
               <Image
                 src="/images/games/russian_roulette/background.png"
@@ -129,7 +132,7 @@ const Home: NextPage = () => {
               />
               <p className="mt-5 body20">Coin Flip</p>
             </div>
-          </div>
+          </div> */}
         </section>
       </div>
     </Page>
