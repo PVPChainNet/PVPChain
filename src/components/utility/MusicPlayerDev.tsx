@@ -1,3 +1,5 @@
+import {ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key, useEffect} from 'react';
+
 interface MusicContextProps {
   showDev: boolean;
   isMusicPlaying: boolean;
@@ -14,6 +16,11 @@ export default function MusicPlayerDev({
   if (!showDev) {
     return null;
   }
+
+  // useEffect(() => {
+  //   console.log('currentSongPosition: ', currentSongPosition);
+  //   console.log('currentSongPosition typeof: ', typeof currentSongPosition);
+  // }, [currentSongPosition]);
 
   return (
     <div
@@ -33,9 +40,9 @@ export default function MusicPlayerDev({
       <p>
         <span className="font-bold">Now Playing:</span> {currentSongString}
       </p>
-      <p>
+      {/* <p>
         <span className="font-bold">Current Position:</span> {currentSongPosition}
-      </p>
+      </p> */}
     </div>
   );
 }

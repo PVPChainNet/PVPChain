@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Sound from 'react-sound';
 //const Sound = require('react-sound');
 import {useMusic} from '@/contexts/MusicContext';
-import {useEffect} from 'react';
+import {useState, useEffect, SetStateAction} from 'react';
 import MusicPlayerDev from '../utility/MusicPlayerDev';
 
 export default function MusicControl(this: any) {
@@ -18,13 +18,21 @@ export default function MusicControl(this: any) {
     setCurrentSongPosition,
   } = useMusic();
 
+  const [playStatus, setPlayStatus] = useState(Sound.status.STOPPED);
+  const [position, setPosition] = useState<number>(0); // in milliseconds
+
   const handleSkipInteraction: React.MouseEventHandler<HTMLButtonElement> = () => {
     console.log('skip song button pressed');
     handleSongFinishedPlaying();
   };
   const handleMuteInteraction: React.MouseEventHandler<HTMLButtonElement> = () => {
     console.log('mute song button pressed');
-    playPauseToggle();
+    //playPauseToggle();
+    if (playStatus === Sound.status.PLAYING) {
+      setPlayStatus(Sound.status.PAUSED);
+    } else {
+      setPlayStatus(Sound.status.PLAYING);
+    }
   };
   const handleSongLoading = () => {
     // console.log('handleSongLoading');
@@ -33,12 +41,9 @@ export default function MusicControl(this: any) {
     // console.log('handleSongPlaying');
   };
 
-  // arg: songPositionAtPause from Sound object
-  const handleSongPause = (songPositionAtPause: number) => {
-    //this.setState({ elapsed: songPositionAtPause.position})
-    //set song position for music context
-    console.log('song position at pause: ', songPositionAtPause);
-    setCurrentSongPosition(songPositionAtPause);
+  // arg: newPosition from Sound object
+  const onPause = (newPosition: number) => {
+    setPosition(newPosition);
   };
 
   const handleSongResume = () => {
@@ -81,20 +86,20 @@ export default function MusicControl(this: any) {
       <div className="absolute pointer-events-none">
         <Sound
           url={currentSongString}
-          playStatus={isMusicPlaying ? Sound.status.PLAYING : Sound.status.PAUSED}
-          playFromPosition={currentSongPosition} // in milliseconds
-          onLoading={handleSongLoading}
+          playStatus={playStatus}
+          position={position} // in milliseconds
+          // onLoading={handleSongLoading}
           onPlaying={handleSongPlaying}
-          onPause={handleSongPause(this)}
-          onResume={handleSongResume}
           onFinishedPlaying={handleSongFinishedPlaying}
+          onPause={onPause}
+          // onResume={handleSongResume}
         />
       </div>
       <MusicPlayerDev
-        showDev={true}
-        isMusicPlaying={isMusicPlaying}
+        showDev={false}
+        isMusicPlaying={playStatus}
         currentSongString={currentSongString}
-        currentSongPosition={currentSongPosition}
+        currentSongPosition={position}
       />
     </>
   );
