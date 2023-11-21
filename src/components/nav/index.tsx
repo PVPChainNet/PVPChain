@@ -75,20 +75,39 @@ export default function Nav() {
         <hr className="mt-2 mb-6 text-white-main opacity-20" />
 
         {/* scrollable nav list */}
-        <div className="">
+        <div>
           {/* PVP Games */}
-          <div className="flex gap-[6px]">
-            <p className="body16Medium">PvP Games</p>
-            <Tooltip text="PvP games are games where you play against other players." />
-            {/* <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} /> */}
-          </div>
-          <ul className="my-4 flex flex-col gap-3">
-            {menuItemsPVP.map((menuItem, index) => (
-              <li className="" key={index}>
-                <MenuItem link={menuItem.link} text={menuItem.name} />
-              </li>
-            ))}
-          </ul>
+          {sidebarStateActive ? (
+            <div>
+              <div className="flex gap-[6px]">
+                <p className="body16Medium">PvP Games</p>
+                <Tooltip text="PvP games are games where you play against other players." />
+                {/* <Image src={'/images/icons/info_icon.svg'} width={20} height={20} alt={'info icon'} /> */}
+              </div>
+              <ul className="my-4 flex flex-col gap-3">
+                {menuItemsPVP.map((menuItem, index) => (
+                  <li className="" key={index}>
+                    <MenuItem link={menuItem.link} text={menuItem.name} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <ul className="flex flex-col gap-2">
+              <p className="text-center title20 mb-2">PvP</p>
+              {menuItemsPVP.map((menuItem, index) => (
+                <li className="" key={index} title={menuItem.name}>
+                  <ActionButton
+                    color="grey"
+                    link={menuItem.link}
+                    icon="/images/icons/house-96.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
 
           {/* PvH Games */}
           {/* <div className="flex gap-[6px]">
@@ -104,7 +123,7 @@ export default function Nav() {
           </ul> */}
 
           {/* Lottery */}
-          <div className="flex justify-between">
+          <div className={`justify-between ${sidebarStateActive ? 'flex' : 'hidden'}`}>
             <div className="flex gap-[6px]">
               <p>Lottery</p>
               <Tooltip text="The Lottery is a pool of money that anyone can win." />
@@ -119,7 +138,7 @@ export default function Nav() {
             <p>Current Pot</p>
             <p>$1,200,550.40</p>
           </div> */}
-          <ul className="my-4 flex flex-col gap-3">
+          <ul className={`my-4 flex-col gap-3 ${sidebarStateActive ? 'flex' : 'hidden'}`}>
             {menuItemsLottery.map((menuItem, index) => (
               <li className="" key={index}>
                 <MenuItem link={menuItem.link} text={menuItem.name} />
@@ -128,37 +147,98 @@ export default function Nav() {
           </ul>
 
           {/* Revenue Pool */}
-          <div className="flex gap-[6px]">
-            <p>Revenue Pool</p>
-            <Tooltip text="The Revenue Pool is where you can buy and sell points." />
+          <div className={`${sidebarStateActive ? '' : 'hidden'}`}>
+            <div className="flex gap-[6px]">
+              <p>Revenue Pool</p>
+              <Tooltip text="The Revenue Pool is where you can buy and sell points." />
+            </div>
+            <ul className="my-4 flex flex-col gap-3">
+              {menuItemsRevenue.map((menuItem, index) => (
+                <li className="" key={index}>
+                  <MenuItem link={menuItem.link} text={menuItem.name} />
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="my-4 flex flex-col gap-3">
-            {menuItemsRevenue.map((menuItem, index) => (
-              <li className="" key={index}>
-                <MenuItem link={menuItem.link} text={menuItem.name} />
-              </li>
-            ))}
-          </ul>
 
           {/* The House */}
-          <div className="flex gap-[6px]">
-            <p>House Pool</p>
-            <Tooltip text="The Revenue Pool is where you can buy and sell points." />
+          <div className={`${sidebarStateActive ? '' : 'hidden'}`}>
+            <div className="flex gap-[6px]">
+              <p>House Pool</p>
+              <Tooltip text="The Revenue Pool is where you can buy and sell points." />
+            </div>
+            <ul className="my-4 flex flex-col gap-3">
+              {menuItemsHouse.map((menuItem, index) => (
+                <li className="" key={index}>
+                  <MenuItem link={menuItem.link} text={menuItem.name} />
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="my-4 flex flex-col gap-3">
-            {menuItemsHouse.map((menuItem, index) => (
-              <li className="" key={index}>
-                <MenuItem link={menuItem.link} text={menuItem.name} />
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* action buttons on bottom */}
-        <div className="absolute bottom-0 w-[276px] mb-2">
+        <div className="absolute bottom-0 w-[85%] mb-2">
           <div className="flex flex-col gap-4">
-            <ActionButton color="blue" link="/points" text="Buy/Sell Points" />
-            <ActionButton color="green" link="/profile" text="Profile" />
+            {sidebarStateActive ? (
+              <>
+                <div title="Buy/Sell Points">
+                  <ActionButton color="blue" link="/points" text="Buy/Sell Points" />
+                </div>
+                <div title="View Profile">
+                  <ActionButton color="green" link="/profile" text="Profile" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div title="The House">
+                  <ActionButton
+                    color="grey"
+                    link="/thehouse"
+                    icon="/images/icons/house-96.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </div>
+                <div title="The Lottery">
+                  <ActionButton
+                    color="grey"
+                    link="/lottery"
+                    icon="/images/icons/lottery-90.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </div>
+                <div title="Revenue Pool">
+                  <ActionButton
+                    color="grey"
+                    link="/revenuepool"
+                    icon="/images/icons/pool-100.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </div>
+
+                <div className="mt-2" title="Buy/Sell Points">
+                  <ActionButton
+                    color="blue"
+                    link="/points"
+                    icon="/images/icons/points-100.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </div>
+                <div title="View Profile">
+                  <ActionButton
+                    color="green"
+                    link="/profile"
+                    icon="/images/icons/profile-64.png"
+                    iconwidth={44}
+                    circle={true}
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

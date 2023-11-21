@@ -23,6 +23,8 @@ module.exports = {
         'brand-blue-hover': '#095cf6',
         'brand-pink': '#CF2CA2',
         'brand-pink-hover': '#DA53B4',
+        'brand-grey': '#363B52',
+        'brand-grey-hover': '#4D546F',
       },
       dropShadow: {
         'brand-shadow-1': '0px 4px 4px rgba(0, 0, 0, 0.25);',
