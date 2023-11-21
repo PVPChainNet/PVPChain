@@ -20,7 +20,7 @@ export default function Nav() {
   return (
     <nav
       className={`fixed h-full bg-slate-light transition-all duration-300 z-30 ${
-        sidebarStateActive ? 'w-[324px] px-6' : 'w-0 px-0'
+        sidebarStateActive ? 'w-[324px] px-6' : 'w-20 px-2'
       }`}
     >
       {/* toggle button */}
@@ -56,9 +56,21 @@ export default function Nav() {
         <MusicControl controlFunction={'mute'} />
       </div>
 
-      <div className={`${sidebarStateActive ? 'block' : 'hidden'}`}>
+      <div className={'transition-all'}>
         <Link href="/" className="block mt-2">
-          <Image src={'/images/logos/pvp_logo.svg'} width={132} height={56} alt={'PVP Logo'} />
+          {sidebarStateActive ? (
+            <Image src={'/images/logos/pvp_logo.svg'} width={132} height={56} alt={'PVP Logo'} />
+          ) : (
+            <div className="h-[56px] flex">
+              <Image
+                className="m-auto"
+                src={'/images/logos/pvp_logo_no_text.svg'}
+                width={30}
+                height={30}
+                alt={'PVP Logo'}
+              />
+            </div>
+          )}
         </Link>
         <hr className="mt-2 mb-6 text-white-main opacity-20" />
 

@@ -26,6 +26,9 @@
   .sidebarActive {
     @apply ml-[324px] transition-all duration-300;
   }
+  .sidebarSmall {
+    @apply ml-[80px] transition-all duration-300;
+  }
 }
 
 .contentContainerWithSidebar {

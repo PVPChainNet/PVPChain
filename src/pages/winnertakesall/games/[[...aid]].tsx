@@ -276,9 +276,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div
-        className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} min-h-screen gameBGImage`}
-      >
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImage`}>
         <div className="mt-24 mx-[4.5rem]">
           <h4 className="text-brand-green mb-16">Winner Takes All - Game {aid}</h4>
           <section

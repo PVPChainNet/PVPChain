@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const sidebarStateActive = useSidebar();
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'}`}>
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <div className="relative mt-28 mb-20 ml-12 max-w-4xl">
           <h2>
             The world&apos;s first <span className="text-brand-green">decentralized</span>,{' '}
