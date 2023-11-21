@@ -66,20 +66,20 @@ const MusicContext = createContext<MusicContextProps | undefined>(undefined);
 export const MusicProvider: React.FC<{children: ReactNode}> = ({children}) => {
   const songs = ['/music/Duggs-1.mp3', '/music/Duggs-2.mp3', '/music/Duggs-3.mp3'];
 
-  const [isMusicPlaying, setMusicPlaying] = useState(true);
+  const [isMusicPlaying, setMusicPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [currentSongString, setCurrentSongString] = useState<string>(songs[currentSongIndex]);
-  const [currentSongPosition, setCurrentSongPosition] = useState(0);
+  const [currentSongPosition, setCurrentSongPosition] = useState(5000);
 
   const playPauseToggle = () => {
     if (isMusicPlaying) {
       // Pausing
       setMusicPlaying(false);
     } else {
-      // Resuming
+      // set the playback position to the current song position
+
+      //resume playing
       setMusicPlaying(true);
-      // If resuming, set the playback position
-      setCurrentSongPosition(position => position || 0);
     }
   };
 

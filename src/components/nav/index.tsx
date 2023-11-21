@@ -5,7 +5,7 @@ import ActionButton from '../buttons/ActionButton';
 import Tooltip from '../utility/Tooltip';
 import Link from 'next/link';
 import {useSidebar, useSidebarUpdate} from '@/contexts/SidebarContext';
-import MusicControl from '../buttons/MusicControl';
+import MusicControls from '../buttons/MusicControls';
 
 /* interface NavProps {
   onToggle: () => void;
@@ -51,10 +51,11 @@ export default function Nav() {
       </div>
 
       {/* music controls */}
-      <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-slate-light rounded-lg flex justify-evenly">
+      <MusicControls />
+      {/* <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-slate-light rounded-lg flex justify-evenly">
         <MusicControl controlFunction={'skip'} />
         <MusicControl controlFunction={'mute'} />
-      </div>
+      </div> */}
 
       <div className={'transition-all'}>
         <Link href="/" className="block mt-2">
@@ -64,6 +65,7 @@ export default function Nav() {
             <div className="h-[56px] flex">
               <Image
                 className="m-auto"
+                title="Home"
                 src={'/images/logos/pvp_logo_no_text.svg'}
                 width={30}
                 height={30}
@@ -178,11 +180,11 @@ export default function Nav() {
         </div>
 
         {/* action buttons on bottom */}
-        <div className="absolute bottom-0 w-[85%] mb-2">
-          <div className="flex flex-col gap-4">
+        <div className="absolute bottom-0 w-[85%] mb-4">
+          <div className="flex flex-col gap-2">
             {sidebarStateActive ? (
               <>
-                <div title="Buy/Sell Points">
+                <div title="Buy/Sell Points" className="mb-2">
                   <ActionButton color="blue" link="/points" text="Buy/Sell Points" />
                 </div>
                 <div title="View Profile">

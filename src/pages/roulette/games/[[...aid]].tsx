@@ -299,28 +299,28 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               <div className="relative w-full h-full">
                 <div className="absolute h-[95%] w-[95%] -z-10 bg-slate-500 rounded-full"></div> {/* table bg */}
                 {/* table of players 3-6 players */}
-                {/* if 3 players */}
-                {gameInfo.players.length === 3 && (
+                {/* if <= 3 players */}
+                {gameInfo.players.length <= 3 && (
                   <div className="grid grid-rows-2 grid-cols-3 gap-y-8">
                     <div className="col-start-2 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* top center */}
                       <div className="flex w-20 h-20 rounded-full bg-red-300">
-                        <p className="m-auto">p1</p>
+                        <p className="m-auto">{gameInfo.players[0]}</p>
                       </div>
                     </div>
                     <div className="col-start-1 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-orange-300">
-                        <p className="m-auto">p2</p>
+                        <p className="m-auto">{gameInfo.players[1]}</p>
                       </div>
                     </div>
                     <div className="col-start-3 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row right */}
                       <div className="flex w-20 h-20 rounded-full bg-indigo-300">
-                        <p className="m-auto">p3</p>
+                        <p className="m-auto">{gameInfo.players[2]}</p>
                       </div>
                     </div>
                   </div>
@@ -332,28 +332,28 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                       {' '}
                       {/* top center */}
                       <div className="flex w-20 h-20 rounded-full bg-red-300">
-                        <p className="m-auto">p1</p>
+                        <p className="m-auto">{gameInfo.players[0]}</p>
                       </div>
                     </div>
                     <div className="col-start-1 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-orange-300">
-                        <p className="m-auto">p2</p>
+                        <p className="m-auto">{gameInfo.players[1]}</p>
                       </div>
                     </div>
                     <div className="col-start-3 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row right */}
                       <div className="flex w-20 h-20 rounded-full bg-yellow-300">
-                        <p className="m-auto">p3</p>
+                        <p className="m-auto">{gameInfo.players[2]}</p>
                       </div>
                     </div>
                     <div className="col-start-2 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 3rd row center */}
                       <div className="flex w-20 h-20 rounded-full bg-indigo-300">
-                        <p className="m-auto">p4</p>
+                        <p className="m-auto">{gameInfo.players[3]}</p>
                       </div>
                     </div>
                   </div>
@@ -365,35 +365,35 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                       {' '}
                       {/* top center */}
                       <div className="flex w-20 h-20 rounded-full bg-red-300">
-                        <p className="m-auto">p1</p>
+                        <p className="m-auto">{gameInfo.players[0]}</p>
                       </div>
                     </div>
                     <div className="col-start-3 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-orange-300">
-                        <p className="m-auto">p2</p>
+                        <p className="m-auto">{gameInfo.players[1]}</p>
                       </div>
                     </div>
                     <div className="col-start-7 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row right */}
                       <div className="flex w-20 h-20 rounded-full bg-indigo-300">
-                        <p className="m-auto">p3</p>
+                        <p className="m-auto">{gameInfo.players[2]}</p>
                       </div>
                     </div>
                     <div className="col-start-4 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 3rd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-yellow-300">
-                        <p className="m-auto">p4</p>
+                        <p className="m-auto">{gameInfo.players[3]}</p>
                       </div>
                     </div>
                     <div className="col-start-6 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 3rd row right */}
                       <div className="flex w-20 h-20 rounded-full bg-red-300">
-                        <p className="m-auto">p5</p>
+                        <p className="m-auto">{gameInfo.players[4]}</p>
                       </div>
                     </div>
                   </div>
@@ -406,42 +406,42 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                       {' '}
                       {/* top center */}
                       <div className="flex w-20 h-20 rounded-full bg-red-300">
-                        <p className="m-auto">p1</p>
+                        <p className="m-auto">{gameInfo.players[0]}</p>
                       </div>
                     </div>
                     <div className="col-start-1 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-orange-300">
-                        <p className="m-auto">p2</p>
+                        <p className="m-auto">{gameInfo.players[1]}</p>
                       </div>
                     </div>
                     <div className="col-start-3 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 2nd row right */}
                       <div className="flex w-20 h-20 rounded-full bg-indigo-300">
-                        <p className="m-auto">p3</p>
+                        <p className="m-auto">{gameInfo.players[2]}</p>
                       </div>
                     </div>
                     <div className="col-start-1 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 3rd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-pink-300">
-                        <p className="m-auto">p4</p>
+                        <p className="m-auto">{gameInfo.players[3]}</p>
                       </div>
                     </div>
                     <div className="col-start-3 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 3rd row left */}
                       <div className="flex w-20 h-20 rounded-full bg-yellow-300">
-                        <p className="m-auto">p5</p>
+                        <p className="m-auto">{gameInfo.players[4]}</p>
                       </div>
                     </div>
                     <div className="col-start-2 h-20 w-full flex justify-center items-center">
                       {' '}
                       {/* 4th row center */}
                       <div className="flex w-20 h-20 rounded-full bg-red-300">
-                        <p className="m-auto">p6</p>
+                        <p className="m-auto">{gameInfo.players[5]}</p>
                       </div>
                     </div>
                   </div>
