@@ -27,7 +27,7 @@ export default function CompanyLogo({
           height={height}
           width={width}
           layout={layout}
-          src="/images/logos/logo-mark.png"
+          src="/images/logos/pvp_logo_no_text.svg"
           alt="Company Logo"
           priority
           className={`${height} ${width}`}
@@ -37,7 +37,7 @@ export default function CompanyLogo({
           height={height}
           width={width}
           layout={layout}
-          src="/images/logos/logo-mark-and-text.png"
+          src="/images/logos/pvp_logo.png"
           alt="Company Logo"
           priority
           className={`${height} ${width}`}

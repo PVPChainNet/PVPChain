@@ -133,9 +133,7 @@ export default function PredictionMarket() {
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div
-        className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'} min-h-screen gameBGImage`}
-      >
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImage`}>
         <div className="mt-60 mb-12 mx-[4.5rem]">
           <section
             className={`${

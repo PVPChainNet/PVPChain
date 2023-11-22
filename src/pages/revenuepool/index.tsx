@@ -7,7 +7,7 @@ export default function RevenuePool() {
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div className={`${sidebarStateActive ? 'sidebarActive' : 'transition-all duration-300'}`}>
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <div className="mt-24 mx-[4.5rem]">
           <h4 className="text-brand-green mb-11">Revenue Pool</h4>
           <section

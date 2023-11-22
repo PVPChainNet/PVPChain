@@ -26,6 +26,9 @@
   .sidebarActive {
     @apply ml-[324px] transition-all duration-300;
   }
+  .sidebarSmall {
+    @apply ml-[80px] transition-all duration-300;
+  }
 }
 
 .contentContainerWithSidebar {
@@ -56,6 +59,12 @@
 .tableGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+}
+
+.addressGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
 }
 
