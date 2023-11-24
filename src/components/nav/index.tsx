@@ -93,6 +93,18 @@ export default function Nav() {
                   </li>
                 ))}
               </ul>
+              <div className="flex gap-[6px]">
+                <p className="body16Medium">Leaderboards</p>
+                <Tooltip text="Leaderboards track betters with the most risk-points in a given time period" />
+              </div>
+              <ul className="my-4 flex flex-col gap-3">
+                <li className="">
+                  <MenuItem link={''} text={'Token Leaderboard'} />
+                </li>
+                <li className="">
+                  <MenuItem link={''} text={'Player Leaderboard'} />
+                </li>
+              </ul>
             </div>
           ) : (
             <ul className="flex flex-col gap-2">
@@ -108,10 +120,17 @@ export default function Nav() {
                   />
                 </li>
               ))}
+              <p className="text-center title20 mt-4 mb-2">LB</p>
+              <li className="" title={'Token Leaderboard'}>
+                <ActionButton color="grey" link={''} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
+              </li>
+              <li className="" title={'Player Leaderboard'}>
+                <ActionButton color="grey" link={''} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
+              </li>
             </ul>
           )}
 
-          {/* PvH Games */}
+          {/* PvH Games - add when PvH is added */}
           {/* <div className="flex gap-[6px]">
             <p>PvH Games</p>
             <Tooltip text="PvH games are games where you play against the house." />
@@ -124,8 +143,8 @@ export default function Nav() {
             ))}
           </ul> */}
 
-          {/* Lottery */}
-          <div className={`justify-between ${sidebarStateActive ? 'flex' : 'hidden'}`}>
+          {/* Lottery - removed for now */}
+          {/* <div className={`justify-between ${sidebarStateActive ? 'flex' : 'hidden'}`}>
             <div className="flex gap-[6px]">
               <p>Lottery</p>
               <Tooltip text="The Lottery is a pool of money that anyone can win." />
@@ -135,21 +154,16 @@ export default function Nav() {
               <p className="font-light">$1,200,550.40</p>
             </div>
           </div>
-          {/* changed this to be on line (above) */}
-          {/* <div className="flex justify-between">
-            <p>Current Pot</p>
-            <p>$1,200,550.40</p>
-          </div> */}
           <ul className={`my-4 flex-col gap-3 ${sidebarStateActive ? 'flex' : 'hidden'}`}>
             {menuItemsLottery.map((menuItem, index) => (
               <li className="" key={index}>
                 <MenuItem link={menuItem.link} text={menuItem.name} />
               </li>
             ))}
-          </ul>
+          </ul> */}
 
-          {/* Revenue Pool */}
-          <div className={`${sidebarStateActive ? '' : 'hidden'}`}>
+          {/* Revenue Pool - removed for now */}
+          {/* <div className={`${sidebarStateActive ? '' : 'hidden'}`}>
             <div className="flex gap-[6px]">
               <p>Revenue Pool</p>
               <Tooltip text="The Revenue Pool is where you can buy and sell points." />
@@ -161,10 +175,10 @@ export default function Nav() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
-          {/* The House */}
-          <div className={`${sidebarStateActive ? '' : 'hidden'}`}>
+          {/* The House - add when PvH is added */}
+          {/* <div className={`${sidebarStateActive ? '' : 'hidden'}`}>
             <div className="flex gap-[6px]">
               <p>House Pool</p>
               <Tooltip text="The Revenue Pool is where you can buy and sell points." />
@@ -176,7 +190,7 @@ export default function Nav() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* action buttons on bottom */}
@@ -190,9 +204,36 @@ export default function Nav() {
                 <div title="View Profile">
                   <ActionButton color="green" link="/profile" text="Profile" />
                 </div>
+                <Link href="#">
+                  <p className="body16Medium text-center my-4">Read Whitepaper</p>
+                </Link>
+                {/* socials */}
+                <div className="flex flex-row justify-evenly">
+                  <Image src={'/images/socials/twitter.svg'} width={30} height={30} alt={'twitter icon'} />
+                  <Image src={'/images/socials/discord.svg'} width={30} height={30} alt={'discord icon'} />
+                  <Image src={'/images/socials/telegram.svg'} width={30} height={30} alt={'telegram icon'} />
+                </div>
               </>
             ) : (
               <>
+                {/* <div title="Token Leaderboard">
+                  <ActionButton
+                    color="grey"
+                    link="/lottery"
+                    icon="/images/icons/lottery-90.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </div>
+                <div title="Player Leaderboard">
+                  <ActionButton
+                    color="grey"
+                    link="/lottery"
+                    icon="/images/icons/lottery-90.png"
+                    iconwidth={30}
+                    circle={true}
+                  />
+                </div>
                 <div title="The House">
                   <ActionButton
                     color="grey"
@@ -219,7 +260,7 @@ export default function Nav() {
                     iconwidth={30}
                     circle={true}
                   />
-                </div>
+                </div> */}
 
                 <div className="mt-2" title="Buy/Sell Points">
                   <ActionButton
@@ -237,6 +278,30 @@ export default function Nav() {
                     icon="/images/icons/profile-64.png"
                     iconwidth={44}
                     circle={true}
+                  />
+                </div>
+                {/* socials */}
+                <div className="flex flex-col my-4 gap-4 justify-center align-middle">
+                  <Image
+                    className="m-auto"
+                    src={'/images/socials/twitter.svg'}
+                    width={30}
+                    height={30}
+                    alt={'twitter icon'}
+                  />
+                  <Image
+                    className="m-auto"
+                    src={'/images/socials/discord.svg'}
+                    width={30}
+                    height={30}
+                    alt={'discord icon'}
+                  />
+                  <Image
+                    className="m-auto"
+                    src={'/images/socials/telegram.svg'}
+                    width={30}
+                    height={30}
+                    alt={'telegram icon'}
                   />
                 </div>
               </>
