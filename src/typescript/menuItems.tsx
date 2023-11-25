@@ -3,15 +3,52 @@ interface MenuItem {
   link: string;
 }
 
-export const menuItemsPVP: MenuItem[] = [
-  {name: 'Russian Roulette', link: '/roulette'},
-  {name: 'Winner Takes All', link: '/winnertakesall'},
-  {name: 'Prediction Market', link: '/predictionmarket'},
+interface MenuItemGame {
+  name: string;
+  link: string;
+  image: string;
+  icon: string;
+}
+
+export const menuItemsPVP: MenuItemGame[] = [
+  {
+    name: 'Russian Roulette',
+    link: '/roulette',
+    image: '/images/games/russian_roulette/background.png',
+    icon: '/images/games/russian_roulette/icon.png',
+  },
+  {
+    name: 'Winner Takes All',
+    link: '/winnertakesall',
+    image: '/images/games/winner_takes_all/background.png',
+    icon: '/images/games/russian_roulette/icon.png',
+  },
+  {
+    name: 'Prediction Market',
+    link: '/predictionmarket',
+    image: '/images/games/prediction_market/background.png',
+    icon: '/images/games/russian_roulette/icon.png',
+  },
 ];
-export const menuItemsPVH: MenuItem[] = [
-  {name: 'Wheel of Fortune', link: '/wheeloffortune'},
-  {name: 'Slots', link: '/slots'},
-  {name: 'Coin Flip', link: '/coinflip'},
+export const menuItemsPVH: MenuItemGame[] = [
+  {
+    name: 'Wheel of Fortune',
+    link: '/wheeloffortune',
+    image: '/images/games/russian_roulette/background.png',
+    icon: '/images/games/russian_roulette/icon.png',
+  },
+  {
+    name: 'Slots',
+    link: '/slots',
+    image: '/images/games/russian_roulette/background.png',
+    icon: '/images/games/russian_roulette/icon.png',
+  },
+  {
+    name: 'Coin Flip',
+    link: '/coinflip',
+    image: '/images/games/russian_roulette/background.png',
+    icon: '/images/games/russian_roulette/icon.png',
+  },
 ];
 export const menuItemsLottery: MenuItem[] = [{name: 'Play Lottery', link: '/lottery'}];
 export const menuItemsRevenue: MenuItem[] = [{name: 'Join Pool', link: '/revenuepool'}];

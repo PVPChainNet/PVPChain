@@ -17,6 +17,7 @@ module.exports = {
         'white-main': '#F6F7F9',
         'white-darker': '#F6F7F980',
         'black-main': '#1D1E22',
+        'black-dark': '#12100E',
         'brand-green': '#A3F777',
         'brand-green-hover': '#5df10e',
         'brand-blue': '#3A7CF8',
