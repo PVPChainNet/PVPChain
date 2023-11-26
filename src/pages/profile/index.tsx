@@ -1,9 +1,28 @@
 import Image from 'next/image';
 import Page from '@/components/page';
 import {useSidebar} from '@/contexts/SidebarContext';
+import {useState} from 'react';
+import Modal from '../../components/modal';
 
 export default function Profile() {
   const sidebarStateActive = useSidebar();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleAction = () => {
+    // Perform your action here
+    // ...
+    // Close the modal
+    // handleCloseModal();
+  };
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
@@ -77,11 +96,25 @@ export default function Profile() {
               <th>Win / Loss</th>
             </tr>
             <tr className="text-left border-gray-600 border-b-2 border-opacity-20 h-20 body18 font-medium">
+              <td>Winner Takes All</td>
+              <td>Nov 22, 2023</td>
+              <td>$130.03</td>
+              <td className="mx-auto">
+                <button
+                  onClick={handleOpenModal}
+                  className="h-11 w-full max-w-[140px] text-black-dark rounded-3xl border-2 border-white-main bg-gradient-to-r from-brand-purple to-[#CCBED3]"
+                >
+                  Claim
+                </button>
+                {isModalOpen && <Modal onClose={handleCloseModal} onAction={handleAction} />}
+              </td>
+            </tr>
+            <tr className="text-left border-gray-600 border-b-2 border-opacity-20 h-20 body18 font-medium">
               <td>Wheel of Fortune</td>
               <td>Sept 10, 2023</td>
               <td>$130.03</td>
               <td className="mx-auto">
-                <Image src="/images/icons/win_icon.svg" width={40} height={40} alt="Win icon" />
+                <Image src="/images/icons/win_icon.png" width={40} height={40} alt="Win icon" />
               </td>
             </tr>
             <tr className="text-left border-gray-600 border-b-2 border-opacity-20 h-20 body18 font-medium">
@@ -89,7 +122,7 @@ export default function Profile() {
               <td>Mar 20, 2022</td>
               <td>$110.50</td>
               <td className="mx-auto">
-                <Image src="/images/icons/lose_icon.svg" width={40} height={40} alt="Lose icon" />
+                <Image src="/images/icons/lose_icon.png" width={40} height={40} alt="Lose icon" />
               </td>
             </tr>
             <tr className="text-left h-20 body18 font-medium">
@@ -97,7 +130,7 @@ export default function Profile() {
               <td>Jan 12, 2022</td>
               <td>$1100.00</td>
               <td className="mx-auto">
-                <Image src="/images/icons/win_icon.svg" width={40} height={40} alt="Win icon" />
+                <Image src="/images/icons/win_icon.png" width={40} height={40} alt="Win icon" />
               </td>
             </tr>
           </table>
