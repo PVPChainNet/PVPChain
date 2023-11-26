@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
         <div className="relative mt-28 mb-20 ml-12 max-w-4xl">
-          <Reveal>
+          <Reveal delay={0}>
             <h2>
               The world&apos;s first <span className="text-brand-green">decentralized</span>,{' '}
               <span className="text-brand-green">trustless</span>, fully{' '}
@@ -108,6 +108,7 @@ const Home: NextPage = () => {
               sidebarStateActive ? 'lg:flex-row lg:mx-auto' : 'md:flex-row md:mx-auto'
             }`}
           >
+            {/* <Reveal> */}
             <div className="w-[360px] h-[405px] bg-slate-light rounded-3xl border-brand-green-hover border-2 flex flex-col justify-evenly px-4">
               <div className="mx-auto flex justify-center items-center w-20 h-20 bg-black-dark rounded-full">
                 <h4>1</h4>
@@ -117,6 +118,8 @@ const Home: NextPage = () => {
                 All games are on-chain, meaning that every game is provably fair and transparent.
               </p>
             </div>
+            {/* </Reveal> */}
+            {/* <Reveal> */}
             <div className="w-[360px] h-[405px] bg-slate-light rounded-3xl border-brand-green-hover border-2 flex flex-col justify-evenly px-4">
               <div className="mx-auto flex justify-center items-center w-20 h-20 bg-black-dark rounded-full">
                 <h4>2</h4>
@@ -126,6 +129,8 @@ const Home: NextPage = () => {
                 All games are on-chain, meaning that every game is provably fair and transparent.
               </p>
             </div>
+            {/* </Reveal> */}
+            {/* <Reveal> */}
             <div className="w-[360px] h-[405px] bg-slate-light rounded-3xl border-brand-green-hover border-2 flex flex-col justify-evenly px-4">
               <div className="mx-auto flex justify-center items-center w-20 h-20 bg-black-dark rounded-full">
                 <h4>3</h4>
@@ -135,6 +140,7 @@ const Home: NextPage = () => {
                 All games are on-chain, meaning that every game is provably fair and transparent.
               </p>
             </div>
+            {/* </Reveal> */}
           </div>
           <h2 className="text-slate-main text-center w-4/5 m-auto">
             Learn all about our project, roadmap, and more in our Whitepaper

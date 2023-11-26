@@ -2,6 +2,7 @@ import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next';
 import PageContent from '../../../components/page/content';
 import Page from '../../../components/page';
 import Link from 'next/link';
+import Image from 'next/image';
 import {useSidebar} from '@/contexts/SidebarContext';
 import {Game} from '../../../typescript/contracts';
 import {useAccount, useBlockNumber, useContractRead, useContractWrite, usePrepareContractWrite} from 'wagmi';
@@ -12,6 +13,7 @@ import {MdCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md';
 import {BiMessageSquareX} from 'react-icons/bi';
 import handleAddress from '@/root/src/typescript/utils/handleAddress';
 import ActionButtonItem from '@/root/src/components/buttons/ActionButton';
+import Footer from '@/root/src/components/footer';
 
 type HomePagePropsT = {props: {aid: number}};
 
@@ -282,9 +284,177 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       {/* <PageContent contentPosition="center"> */}
-      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImage`}>
-        <div className="mt-24 mx-[4.5rem]">
-          <h4 className="text-brand-green mb-16">Russian Roulette - Game {aid}</h4>
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImageNoFade`}>
+        {/* game window container */}
+        <div className="mt-28 mx-10">
+          {/* game title and meta info */}
+          <div className="bg-slate-extra h-14 rounded-t-lg px-5">
+            <div className="flex items-center">
+              {/* left content - game title */}
+              <h4 className="text-brand-green text-[24px] font-medium flex-none">Russian Roulette - Game {aid}</h4>
+              {/* fill middle with grow */}
+              <div className="grow"></div>
+              {/* right content - meta info */}
+              <div className="flex gap-9">
+                {/* status */}
+                <div className="flex flex-row gap-3">
+                  <p className="text-grey-main body16Medium">Status: </p>
+                  <div className="flex flex-row gap-1">
+                    <p className="text-sm text-white-main font-medium">Joined, Waiting for Players</p>
+                    <div className={`my-auto h-[14px] w-[14px] bg-brand-blue rounded-full`}></div>
+                  </div>
+                </div>
+                {/* Buy In */}
+                <div className="flex flex-row gap-3">
+                  <p className="text-grey-main body16Medium">Buy In: </p>
+                  <p className="text-sm text-white-main font-medium">
+                    {formatBuyIn()} {tokenName()}
+                  </p>
+                </div>
+                {/* currency */}
+                <div className="flex flex-row gap-3">
+                  <p className="text-grey-main body16Medium">Currency: </p>
+                  <div className="flex flex-row gap-1">
+                    <p className="text-sm text-white-main font-medium">WBNB</p>
+                    <Image
+                      className="my-auto"
+                      src={'/images/icons/coinbase.svg'}
+                      width={20}
+                      height={20}
+                      alt={'token'}
+                    ></Image>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2 columns main section - left for game, right for players and game details */}
+          <div className="flex w-full bg-slate-main min-h-[680px] rounded-b-lg">
+            <div className="relative basis-3/4">
+              {/* absolute players overlay */}
+              <div className="absolute top-10 left-14">
+                <h4 className="title20">Players</h4>
+                <p className="ml-6 mt-3 text-[32px]">
+                  {gameInfo.players.length}
+                  {/* /{tableInfo.maxPlayers} */}
+                </p>
+              </div>
+              {/* main game section */}
+              <div className="h-3/5 w-2/5 mx-auto mt-20 bg-slate-extra rounded-full"></div>
+              {/* enter + vote buttons */}
+              <div className="mx-auto my-8 w-1/2 flex justify-center gap-10">
+                <ActionButtonItem text="Join Game" color="green" link={''} />
+                <ActionButtonItem text="Vote to End Early" color="pink" link={''} />
+              </div>
+            </div>
+            <div className="basis-1/4">
+              {/* players list */}
+              <div className="h-1/2 w-full">
+                {/* players table header */}
+                <div className="bg-slate-table-header h-9 flex items-center gap-5">
+                  {' '}
+                  {/* h-12 */}
+                  <div className="basis-1/4">
+                    <p className="text-center text-grey-main body16Medium border-r-2 border-white-darker">Player #</p>
+                  </div>
+                  <div className="basis-3/4 flex flex-col">
+                    <p className="text-grey-main body16Medium">Player</p>
+                  </div>
+                </div>
+                {/* players table */}
+                <div className="h-full bg-slate-extra rounded-l-lg pt-8">
+                  {' '}
+                  {/* relative -top-1 */}
+                  {/* TODO: MAP OVER PLAYERS HERE */}
+                  <div className="flex items-center gap-5 mb-4">
+                    {/* left column */}
+                    <div className="my-auto basis-1/4 flex flex-col">
+                      <p className="text-white border-r-2 border-white-darker text-center">1</p>
+                    </div>
+                    {/* right column */}
+                    <div className="basis-3/4 flex flex-col">
+                      <p className="text-white text-start">0xcA1551...b88C1F</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-5 mb-4">
+                    {/* left column */}
+                    <div className="basis-1/4 flex flex-col">
+                      <p className="text-white border-r-2 border-white-darker text-center">2</p>
+                    </div>
+                    {/* right column */}
+                    <div className="basis-3/4 flex flex-col">
+                      <p className="text-white text-start">0xcA1551...b88C1F</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-5 mb-4">
+                    {/* left column */}
+                    <div className="basis-1/4 flex flex-col">
+                      <p className="text-white border-r-2 border-white-darker text-center">3</p>
+                    </div>
+                    {/* right column */}
+                    <div className="basis-3/4 flex flex-col">
+                      <p className="text-white text-start">0xcA1551...b88C1F</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-5 mb-4">
+                    {/* left column */}
+                    <div className="basis-1/4 flex flex-col">
+                      <p className="text-white border-r-2 border-white-darker text-center">4</p>
+                    </div>
+                    {/* right column */}
+                    <div className="basis-3/4 flex flex-col">
+                      <p className="text-white text-start">0xcA1551...b88C1F</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-5 mb-4">
+                    {/* left column */}
+                    <div className="basis-1/4 flex flex-col">
+                      <p className="text-white border-r-2 border-white-darker text-center">5</p>
+                    </div>
+                    {/* right column */}
+                    <div className="basis-3/4 flex flex-col">
+                      <p className="text-white text-start">0xcA1551...b88C1F</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-5 mb-4">
+                    {/* left column */}
+                    <div className="basis-1/4 flex flex-col">
+                      <p className="text-white border-r-2 border-white-darker text-center">6</p>
+                    </div>
+                    {/* right column */}
+                    <div className="basis-3/4 flex flex-col">
+                      <p className="text-white text-start">0xcA1551...b88C1F</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* game details */}
+              <div className="h-1/2 w-full">
+                {/* game details table header */}
+                <div className="bg-slate-table-header h-10 flex items-center gap-5">
+                  <p className="text-grey-main body16Medium ml-2">Game Details</p>
+                </div>
+                {/* players table */}
+                <div className=" bg-slate-extra relative -top-1 rounded-tl-lg rounded-br-lg pt-4 px-3">
+                  {/* vote early section */}
+                  <div>
+                    <p className="text-sm">End Early: </p>
+                    <p className="title32 text-center text-red-500">1 Vote</p>
+                    <p className="mt-2 text-sm font-medium text-center">2 Votes Needed</p>
+                  </div>
+                  <hr className="my-2" />
+                  <p className="font-medium text-sm">Amount to Win:</p>
+                  <p className="text-[28px] font-medium text-center mt-1 text-yellow-300">0.1218750 BNB</p>
+                  <p className="mt-2 font-medium text-sm">Chance to Win:</p>
+                  <p className="text-[28px] font-medium text-center mt-1 pb-6">
+                    {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <section
             className={`${
               sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
@@ -296,7 +466,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                 Players: ({gameInfo.players.length}/{tableInfo.maxPlayers}):
               </h4>
               {/* table */}
-              <div className="relative w-full h-full">
+              <div className="relative w-full">
                 <div className="absolute h-[95%] w-[95%] -z-10 bg-slate-500 rounded-full"></div> {/* table bg */}
                 {/* table of players 3-6 players */}
                 {/* if <= 3 players */}
@@ -517,17 +687,19 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
             </div>
           </section>
         </div>
+
+        {/* original game page */}
         {/* <h1 className="text-4xl font-bold absolute top-10">Russian Roulette</h1>
         <h4 className="text-3xl font-bold absolute top-24">Game {aid}</h4>
         <hr /> */}
 
-        <div className="mt-10 flex flex-col text-center text-xl">
+        {/* <div className="mt-10 flex flex-col text-center text-xl">
           <code className="mb-8">
             Buy In: {formatBuyIn()} {tokenName()}
           </code>
           <code className="mb-8">
             {' '}
-            {/** Make it fetch platformFee from contract */}
+            {/** Make it fetch platformFee from contract 
             Amount To Win: {getAmountToWin()}
           </code>
           <code className="mb-8">
@@ -567,13 +739,15 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         {/* <Link href={'/roulette'} className="border border-white p-2 absolute bottom-4">
           Go Back
         </Link> */}
         {/* </PageContent> */}
       </div>
+      {/* footer */}
+      {/* <Footer /> */}
     </Page>
   );
 };

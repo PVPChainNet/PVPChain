@@ -99,10 +99,10 @@ export default function Nav() {
               </div>
               <ul className="my-4 flex flex-col gap-3">
                 <li className="">
-                  <MenuItem link={''} text={'Token Leaderboard'} />
+                  <MenuItem link={'#'} text={'Token Leaderboard'} />
                 </li>
                 <li className="">
-                  <MenuItem link={''} text={'Player Leaderboard'} />
+                  <MenuItem link={'#'} text={'Player Leaderboard'} />
                 </li>
               </ul>
             </div>
@@ -122,10 +122,10 @@ export default function Nav() {
               ))}
               <p className="text-center title20 mt-4 mb-2">LB</p>
               <li className="" title={'Token Leaderboard'}>
-                <ActionButton color="grey" link={''} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
+                <ActionButton color="grey" link={'#'} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
               </li>
               <li className="" title={'Player Leaderboard'}>
-                <ActionButton color="grey" link={''} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
+                <ActionButton color="grey" link={'#'} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
               </li>
             </ul>
           )}

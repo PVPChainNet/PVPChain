@@ -59,6 +59,9 @@
 .gameBGImage {
   @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
 }
+.gameBGImageNoFade {
+  @apply bg-game-bg-temp-no-fade bg-cover bg-no-repeat bg-fixed;
+}
 
 .tableGrid {
   display: grid;
