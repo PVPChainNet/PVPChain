@@ -345,7 +345,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                 <div className="ml-20 mr-10">
                   {/* user entry, if joined */}
                   {/* {isUserInGame() && ( */}
-                  <div className="flex gap-9 items-center">
+                  <div className="flex gap-9 items-center mb-2">
                     <div className="drop-shadow-xl border-2 border-brand-green rounded-full">
                       <Image
                         className="my-auto"
@@ -353,24 +353,241 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                         width={40}
                         height={40}
                         alt={'token'}
-                      ></Image>{' '}
+                      ></Image>
                       {/* user icon */}
                     </div>
                     <p className="text-[14px] font-light text-brand-green">0xcA1551...b88C1F</p> {/* user address */}
                     <p className="text-[14px] font-light text-brand-green">12</p> {/* entry count */}
                   </div>
                   {/* )} */}
-                  {/* users-in-game table header */}
-                  <div className="my-4 ml-12 flex gap-12 w-[208px]">
-                    <p className="text-grey-main text-[16px]">Player</p>
-                    <p className="text-grey-main text-[16px]">Entries</p>
-                  </div>
-                  {/* TODO: MAP PLAYERS */}
-                  <div className="flex gap-2 w-[208px]">
-                    <p>wallet address</p>
-                    <p className="font-bold">entry count</p>
-                  </div>
 
+                  {/* dynamic table of tables */}
+                  <div className="addressGrid">
+                    {/* users-in-game table */}
+                    <table className="table-auto border-spacing-10">
+                      {/* table headers */}
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th className="text-grey-main text-[16px] font-normal">Player</th>
+                          <th className="text-grey-main text-[16px] font-normal">Entries</th>
+                        </tr>
+                      </thead>
+                      {/* table body */}
+                      <tbody>
+                        {/* table rows (data) - TODO: MAP PLAYERS */}
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {/* users-in-game table */}
+                    <table className="table-auto border-spacing-10">
+                      {/* table headers */}
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th className="text-grey-main text-[16px] font-normal">Player</th>
+                          <th className="text-grey-main text-[16px] font-normal">Entries</th>
+                        </tr>
+                      </thead>
+                      {/* table body */}
+                      <tbody>
+                        {/* table rows (data) - TODO: MAP PLAYERS */}
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table className="table-auto border-spacing-10">
+                      {/* table headers */}
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th className="text-grey-main text-[16px] font-normal">Player</th>
+                          <th className="text-grey-main text-[16px] font-normal">Entries</th>
+                        </tr>
+                      </thead>
+                      {/* table body */}
+                      <tbody>
+                        {/* table rows (data) - TODO: MAP PLAYERS */}
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address */}
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                   {/* {gameInfo.players.map((player, i) => {
                     return (
                       <div key={i} className="w-[208px]">
