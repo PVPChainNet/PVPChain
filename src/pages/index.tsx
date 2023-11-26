@@ -6,6 +6,7 @@ import {menuItemsPVP, menuItemsPVH} from '../typescript/menuItems';
 import Page from '@/components/page';
 import {useSidebar} from '@/contexts/SidebarContext';
 import Footer from '../components/footer';
+import Reveal from '../components/utility/Reveal';
 
 const Home: NextPage = () => {
   const sidebarStateActive = useSidebar();
@@ -13,11 +14,13 @@ const Home: NextPage = () => {
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
         <div className="relative mt-28 mb-20 ml-12 max-w-4xl">
-          <h2>
-            The world&apos;s first <span className="text-brand-green">decentralized</span>,{' '}
-            <span className="text-brand-green">trustless</span>, fully{' '}
-            <span className="text-brand-green">on-chain</span> casino.
-          </h2>
+          <Reveal>
+            <h2>
+              The world&apos;s first <span className="text-brand-green">decentralized</span>,{' '}
+              <span className="text-brand-green">trustless</span>, fully{' '}
+              <span className="text-brand-green">on-chain</span> casino.
+            </h2>
+          </Reveal>
         </div>
       </section>
 
@@ -149,9 +152,12 @@ const Home: NextPage = () => {
           sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'
         }`}
       >
-        <h3 className="mt-[168px] w-2/3 mx-auto text-center">
-          Bet with BNB, and Claim your winnings in <span className="text-brand-green-hover">any supported token*</span>
-        </h3>
+        <Reveal>
+          <h3 className="mt-[168px] w-2/3 mx-auto text-center">
+            Bet with BNB, and Claim your winnings in{' '}
+            <span className="text-brand-green-hover">any supported token*</span>
+          </h3>
+        </Reveal>
         <div className="w-5/6 mt-[120px] mb-28 mx-auto flex flex-row justify-evenly">
           <Image src="/images/socials/discord.svg" width={50} height={100} alt="BNB icon" />
           <Image src="/images/socials/discord.svg" width={50} height={100} alt="BNB icon" />
@@ -166,9 +172,11 @@ const Home: NextPage = () => {
         </div>
       </section>
       <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
-        <h1 className="mt-[208px] w-4/5 mx-auto text-center drop-shadow">
-          For questions, or to request features or token support, join our Discord
-        </h1>
+        <Reveal>
+          <h1 className="mt-[208px] w-4/5 mx-auto text-center drop-shadow">
+            For questions, or to request features or token support, join our Discord
+          </h1>
+        </Reveal>
         <Link
           href="#"
           className="flex justify-center align-middle mt-24 mb-24 mx-auto w-[450px] h-[89px] rounded-full bg-brand-green hover:bg-brand-green-hover"
