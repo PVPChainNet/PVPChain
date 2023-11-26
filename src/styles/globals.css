@@ -52,8 +52,15 @@
   @apply flex flex-col mx-4 my-4 lg:my-16;
 }
 
+.limeGreenGradientBG {
+  background: linear-gradient(to bottom left, #d0dacb00, #d0dacb);
+}
+
 .gameBGImage {
   @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
+}
+.gameBGImageNoFade {
+  @apply bg-game-bg-temp-no-fade bg-cover bg-no-repeat bg-fixed;
 }
 
 .tableGrid {

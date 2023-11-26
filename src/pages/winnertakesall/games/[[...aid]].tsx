@@ -2,6 +2,7 @@ import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from 'next';
 import PageContent from '../../../components/page/content';
 import Page from '../../../components/page';
 import Link from 'next/link';
+import Image from 'next/image';
 import {useSidebar} from '@/contexts/SidebarContext';
 import {WinnerTakesAll} from '../../../typescript/contracts';
 import {useAccount, useBlockNumber, useContractRead, useContractWrite, usePrepareContractWrite} from 'wagmi';
@@ -276,7 +277,161 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImage`}>
+      <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImageNoFade`}>
+        {/* game window container */}
+        <div className="mt-28 mx-10">
+          {/* game title and meta info */}
+          <div className="bg-slate-extra h-14 rounded-t-lg px-5">
+            <div className="flex items-center">
+              {/* left content - game title */}
+              <h4 className="text-brand-green text-[24px] font-medium flex-none">Winner Takes All - Game {aid}</h4>
+              {/* fill middle with grow */}
+              <div className="grow"></div>
+              {/* right content - meta info */}
+              <div className="flex gap-9">
+                {/* status */}
+                <div className="flex flex-row gap-3">
+                  <p className="text-grey-main body16Medium">Status: </p>
+                  <div className="flex flex-row gap-1">
+                    <p className="text-sm text-white-main font-medium">Joined, Waiting for Players</p>
+                    <div className={`my-auto h-[14px] w-[14px] bg-brand-blue rounded-full`}></div>
+                  </div>
+                </div>
+                {/* Buy In */}
+                <div className="flex flex-row gap-3">
+                  <p className="text-grey-main body16Medium">Buy In: </p>
+                  <p className="text-sm text-white-main font-medium">
+                    {formatBuyIn()} {tokenName()}
+                  </p>
+                </div>
+                {/* currency */}
+                <div className="flex flex-row gap-3">
+                  <p className="text-grey-main body16Medium">Currency: </p>
+                  <div className="flex flex-row gap-1">
+                    <p className="text-sm text-white-main font-medium">WBNB</p>
+                    <Image
+                      className="my-auto"
+                      src={'/images/icons/coinbase.svg'}
+                      width={20}
+                      height={20}
+                      alt={'token'}
+                    ></Image>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2 columns main section - left for game, right for players and game details */}
+          <div className="flex w-full bg-slate-main min-h-[680px] h-4/5 rounded-b-lg">
+            <div className="basis-3/4">
+              <div className="flex gap-28 py-6 ml-10">
+                {/* players info */}
+                <div className="flex flex-col">
+                  <h4 className="title20">Players</h4>
+                  <p className="mt-3 text-[32px]">
+                    {gameInfo.players.length}/{tableInfo.maxPlayers}
+                  </p>
+                </div>
+                {/* time until start info */}
+                <div className="">
+                  <h4 className="title20">Time Until Game Starts: </h4>
+                  <p className="mt-3 text-[32px]">4 Hours, 12 Minutes, 32 Seconds</p>
+                </div>
+              </div>
+
+              {/* main game section */}
+              <div className="min-h-[500px] mx-10 mb-8 pt-5 bg-slate-extra rounded-lg">
+                <div className="ml-20 mr-10">
+                  {/* user entry, if joined */}
+                  {/* {isUserInGame() && ( */}
+                  <div className="flex gap-9 items-center">
+                    <div className="drop-shadow-xl border-2 border-brand-green rounded-full">
+                      <Image
+                        className="my-auto"
+                        src={'/images/icons/coinbase.svg'}
+                        width={40}
+                        height={40}
+                        alt={'token'}
+                      ></Image>{' '}
+                      {/* user icon */}
+                    </div>
+                    <p className="text-[14px] font-light text-brand-green">0xcA1551...b88C1F</p> {/* user address */}
+                    <p className="text-[14px] font-light text-brand-green">12</p> {/* entry count */}
+                  </div>
+                  {/* )} */}
+                  {/* users-in-game table header */}
+                  <div className="my-4 ml-12 flex gap-12 w-[208px]">
+                    <p className="text-grey-main text-[16px]">Player</p>
+                    <p className="text-grey-main text-[16px]">Entries</p>
+                  </div>
+                  {/* TODO: MAP PLAYERS */}
+                  <div className="flex gap-2 w-[208px]">
+                    <p>wallet address</p>
+                    <p className="font-bold">entry count</p>
+                  </div>
+
+                  {/* {gameInfo.players.map((player, i) => {
+                    return (
+                      <div key={i} className="w-[208px]">
+                        {getCheckbox(player)} {handleAddress(player)} &nbsp; &nbsp; {getUserFinalStats(player)}
+                      </div>
+                    );
+                  })} */}
+                </div>
+              </div>
+
+              {/* enter + vote buttons */}
+              <div className="mx-auto my-8 w-1/2 flex justify-center gap-10">
+                {/* select entry count */}
+                <div className="flex flex-col">
+                  {/* <p className="text-[16px] font-medium">Select Entry Count</p> */}
+                  <div className="flex gap-3 mt-2">
+                    <div className="flex-grow">
+                      <input
+                        className="rounded-lg w-full h-[40px] bg-slate-extra text-[24px] text-center"
+                        type="number"
+                        placeholder="0"
+                      />
+                    </div>
+                    <div className="flex-none">
+                      <button className="w-[48px] h-[40px] rounded-lg bg-brand-green-hover text-white-main">+</button>
+                    </div>
+                  </div>
+                </div>
+                <ActionButtonItem text={`Play with _ entries`} color="blue" link={''} />
+              </div>
+            </div>
+
+            <div className="basis-1/4 flex items-center">
+              {/* game details */}
+              <div className="h-1/2 w-full">
+                {/* game details table header */}
+                <div className="bg-slate-table-header rounded-tl-lg h-10 flex items-center gap-5">
+                  <p className="text-grey-main body16Medium ml-2">Game Details</p>
+                </div>
+                {/* players table */}
+                <div className=" bg-slate-extra relative -top-1 rounded-l-lg rounded-br-lg pt-4 px-3">
+                  {/* vote early section */}
+                  <div>
+                    <p className="text-sm">Time Until Start: </p>
+                    <p className="title32 text-center text-brand-purple">04:12:32</p>
+                    <p className="mt-2 text-sm font-medium text-center">Or Until Players Fill</p>
+                  </div>
+                  <hr className="my-2" />
+                  <p className="font-medium text-sm">Amount to Win:</p>
+                  <p className="text-[28px] font-medium text-center mt-1 text-yellow-300">0.1218750 BNB</p>
+                  <p className="mt-2 font-medium text-sm">Chance to Win:</p>
+                  <p className="text-[28px] font-medium text-center mt-1 pb-6">
+                    {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* old info container */}
         <div className="mt-24 mx-[4.5rem]">
           <h4 className="text-brand-green mb-16">Winner Takes All - Game {aid}</h4>
           <section

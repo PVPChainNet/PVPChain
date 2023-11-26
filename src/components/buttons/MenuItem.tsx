@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 interface MenuItemProps {
   link: string;
@@ -7,10 +8,16 @@ interface MenuItemProps {
 }
 
 export default function MenuItem({link, text}: MenuItemProps) {
+  const router = useRouter();
+
   return (
     <Link
       href={link}
-      className="flex justify-between align-middle h-[40px] w-full px-[14px] bg-slate-main rounded-lg hover:bg-slate-700"
+      className={`flex justify-between align-middle h-[40px] w-full px-[14px] bg-slate-main rounded-lg ${
+        router.pathname.includes(link)
+          ? 'bg-brand-green text-black focus:outline-none focus:ring-2 focus:ring-green-300 hover:bg-brand-green-hover'
+          : 'hover:bg-slate-700'
+      }`}
     >
       {' '}
       {/* h-[54px] */}
