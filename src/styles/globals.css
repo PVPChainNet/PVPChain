@@ -76,6 +76,19 @@
   grid-gap: 1rem;
 }
 
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
 h1 {
   font-size: 64px;
   font-weight: 500;

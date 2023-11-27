@@ -6,6 +6,7 @@ import Tooltip from '../utility/Tooltip';
 import Link from 'next/link';
 import {useSidebar, useSidebarUpdate} from '@/contexts/SidebarContext';
 import MusicControls from '../buttons/MusicControls';
+import {useEffect, useState} from 'react';
 
 /* interface NavProps {
   onToggle: () => void;
@@ -16,6 +17,11 @@ export default function Nav() {
   //NOTE: replaced the props with the context hooks
   const sidebarStateActive = useSidebar();
   const toggleSidebar = useSidebarUpdate();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <nav
@@ -111,13 +117,17 @@ export default function Nav() {
               <p className="text-center title20 mb-2">PvP</p>
               {menuItemsPVP.map((menuItem, index) => (
                 <li className="" key={index} title={menuItem.name}>
-                  <ActionButton
-                    color="grey"
-                    link={menuItem.link}
-                    icon="/images/icons/house-96.png"
-                    iconwidth={30}
-                    circle={true}
-                  />
+                  {isMounted ? (
+                    <ActionButton
+                      color="grey"
+                      link={menuItem.link}
+                      icon="/images/icons/house-96.png"
+                      iconwidth={30}
+                      circle={true}
+                    />
+                  ) : (
+                    <div className="max-w-[54px] mx-auto h-[54px] w-full rounded-full"></div>
+                  )}
                 </li>
               ))}
               <p className="text-center title20 mt-4 mb-2">LB</p>

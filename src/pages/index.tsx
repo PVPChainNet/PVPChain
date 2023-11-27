@@ -10,6 +10,7 @@ import Reveal from '../components/utility/Reveal';
 
 const Home: NextPage = () => {
   const sidebarStateActive = useSidebar();
+
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
                     width={370}
                     height={260}
                     alt={`${item.name} background`}
-                    className="rounded-lg"
+                    className="rounded-lg hover:scale-105 transition-all duration-300"
                   />
                   <p className="mt-5 body20">{item.name}</p>
                 </Link>
@@ -68,13 +69,15 @@ const Home: NextPage = () => {
                       Coming Soon
                     </p>
                   </div>
-                  <Image
-                    src={item.image}
-                    width={370}
-                    height={260}
-                    alt={`${item.name} background`}
-                    className="rounded-lg"
-                  />
+                  <div className="">
+                    <Image
+                      src={item.image}
+                      width={370}
+                      height={260}
+                      alt={`${item.name} background`}
+                      className="rounded-lg hover:scale-105 transition-all duration-300"
+                    />
+                  </div>
                 </div>
                 <p className="mt-5 body20">{item.name}</p>
                 {/* </Link> */}

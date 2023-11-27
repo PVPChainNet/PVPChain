@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Page from '@/components/page';
 import {useSidebar} from '@/contexts/SidebarContext';
 import {useState} from 'react';
-import Modal from '../../components/modal';
+import ClaimModal from '../../components/modals/claim';
 
 export default function Profile() {
   const sidebarStateActive = useSidebar();
@@ -106,7 +106,7 @@ export default function Profile() {
                 >
                   Claim
                 </button>
-                {isModalOpen && <Modal onClose={handleCloseModal} onAction={handleAction} />}
+                {isModalOpen && <ClaimModal onClose={handleCloseModal} onAction={handleAction} />}
               </td>
             </tr>
             <tr className="text-left border-gray-600 border-b-2 border-opacity-20 h-20 body18 font-medium">

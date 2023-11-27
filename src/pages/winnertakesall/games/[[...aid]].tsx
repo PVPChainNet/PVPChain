@@ -13,6 +13,8 @@ import {MdCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md';
 import {BiMessageSquareX} from 'react-icons/bi';
 import handleAddress from '@/root/src/typescript/utils/handleAddress';
 import ActionButtonItem from '@/root/src/components/buttons/ActionButton';
+import {motion, AnimatePresence} from 'framer-motion';
+import ResultsModal from '@/root/src/components/modals/results';
 
 type HomePagePropsT = {props: {aid: number}};
 
@@ -36,6 +38,14 @@ type TableInfoT = {
 
 const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const sidebarStateActive = useSidebar();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+  const handleResultsAction = () => {
+    console.log('results action');
+  };
+
   const {address, isConnected} = useAccount();
   const [minBuyIn, setMinBuyIn] = useState<string>('0');
 
@@ -278,6 +288,11 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImageNoFade`}>
+        <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+          {isModalOpen && (
+            <ResultsModal resultStateToDisplay={1} onAction={handleResultsAction} onClose={handleCloseModal} />
+          )}
+        </AnimatePresence>
         {/* game window container */}
         <div className="mt-28 mx-10">
           {/* game title and meta info */}
@@ -620,7 +635,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               </div>
             </div>
 
-            <div className="basis-1/4 flex items-center">
+            <div className="basis-1/4 relative flex items-center">
               {/* game details */}
               <div className="h-1/2 w-full">
                 {/* game details table header */}
@@ -643,6 +658,15 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                     {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%
                   </p>
                 </div>
+              </div>
+              {/* DEV: FORCE GAME START */}
+              <div className="absolute right-20 bottom-20 mt-10 w-[120px]">
+                <button
+                  onClick={() => (isModalOpen ? handleCloseModal() : handleOpenModal())}
+                  className="border-2 rounded-lg"
+                >
+                  Force Game Start
+                </button>
               </div>
             </div>
           </div>
