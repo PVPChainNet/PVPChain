@@ -22,8 +22,8 @@ export default function ActionButtonItem({color, link, text, icon, iconwidth, ci
       href={link}
       className={`flex justify-center align-middle 
       ${
-        router.pathname.includes(link)
-          ? 'bg-brand-green text-black focus:outline-none focus:ring-2 focus:ring-green-300 hover:bg-brand-green-hover'
+        color === 'grey' && router.pathname.includes(link)
+          ? 'text-black focus:outline-none border-2 border-brand-green shadow-sm shadow-brand-green'
           : 'hover:bg-slate-700'
       }
       ${circle?.valueOf() == true ? 'max-w-[54px] mx-auto' : ''} h-[54px] w-full rounded-full ${

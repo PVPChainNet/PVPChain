@@ -58,10 +58,6 @@ export default function Nav() {
 
       {/* music controls */}
       <MusicControls />
-      {/* <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-slate-light rounded-lg flex justify-evenly">
-        <MusicControl controlFunction={'skip'} />
-        <MusicControl controlFunction={'mute'} />
-      </div> */}
 
       <div className={'transition-all'}>
         <Link href="/" className="block mt-2">
@@ -291,7 +287,7 @@ export default function Nav() {
                   />
                 </div>
                 {/* socials */}
-                <div className="flex flex-col my-4 gap-4 justify-center align-middle">
+                {/* <div className="flex flex-col my-4 gap-4 justify-center align-middle">
                   <Image
                     className="m-auto"
                     src={'/images/socials/twitter.svg'}
@@ -313,7 +309,7 @@ export default function Nav() {
                     height={30}
                     alt={'telegram icon'}
                   />
-                </div>
+                </div> */}
               </>
             )}
           </div>
