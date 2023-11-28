@@ -149,7 +149,8 @@ const Home: NextPage = () => {
             Learn all about our project, roadmap, and more in our Whitepaper
           </h2>
           <Link
-            href="#"
+            href="https://app.gitbook.com/o/bosh1Lw7viN5cWrdY2Ig/s/NzQVjNo6xDa3gVEMSXEb/"
+            target="_blank"
             className="flex justify-center align-middle mt-11 mb-24 mx-auto w-[450px] h-[89px] rounded-full bg-brand-green hover:bg-brand-green-hover"
           >
             <p className="text-slate-main text-[24px] mx-auto my-auto">Read Whitepaper</p>

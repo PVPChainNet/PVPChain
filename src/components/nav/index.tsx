@@ -210,7 +210,7 @@ export default function Nav() {
                 <div title="View Profile">
                   <ActionButton color="green" link="/profile" text="Profile" />
                 </div>
-                <Link href="#">
+                <Link href="https://app.gitbook.com/o/bosh1Lw7viN5cWrdY2Ig/s/NzQVjNo6xDa3gVEMSXEb/" target="_blank">
                   <p className="body16Medium text-center my-4">Read Whitepaper</p>
                 </Link>
                 {/* socials */}
