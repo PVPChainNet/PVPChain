@@ -13,7 +13,7 @@ interface MenuItemGame {
 export const menuItemsPVP: MenuItemGame[] = [
   {
     name: 'Russian Roulette',
-    link: '/roulette',
+    link: '/russianroulette',
     image: '/images/games/russian_roulette/background.png',
     icon: '/images/games/russian_roulette/icon.png',
   },

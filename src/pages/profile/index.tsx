@@ -43,7 +43,7 @@ export default function Profile() {
                 }`}
               >
                 <p className="text-[32px] font-medium">12,012</p>
-                <p className="title24">Current points earned</p>
+                <p className="title24">Total Bet</p>
               </div>
 
               <div
@@ -63,7 +63,7 @@ export default function Profile() {
                 }`}
               >
                 <p className="text-[32px] font-medium">123,987</p>
-                <p className="title24">Lifetime points earned</p>
+                <p className="title24">Total Received</p>
               </div>
 
               <div
@@ -83,7 +83,7 @@ export default function Profile() {
                 }`}
               >
                 <p className="text-[32px] font-medium">$1,003.06</p>
-                <p className="title24">Money Spent</p>
+                <p className="title24">Games Played</p>
               </div>
             </div>
           </section>

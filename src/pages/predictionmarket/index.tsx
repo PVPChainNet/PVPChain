@@ -215,7 +215,7 @@ export default function PredictionMarket() {
 
               {isConnected && (
                 <Link
-                  href={'/roulette/history'}
+                  href={'/russianroulette/history'}
                   className="cursor-pointer border border-solid border-white text-center mt-10 flex flex-col p-4"
                 >
                   View Game History

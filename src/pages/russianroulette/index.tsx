@@ -225,6 +225,10 @@ const Home: NextPage = () => {
                         {table.numberOfPlayers}/{table.maxPlayers}
                       </p>
                     </div>
+                    <div className="mr-4 flex justify-between text-xl">
+                      <p className="font-medium">Risk Points: </p>
+                      <p className="font-light">10</p>
+                    </div>
                     <div className="mt-12 mx-4" onClick={() => tableClick(table, i + 1)}>
                       <ActionButtonItem text={timeRemainingString(table)} color={'blue'} link={''} />
                     </div>

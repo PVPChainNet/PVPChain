@@ -204,8 +204,8 @@ export default function Nav() {
           <div className="flex flex-col gap-2">
             {sidebarStateActive ? (
               <>
-                <div title="Buy/Sell Points" className="mb-2">
-                  <ActionButton color="blue" link="/points" text="Buy/Sell Points" />
+                <div title="Swap Tokens" className="mb-2">
+                  <ActionButton color="blue" link="/swap" text="Swap Tokens" />
                 </div>
                 <div title="View Profile">
                   <ActionButton color="green" link="/profile" text="Profile" />
@@ -268,10 +268,10 @@ export default function Nav() {
                   />
                 </div> */}
 
-                <div className="mt-2" title="Buy/Sell Points">
+                <div className="mt-2" title="Swap Tokens">
                   <ActionButton
                     color="blue"
-                    link="/points"
+                    link="/swap"
                     icon="/images/icons/points-100.png"
                     iconwidth={30}
                     circle={true}

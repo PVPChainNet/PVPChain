@@ -13,7 +13,7 @@ import {MdCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md';
 import {BiMessageSquareX} from 'react-icons/bi';
 import handleAddress from '@/root/src/typescript/utils/handleAddress';
 import ActionButtonItem from '@/root/src/components/buttons/ActionButton';
-import {motion, AnimatePresence} from 'framer-motion';
+import {AnimatePresence} from 'framer-motion';
 import ResultsModal from '@/root/src/components/modals/results';
 
 type HomePagePropsT = {props: {aid: number}};
@@ -285,16 +285,46 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     } else return false;
   };
 
+  const generateTempTableRows = (): JSX.Element[] => {
+    const tempTableRows: JSX.Element[] = [];
+
+    for (let i = 1; i <= 50; i++) {
+      tempTableRows.push(
+        <tr>
+          <td className="">
+            <div className="h-6 w-6 drop-shadow-xl rounded-full bg-grey-main">
+              <Image
+                className="my-auto"
+                src={'/images/icons/profile-64.png'}
+                width={24}
+                height={24}
+                alt={'token'}
+              ></Image>
+            </div>
+          </td>
+          <td className="pl-3">
+            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p> {/* user address */}
+          </td>
+          <td className="pl-5">
+            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+          </td>
+        </tr>
+      );
+    }
+
+    return tempTableRows;
+  };
+
+  const tempTableRows = generateTempTableRows();
+
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImageNoFade`}>
         <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-          {isModalOpen && (
-            <ResultsModal resultStateToDisplay={1} onAction={handleResultsAction} onClose={handleCloseModal} />
-          )}
+          {isModalOpen && <ResultsModal onAction={handleResultsAction} onClose={handleCloseModal} />}
         </AnimatePresence>
         {/* game window container */}
-        <div className="mt-28 mx-10">
+        <div className="mt-28 mx-10 mb-12">
           {/* game title and meta info */}
           <div className="bg-slate-extra h-14 rounded-t-lg px-5">
             <div className="flex items-center">
@@ -356,15 +386,15 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               </div>
 
               {/* main game section */}
-              <div className="min-h-[500px] mx-10 mb-8 pt-5 bg-slate-extra rounded-lg">
+              <div className="min-h-[450px] mx-10 mb-8 pt-5 bg-slate-extra rounded-lg">
                 <div className="ml-20 mr-10">
                   {/* user entry, if joined */}
                   {/* {isUserInGame() && ( */}
                   <div className="flex gap-9 items-center mb-2">
-                    <div className="drop-shadow-xl border-2 border-brand-green rounded-full">
+                    <div className="bg-grey-main h-10 w-10 drop-shadow-xl border-2 border-brand-green rounded-full">
                       <Image
                         className="my-auto"
-                        src={'/images/icons/coinbase.svg'}
+                        src={'/images/icons/profile-64.png'}
                         width={40}
                         height={40}
                         alt={'token'}
@@ -379,7 +409,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                   {/* dynamic table of tables */}
                   <div className="addressGrid">
                     {/* users-in-game table */}
-                    <table className="table-auto border-spacing-10">
+                    <table className="table-auto border-spacing-10 ">
                       {/* table headers */}
                       <thead>
                         <tr>
@@ -391,7 +421,8 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                       {/* table body */}
                       <tbody>
                         {/* table rows (data) - TODO: MAP PLAYERS */}
-                        <tr>
+                        {tempTableRows}
+                        {/* <tr>
                           <td className="">
                             <div className="drop-shadow-xl rounded-full">
                               <Image
@@ -405,56 +436,15 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                           </td>
                           <td className="pl-3">
                             <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
+                            {/* user address 
                           </td>
                           <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count 
                           </td>
-                        </tr>
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </table>
-                    {/* users-in-game table */}
-                    <table className="table-auto border-spacing-10">
+                    <table className="table-auto border-spacing-10 ">
                       {/* table headers */}
                       <thead>
                         <tr>
@@ -464,145 +454,11 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                         </tr>
                       </thead>
                       {/* table body */}
-                      <tbody>
-                        {/* table rows (data) - TODO: MAP PLAYERS */}
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table className="table-auto border-spacing-10">
-                      {/* table headers */}
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th className="text-grey-main text-[16px] font-normal">Player</th>
-                          <th className="text-grey-main text-[16px] font-normal">Entries</th>
-                        </tr>
-                      </thead>
-                      {/* table body */}
-                      <tbody>
-                        {/* table rows (data) - TODO: MAP PLAYERS */}
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="">
-                            <div className="drop-shadow-xl rounded-full">
-                              <Image
-                                className="my-auto"
-                                src={'/images/icons/coinbase.svg'}
-                                width={24}
-                                height={24}
-                                alt={'token'}
-                              ></Image>
-                            </div>
-                          </td>
-                          <td className="pl-3">
-                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
-                            {/* user address */}
-                          </td>
-                          <td className="pl-5">
-                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
-                          </td>
-                        </tr>
-                      </tbody>
+                      <tbody>{tempTableRows}</tbody>
                     </table>
                   </div>
+                  {/* users-in-game table */}
+
                   {/* {gameInfo.players.map((player, i) => {
                     return (
                       <div key={i} className="w-[208px]">
@@ -660,10 +516,10 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                 </div>
               </div>
               {/* DEV: FORCE GAME START */}
-              <div className="absolute right-20 bottom-20 mt-10 w-[120px]">
+              <div className="absolute right-20 bottom-20 mt-10 w-[140px]">
                 <button
                   onClick={() => (isModalOpen ? handleCloseModal() : handleOpenModal())}
-                  className="border-2 rounded-lg"
+                  className="h-16 font-bold text-black p-2 border-2 rounded-lg bg-red-600"
                 >
                   Force Game Start
                 </button>
@@ -671,8 +527,13 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
             </div>
           </div>
         </div>
+      </div>
+    </Page>
+  );
+};
 
-        {/* old info container */}
+{
+  /* old info container 
         <div className="mt-24 mx-[4.5rem]">
           <h4 className="text-brand-green mb-16">Winner Takes All - Game {aid}</h4>
           <section
@@ -680,14 +541,14 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
             } mb-24`}
           >
-            {/* left column */}
+            {/* left column 
             <div className="basis-3/4">
               <h4 className="title32 mb-6">
                 Players: ({gameInfo.players.length}/{tableInfo.maxPlayers}):
               </h4>
-              {/* table of players */}
+              {/* table of players 
               <div className="addressGrid">
-                {/* temp data wheile players are none */}
+                {/* temp data wheile players are none 
                 <div className="flex gap-2 w-[208px]">
                   <p>wallet address</p>
                   <p className="font-bold">entry count</p>
@@ -718,12 +579,12 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                 })}
               </div>
             </div>
-            {/* right column */}
+            {/* right column 
             <div className="basis-1/4 mb-4">
-              {/* status section */}
+              {/* status section 
               <p className="text-[24px] font-medium mb-4">Status: </p>
               <div className="ml-9 title20 flex flex-col gap-6">
-                {/* TODO: UPDATE STATUSES */}
+                {/* TODO: UPDATE STATUSES 
                 <p>Joined - Table Full </p>
                 {gameInfo.players.length >= 2 &&
                   gameInfo.gameEnded === false &&
@@ -750,7 +611,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                   </button>
                 )}
               </div>
-              {/* details section */}
+              {/* details section 
               <p className="text-[24px] font-medium mt-8 mb-4">Details: </p>
               <div className="ml-9 body18 flex flex-col gap-6">
                 <div className="flex gap-8 align-middle">
@@ -779,14 +640,14 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
         </div>
         {/* <h1 className="text-4xl font-bold absolute top-10">Winner Takes All</h1>
         <h1 className="text-3xl font-bold absolute top-24">Game {aid}</h1>
-        <hr /> */}
+        <hr /> 
         <div className="mt-10 flex flex-col text-center text-xl">
           <code className="mb-8">
             Buy In: {formatBuyIn()} {tokenName()}
           </code>
           <code className="mb-8">
             {' '}
-            {/* Make it fetch platformFee from contract */}
+            {/* Make it fetch platformFee from contract 
             Amount To Win: {getAmountToWin()}
           </code>
           <code className="mb-8">Chance To Win: {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%</code>
@@ -827,11 +688,12 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
         {/* <Link href={'/winnertakesall'} className="border border-white p-2 absolute bottom-4">
           Go Back
-        </Link> */}
+        </Link> 
       </div>
     </Page>
   );
-};
+}; */
+}
 
 export const getServerSideProps: GetServerSideProps = async function ({params}) {
   // Set default props, returning 0

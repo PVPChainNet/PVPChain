@@ -15,6 +15,8 @@ import handleAddress from '@/root/src/typescript/utils/handleAddress';
 import ActionButtonItem from '@/root/src/components/buttons/ActionButton';
 import Footer from '@/root/src/components/footer';
 import RRPlayer from '@/root/src/components/rrplayer';
+import {motion, AnimatePresence} from 'framer-motion';
+import ResultsModal from '@/root/src/components/modals/results';
 
 type HomePagePropsT = {props: {aid: number}};
 
@@ -38,6 +40,14 @@ type TableInfoT = {
 
 const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const sidebarStateActive = useSidebar();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+  const handleResultsAction = () => {
+    console.log('results action');
+  };
+
   const {address, isConnected} = useAccount();
   const [minBuyIn, setMinBuyIn] = useState<string>('0');
 
@@ -286,6 +296,9 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       {/* <PageContent contentPosition="center"> */}
       <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImageNoFade`}>
+        <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+          {isModalOpen && <ResultsModal onAction={handleResultsAction} onClose={handleCloseModal} />}
+        </AnimatePresence>
         {/* game window container */}
         <div className="mt-28 mx-10">
           {/* game title and meta info */}
@@ -336,10 +349,18 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               {/* absolute players overlay */}
               <div className="absolute top-10 left-14">
                 <h4 className="title20">Players</h4>
-                <p className="ml-6 mt-3 text-[32px]">
-                  {gameInfo.players.length}
-                  {/* /{tableInfo.maxPlayers} */}
+                <p className="ml-3 mt-3 text-[32px]">
+                  {gameInfo.players.length}/{tableInfo.maxPlayers}
                 </p>
+              </div>
+              {/* DEV: FORCE GAME START */}
+              <div className="absolute left-10 bottom-10 mt-10 w-[140px]">
+                <button
+                  onClick={() => (isModalOpen ? handleCloseModal() : handleOpenModal())}
+                  className="h-16 font-bold text-black p-2 border-2 rounded-lg bg-red-600"
+                >
+                  Force Game Start
+                </button>
               </div>
               {/* main game section */}
               <div className="h-3/5 w-3/5 mx-auto mt-20 bg-slate-extra border-8 border-grey-main rounded-full">
@@ -351,8 +372,8 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                       {' '}
                       {/* top center */}
                       <RRPlayer
-                        hasJoined={true}
-                        isLoggedinUser={true}
+                        hasJoined={isUserInGame()}
+                        isLoggedinUser={isUserInGame()}
                         player={gameInfo.players[0]}
                         positionInGrid="top"
                       />
@@ -478,9 +499,19 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               </div>
 
               {/* enter + vote buttons */}
-              <div className="mx-auto my-8 w-1/2 flex justify-center gap-10">
-                <ActionButtonItem text="Join Game" color="green" link={''} />
-                <ActionButtonItem text="Vote to End Early" color="pink" link={''} />
+              <div className="mx-auto mt-24 mb-8 w-1/2 flex justify-center gap-10">
+                {/* if user has joined */}
+                {isUserInGame() ? (
+                  <ActionButtonItem text="Joined Game" color="green" />
+                ) : (
+                  <ActionButtonItem text="Join Game" color="blue" onClick={join} />
+                )}
+                {/* if user can end early */}
+                {shouldDisplayEndEarly() ? (
+                  <ActionButtonItem text="Vote to End Early" color="pink" onClick={endEarly} />
+                ) : (
+                  <ActionButtonItem text="Leave Game" color="pink" onClick={leaveGame} />
+                )}
               </div>
             </div>
             <div className="basis-1/4">

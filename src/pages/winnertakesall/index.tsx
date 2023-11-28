@@ -147,7 +147,7 @@ const Home: NextPage = () => {
   };
 
   const goToHistory = () => {
-    router.push('/roulette/history');
+    router.push('/russianroulette/history');
   };
 
   // Event handler to update the selected value
@@ -236,6 +236,10 @@ const Home: NextPage = () => {
                   <div className="bg-slate-main rounded-lg p-8 flex flex-col" key={i}>
                     <p className="text-2xl font-medium mb-8">Table {i + 1}</p>
                     <div className="mr-4 flex justify-between text-xl">
+                      <p className="font-medium">Total Pot: </p>
+                      <p className="font-light">$20,000</p>
+                    </div>
+                    <div className="mr-4 flex justify-between text-xl">
                       <p className="font-medium">Buy In: </p>
                       <p className="font-light">
                         {formatBuyIn(table)} {tokenName(table)}
@@ -246,6 +250,10 @@ const Home: NextPage = () => {
                       <p className="font-light">
                         {table.numberOfPlayers}/{table.maxPlayers}
                       </p>
+                    </div>
+                    <div className="mr-4 flex justify-between text-xl">
+                      <p className="font-medium">Risk Points: </p>
+                      <p className="font-light">10</p>
                     </div>
                     <div className="mt-12 mx-4" onClick={() => tableClick(table, i + 1)}>
                       <ActionButtonItem text={timeRemainingString(table)} color={'blue'} link={''} />

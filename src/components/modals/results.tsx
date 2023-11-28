@@ -2,23 +2,39 @@ import React, {useEffect, useState} from 'react';
 import Sound from 'react-sound';
 import Backdrop from '../backdrop';
 import {motion} from 'framer-motion';
+import {set} from 'lodash';
 
 interface ResultsModalProps {
   onClose: () => void;
   onAction: () => void;
-  resultStateToDisplay: number;
 }
 
-const Results: React.FC<ResultsModalProps> = ({onClose, onAction, resultStateToDisplay}) => {
+const Results: React.FC<ResultsModalProps> = ({onClose, onAction}) => {
   //   const [playSound, setPlaySound] = useState(false);
 
-  //   0 = waiting to start
-  //   1 = announce game starting
-  //   2 = starting in 3
-  //   3 = starting in 2
-  //   4 = starting in 1
-  //   5 = results ready
+  //   0 = announce game starting
+  //   1 = starting in 3
+  //   2 = starting in 2
+  //   3 = starting in 1
+  //   4 = results ready
   const [resultStateIndex, setResultStateIndex] = useState(0);
+  const resultStateData = [
+    {
+      message: 'Game Starting!',
+    },
+    {
+      message: 'Game starting in 3',
+    },
+    {
+      message: 'Game starting in 2',
+    },
+    {
+      message: 'Game starting in 1',
+    },
+    {
+      message: 'Results!',
+    },
+  ];
 
   const dropIn = {
     hidden: {opacity: 0, y: '-100vh'},
@@ -27,10 +43,23 @@ const Results: React.FC<ResultsModalProps> = ({onClose, onAction, resultStateToD
   };
 
   const handleAction = () => {
-    onAction();
+    setResultStateIndex(resultStateIndex + 1);
+    onAction(); // action state from parent component
   };
 
-  //   useEffect(() => {}, [resultStateIndex]);
+  useEffect(() => {
+    // if result state is 1 or 2 or 3, increment the result state index after 1 second
+    if (resultStateIndex > 0 && resultStateIndex < 4) {
+      setTimeout(() => {
+        setResultStateIndex(resultStateIndex + 1);
+      }, 1000);
+
+      // if result state is 3, call onAction() to check game results
+      if (resultStateIndex === 3) {
+        onAction(); // TODO: modify parent function to return game results
+      }
+    }
+  }, [resultStateIndex]);
 
   return (
     <Backdrop onClick={onClose}>
@@ -42,7 +71,10 @@ const Results: React.FC<ResultsModalProps> = ({onClose, onAction, resultStateToD
         animate="visible"
         exit="exit"
       >
-        <button onClick={handleAction}>Next Result State</button>
+        <div className="p-4">
+          <h2 className="text-xl font-semibold mb-2">{resultStateData[resultStateIndex]?.message}</h2>
+          {resultStateIndex < 4 && <button onClick={handleAction}>Next Result State</button>}
+        </div>
       </motion.div>
     </Backdrop>
   );
