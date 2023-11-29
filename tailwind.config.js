@@ -22,6 +22,8 @@ module.exports = {
         'black-main': '#1D1E22',
         'black-dark': '#12100E',
         'grey-main': '#959595',
+        'grey-light': '#D9D9D9',
+        'grey-lighter': '#E1E1E1',
         'brand-green': '#A3F777',
         'brand-green-hover': '#5df10e',
         'brand-blue': '#3A7CF8',

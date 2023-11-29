@@ -24,11 +24,17 @@ export default function Profile() {
     setIsModalOpen(false);
   };
 
-  const handleAction = () => {
-    // Perform your action here
+  const handleAction = async (amount: number, isBNB: boolean): Promise<boolean> => {
+    // user clicked claim in the claim modal. execute purchase
     // ...
-    // Close the modal
-    // handleCloseModal();
+
+    // return boolean based on success of purchase
+    // this will determine whether to display a 'claim successful' message or 'claim failed' message to user
+
+    //simulate a response of true after 2 seconds
+    return new Promise(resolve => {
+      setTimeout(() => resolve(true), 2000);
+    });
   };
 
   function handleRowClick(link: string): void {
@@ -151,7 +157,14 @@ export default function Profile() {
                   >
                     Claim
                   </button>
-                  {isModalOpen && <ClaimModal onClose={handleCloseModal} onAction={handleAction} />}
+                  {isModalOpen && (
+                    <ClaimModal
+                      onClose={handleCloseModal}
+                      onAction={handleAction}
+                      totalRemainingToClaim={10.55}
+                      isAmountInBNB={false}
+                    />
+                  )}
                   {/* TODO: else, remaining is 0. show claimed button */}
                   {/* <div className="flex justify-center items-center h-11 w-full max-w-[140px] text-white-main rounded-3xl border-2 border-slate-accent bg-slate-light">
                     <p className="">Claimed</p>
