@@ -101,10 +101,10 @@ export default function Nav() {
               </div>
               <ul className="my-4 flex flex-col gap-3">
                 <li className="">
-                  <MenuItem link={'#'} text={'Token Leaderboard'} />
+                  <MenuItem link={'/tokenleaderboard'} text={'Token Leaderboard'} />
                 </li>
                 <li className="">
-                  <MenuItem link={'#'} text={'Player Leaderboard'} />
+                  <MenuItem link={'/playerleaderboard'} text={'Player Leaderboard'} />
                 </li>
               </ul>
             </div>
@@ -128,10 +128,22 @@ export default function Nav() {
               ))}
               <p className="text-center title20 mt-4 mb-2">LB</p>
               <li className="" title={'Token Leaderboard'}>
-                <ActionButton color="grey" link={'#'} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
+                <ActionButton
+                  color="grey"
+                  link={'/tokenleaderboard'}
+                  icon="/images/icons/house-96.png"
+                  iconwidth={30}
+                  circle={true}
+                />
               </li>
               <li className="" title={'Player Leaderboard'}>
-                <ActionButton color="grey" link={'#'} icon="/images/icons/house-96.png" iconwidth={30} circle={true} />
+                <ActionButton
+                  color="grey"
+                  link={'playerleaderboard'}
+                  icon="/images/icons/house-96.png"
+                  iconwidth={30}
+                  circle={true}
+                />
               </li>
             </ul>
           )}
@@ -225,7 +237,7 @@ export default function Nav() {
                 {/* <div title="Token Leaderboard">
                   <ActionButton
                     color="grey"
-                    link="/lottery"
+                    link="/tokenleaderboard"
                     icon="/images/icons/lottery-90.png"
                     iconwidth={30}
                     circle={true}
@@ -234,7 +246,7 @@ export default function Nav() {
                 <div title="Player Leaderboard">
                   <ActionButton
                     color="grey"
-                    link="/lottery"
+                    link="/playerleaderboard"
                     icon="/images/icons/lottery-90.png"
                     iconwidth={30}
                     circle={true}

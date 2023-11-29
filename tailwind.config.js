@@ -33,6 +33,7 @@ module.exports = {
         'brand-pink-hover': '#DA53B4',
         'brand-grey': '#363B52',
         'brand-grey-hover': '#4D546F',
+        'brand-orange': '#FFAF75',
       },
       dropShadow: {
         'brand-shadow-1': '0px 4px 4px rgba(0, 0, 0, 0.25);',

@@ -117,7 +117,7 @@ export default function Profile() {
           <div className="flex justify-center gap-4 mt-5">
             <button
               onClick={() => setSelectedTab('Claim')}
-              className={`h-12 w-36 rounded-3xl bg-slate-light text-[20px] text-white-main ${
+              className={`h-12 w-36 rounded-3xl bg-slate-light text-[20px] text-white-main hover:bg-black-main ${
                 selectedTab === 'Claim' ? 'font-medium border-2 border-brand-green' : 'font-light'
               }`}
             >
@@ -125,7 +125,7 @@ export default function Profile() {
             </button>
             <button
               onClick={() => setSelectedTab('Game History')}
-              className={`h-12 w-40 rounded-3xl bg-slate-light text-[20px] text-white-main ${
+              className={`h-12 w-40 rounded-3xl bg-slate-light text-[20px] text-white-main hover:bg-black-main ${
                 selectedTab === 'Game History' ? 'font-medium border-2 border-brand-green' : 'font-light'
               }`}
             >

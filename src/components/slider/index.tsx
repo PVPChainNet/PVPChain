@@ -33,9 +33,9 @@ const Slider: React.FC<SliderProps> = ({totalAmount, isFeeApplied, onChange}) =>
         <p className="text-[16px] font-light">{totalAmount}</p>
       </div>
       <div className="mt-7 flex justify-evenly items-center ">
-        <p className="text-[16px] font-light text-[#FFAF75]">{value} BNB</p>
+        <p className="text-[16px] font-light text-brand-orange">{value} BNB</p>
         <div className="h-[26px] rotate-180 arrow"></div>
-        <p className="text-[16px] font-light text-[#FFAF75]">20 DOGE</p>
+        <p className="text-[16px] font-light text-brand-orange">20 DOGE</p>
       </div>
       {isFeeApplied ? (
         <p className="mt-2 text-[12px] text-center text-red-600 font-light">10% Fee Applied</p>
