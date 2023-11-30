@@ -92,6 +92,7 @@ export default function MusicControl(this: any) {
           onPlaying={handleSongPlaying}
           onFinishedPlaying={handleSongFinishedPlaying}
           onPause={onPause}
+          volume={20} // 0-100
           // onResume={handleSongResume}
         />
       </div>
