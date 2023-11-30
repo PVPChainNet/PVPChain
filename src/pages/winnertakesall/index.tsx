@@ -2,7 +2,7 @@ import {NextPage} from 'next';
 
 import PageContent from '@/components/page/content';
 import Page from '@/components/page';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {WinnerTakesAll} from '../../typescript/contracts';
 import {useAccount, useContractRead, useContractWrite} from 'wagmi';
@@ -150,9 +150,21 @@ const Home: NextPage = () => {
     router.push('/russianroulette/history');
   };
 
+  useEffect(() => {
+    // Check if there's a currency parameter in the URL
+    const {currency} = router.query;
+    // Update tableCurrency state if the currency parameter is present
+    if (currency) {
+      setTableCurrency(currency as string);
+    }
+  }, [router.query]); // Re-run the effect when the URL changes
+
   // Event handler to update the selected value
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTableCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTableCurrency(event.target.value);
+
+    // Update the URL with the new currency parameter
+    router.push(`/winnertakesall?currency=${event.target.value}`);
   };
 
   return (
@@ -199,12 +211,12 @@ const Home: NextPage = () => {
               className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
               placeholder="ETH"
               value={tableCurrency}
-              onChange={handleSelectChange}
+              onChange={handleTableCurrencyChange}
             >
               <option value="">Select a currency: </option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="BNB">BNB</option>
+              <option value="DOGE">DOGE</option>
+              <option value="ETH">ETH</option>
             </select>
           </div>
           <section

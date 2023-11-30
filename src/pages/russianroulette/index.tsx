@@ -149,7 +149,6 @@ const Home: NextPage = () => {
   useEffect(() => {
     // Check if there's a currency parameter in the URL
     const {currency} = router.query;
-    console.log('currency', currency);
     // Update tableCurrency state if the currency parameter is present
     if (currency) {
       setTableCurrency(currency as string);
