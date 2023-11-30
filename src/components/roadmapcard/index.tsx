@@ -21,7 +21,11 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({title, textItems, releaseWindo
 
   return (
     <div className="">
-      <div className={`flex flex-col ${isPositionOnLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+      <div
+        className={`flex flex-col-reverse ${
+          isPositionOnLeft ? 'md:flex-row justify-evenly' : 'md:flex-row-reverse justify-evenly'
+        }`}
+      >
         {/* text section */}
         <div className="whiteToGreenGradient w-full max-w-[540px] min-h-[260px] max-h-[360px] rounded-3xl drop-shadow-lg px-10 py-7">
           <p className="text-black-dark title32 mb-8">{title}</p>
@@ -32,7 +36,7 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({title, textItems, releaseWindo
           ))}
         </div>
         {/* release window */}
-        <div className={`${isPositionOnLeft ? 'md:rotate-90' : 'md:-rotate-90'}`}>
+        <div className={`${isPositionOnLeft ? 'md:rotate-90 self-center' : 'md:-rotate-90 self-center'}`}>
           <p className="uppercase text-[32px] font-medium">{releaseWindow}</p>
         </div>
       </div>

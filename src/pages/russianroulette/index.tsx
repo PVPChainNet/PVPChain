@@ -127,6 +127,12 @@ const Home: NextPage = () => {
   };
 
   const tableClick = (table: TableT, tableIndex: number) => {
+    //ensure that a currency is selected
+    if (tableCurrency === '') {
+      toast.error('Please select a currency');
+      return;
+    }
+
     if (table.numberOfPlayers === '0') {
       joinGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],

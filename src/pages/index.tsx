@@ -153,7 +153,7 @@ const Home: NextPage = () => {
           {/* open source and blockchain info cards */}
           <div className="mt-24 flex flex-col md:flex-row justify-evenly gap-8 text-black-dark">
             <Reveal>
-              <div className="bg-[#F5F5F5] w-full max-w-[540px] min-h-[360px] rounded-3xl drop-shadow-lg flex flex-col justify-evenly px-10 py-7">
+              <div className="bg-[#F5F5F5] w-full max-w-[540px] min-h-[360px] rounded-3xl after:drop-shadow-lg flex flex-col justify-evenly px-10 py-7">
                 <Image
                   className="mx-auto"
                   src="/images/icons/open-source.png"
@@ -169,7 +169,7 @@ const Home: NextPage = () => {
               </div>
             </Reveal>
             <Reveal delay={1}>
-              <div className="bg-[#F5F5F5] w-full max-w-[540px] min-h-[360px] rounded-3xl drop-shadow-lg flex flex-col justify-evenly px-10 py-7">
+              <div className="bg-[#F5F5F5] w-full max-w-[540px] min-h-[360px] rounded-3xl after:drop-shadow-lg flex flex-col justify-evenly px-10 py-7">
                 <Image
                   className="mx-auto"
                   src="/images/icons/blockchain.png"
@@ -187,7 +187,7 @@ const Home: NextPage = () => {
           </div>
 
           {/* how it works section */}
-          <div className="mt-11 mb-28 flex flex-col md:flex-row">
+          <div className="mt-11 mb-28 flex flex-col md:flex-row gap-4">
             {/* left column */}
             <div className="basis-1/2">
               <h4 className="my-10 text-black-dark">How it Works</h4>
@@ -206,7 +206,16 @@ const Home: NextPage = () => {
               </div>
             </div>
             {/* right column */}
-            <div className="basis-1/2 rounded-lg bg-yellow-300"></div>
+            <div className="basis-1/2 my-4 flex justify-center items-center rounded-xl bg-gradient-to-br from-slate-500 to-orange-300">
+              <div className="glassyBG">
+                <Image
+                  src={`/images/howitworks/${activeHowItWorksStep + 1}.png`}
+                  width={430}
+                  height={200}
+                  alt={'connect wallet image'}
+                />
+              </div>
+            </div>
           </div>
 
           {/* 3 steps cards */}

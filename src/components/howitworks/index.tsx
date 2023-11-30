@@ -20,7 +20,7 @@ const HowItWorksCard: React.FC<howItWorksProps> = ({index, title, description, a
   return (
     <div
       onClick={() => onClick(index)}
-      className={`cursor-pointer min-h-[80px] rounded-lg py-5 pl-5 ${
+      className={`cursor-pointer min-h-[80px] rounded-lg py-5 pl-5 pr-2 ${
         activeCard === index ? 'bg-slate-main' : 'bg-white-main'
       }`}
     >

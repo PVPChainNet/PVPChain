@@ -99,6 +99,12 @@ export default function PredictionMarket() {
   });
 
   const tableClick = (table: TableT, tableIndex: number) => {
+    //ensure that a currency is selected
+    if (tableCurrency === '') {
+      toast.error('Please select a currency');
+      return;
+    }
+
     if (table.numberOfPlayers === '0') {
       joinGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
@@ -235,9 +241,6 @@ export default function PredictionMarket() {
             </div>
             {/* </PageContent> */}
           </section>
-          <div className="flex justify-center mx-auto max-w-[245px]">
-            <ActionButtonItem text="Enter Prediction Market" color="blue" link="predictionmarket/play" />
-          </div>
         </div>
       </div>
     </Page>
