@@ -35,7 +35,7 @@ export default function Nav() {
           <Link href="https://app.gitbook.com/o/bosh1Lw7viN5cWrdY2Ig/s/NzQVjNo6xDa3gVEMSXEb/" target="_blank">
             <p>Whitepaper</p>
           </Link>
-          <Link href="/#">
+          <Link href="/privacypolicy">
             <p>Privacy Policy</p>
           </Link>
         </div>
