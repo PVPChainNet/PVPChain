@@ -15,7 +15,7 @@ const Reveal = ({children, width = 'fit-content', delay}: RevealProps) => {
   const mainControls = useAnimation();
 
   useEffect(() => {
-    console.log('isInView: ', isInView);
+    // console.log('isInView: ', isInView);
     if (isInView) {
       mainControls.start('visible');
     }
