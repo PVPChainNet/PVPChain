@@ -52,10 +52,6 @@
   @apply flex flex-col mx-4 my-4 lg:my-16;
 }
 
-.limeGreenGradientBG {
-  background: linear-gradient(to bottom left, #d0dacb00, #d0dacb);
-}
-
 .gameBGImage {
   @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
 }
@@ -95,6 +91,14 @@
   justify-content: center;
   overflow-y: hidden;
   z-index: 10;
+}
+
+.purpleTopToBottomGradient {
+  background: linear-gradient(180deg, #be68ec 0%, #be68ec00 100%);
+}
+
+.whiteToGreenGradient {
+  background: linear-gradient(to left, #f5f5f5 0%, #c8e1ba 100%);
 }
 
 h1 {
