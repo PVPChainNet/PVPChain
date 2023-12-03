@@ -12,7 +12,7 @@ const Backdrop = ({children, onClick}: BackdropProps) => {
   return (
     <motion.div
       onClick={onClick}
-      className={`backdrop ${sidebarStateActive ? 'pl-[324px]' : 'pl-[80px]'}`}
+      className={`backdrop ${sidebarStateActive ? 'sm:pl-[324px]' : 'sm:pl-[80px]'}`}
       initial={{opacity: 0}}
       animate={{opacity: 1}}
       exit={{opacity: 0}}

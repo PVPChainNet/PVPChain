@@ -69,7 +69,7 @@ const Home: NextPage = () => {
 
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
-      <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
+      <section className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <div className="relative mt-28 mb-20 ml-12 max-w-4xl">
           <Reveal delay={0}>
             <h2>
@@ -81,7 +81,7 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
+      <section className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <div className="ml-12 relative">
           {/* horizontal scroll button */}
           {/* <div className="absolute top-[40%] right-7 bg-slate-main rounded-full w-12 h-12">
@@ -142,11 +142,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </section>
-      <section
-        className={`bg-grey-lighter rounded-3xl transition-all duration-300 ${
-          sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'
-        }`}
-      >
+      <section className={`bg-grey-lighter rounded-3xl ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <div className="w-full mx-auto px-12 mt-24">
           <h1 className="text-center text-black-dark">Trust the Tech</h1>
           <h1 className="mt-3 text-center text-black-dark">Play the Games</h1>
@@ -265,11 +261,7 @@ const Home: NextPage = () => {
           </Link>
         </div>
       </section>
-      <section
-        className={`bg-black-dark min-h-[700px] transition-all duration-300 ${
-          sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'
-        }`}
-      >
+      <section className={`bg-black-dark min-h-[700px] ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <Reveal>
           <h3 className="mt-[168px] w-2/3 mx-auto text-center">
             Bet with BNB, and Claim your winnings in{' '}
@@ -291,11 +283,7 @@ const Home: NextPage = () => {
       </section>
 
       {/* roadmap section  */}
-      <section
-        className={`purpleTopToBottomGradient transition-all duration-300 ${
-          sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'
-        }`}
-      >
+      <section className={`purpleTopToBottomGradient ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <h1 className="mt-28 mb-24 text-center text-white-main">Roadmap</h1>
         {/* roadmap cards */}
         <div className="w-4/5 mx-auto">
@@ -313,7 +301,7 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
+      <section className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <Reveal>
           <h1 className="mt-[208px] w-4/5 mx-auto text-center drop-shadow">
             For questions, or to request features or token support, join our Discord
@@ -326,7 +314,7 @@ const Home: NextPage = () => {
           <p className="text-slate-main text-[24px] mx-auto my-auto">Join Discord</p>
         </Link>
       </section>
-      <section className={`transition-all duration-300 ${sidebarStateActive ? 'ml-[324px]' : 'ml-[80px]'}`}>
+      <section className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <Footer />
       </section>
     </Page>

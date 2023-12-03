@@ -24,10 +24,10 @@
     @apply bg-slate-main text-white-main;
   }
   .sidebarActive {
-    @apply ml-[324px] transition-all duration-300;
+    @apply sm:ml-[324px] transition-all duration-300;
   }
   .sidebarSmall {
-    @apply ml-[80px] transition-all duration-300;
+    @apply sm:ml-[80px] transition-all duration-300;
   }
 }
 
@@ -53,7 +53,7 @@
 }
 
 .gameBGImage {
-  @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
+  @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed pointer-events-none;
 }
 .gameBGImageNoFade {
   @apply bg-game-bg-temp-no-fade bg-cover bg-no-repeat bg-fixed;
