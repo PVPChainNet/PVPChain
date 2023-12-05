@@ -65,7 +65,7 @@ export default function MusicControl(this: any) {
 
   return (
     <>
-      <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-slate-light rounded-lg flex justify-evenly">
+      <div className="z-10 absolute top-8 -right-36 w-24 h-11 bg-deep-blue rounded-lg flex justify-evenly">
         <button onClick={handleSkipInteraction} title="skip song" className="hover:scale-110 transition-all">
           <Image src={'/images/icons/skip.png'} width={24} height={24} alt={'skip song button'} className="my-auto" />
         </button>

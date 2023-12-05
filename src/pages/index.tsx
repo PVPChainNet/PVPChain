@@ -142,7 +142,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </section>
-      <section className={`bg-grey-lighter rounded-3xl ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
+      <section className={`bg-white-darker rounded-3xl ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <div className="w-full mx-auto px-12 mt-24">
           <h1 className="text-center text-black-dark">Trust the Tech</h1>
           <h1 className="mt-3 text-center text-black-dark">Play the Games</h1>
@@ -202,12 +202,12 @@ const Home: NextPage = () => {
               </div>
             </div>
             {/* right column */}
-            <div className="basis-1/2 my-4 flex justify-center items-center rounded-xl bg-gradient-to-br from-slate-500 to-orange-300">
+            <div className="basis-1/2 my-4 flex justify-center items-center rounded-xl bg-gradient-to-br from-slate-500 to-[#f0bd64]">
               <div className="glassyBG">
                 <Image
                   src={`/images/howitworks/${activeHowItWorksStep + 1}.png`}
-                  width={430}
-                  height={200}
+                  width={1200}
+                  height={1200}
                   alt={'connect wallet image'}
                 />
               </div>
@@ -283,7 +283,7 @@ const Home: NextPage = () => {
       </section>
 
       {/* roadmap section  */}
-      <section className={`purpleTopToBottomGradient ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
+      <section className={`yellowTopToBottomGradient ${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'}`}>
         <h1 className="mt-28 mb-24 text-center text-white-main">Roadmap</h1>
         {/* roadmap cards */}
         <div className="w-4/5 mx-auto">

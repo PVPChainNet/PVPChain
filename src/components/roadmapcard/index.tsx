@@ -27,7 +27,7 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({title, textItems, releaseWindo
         }`}
       >
         {/* text section */}
-        <div className="whiteToGreenGradient w-full max-w-[540px] min-h-[260px] max-h-[360px] rounded-3xl drop-shadow-lg px-10 py-7">
+        <div className="bg-white-darker shadow-lg w-full max-w-[540px] min-h-[260px] max-h-[360px] rounded-3xl drop-shadow-lg px-10 py-7">
           <p className="text-black-dark title32 mb-8">{title}</p>
           {textItems.map((item, index) => (
             <li key={index} className="text-[16px] text-black-dark list-disc">

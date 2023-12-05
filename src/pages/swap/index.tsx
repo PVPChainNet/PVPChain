@@ -95,7 +95,7 @@ export default function Swap() {
             </div> */}
           </section>
           <div className="my-6 max-w-[650px] mx-auto">
-            <ActionButtonItem text="Swap" color="blue" link="" />
+            <ActionButtonItem text="Swap" color="green" link="" />
           </div>
         </div>
       </div>

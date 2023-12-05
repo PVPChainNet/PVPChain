@@ -141,7 +141,7 @@ const Home: NextPage = () => {
         },
       });
     } else {
-      const path = '/roulette/games/' + table.gameID;
+      const path = '/russianroulette/games/' + table.gameID;
       router.push(path);
       // joinGame?.({
       //   recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
@@ -208,7 +208,7 @@ const Home: NextPage = () => {
           <div className="flex gap-4 align-middle mb-10">
             <h4 className="text-brand-green">Join a Table </h4>
             <select
-              className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
+              className="h-12 my-auto rounded-lg bg-deep-blue flex justify-evenly"
               placeholder="ETH"
               value={tableCurrency}
               onChange={handleTableCurrencyChange}
@@ -228,8 +228,11 @@ const Home: NextPage = () => {
             <div className="w-full text-xl tableGrid min-h-[280px]">
               {tables.map((table, i) => {
                 return (
-                  <div className="bg-slate-main rounded-lg p-8 flex flex-col" key={i}>
-                    <p className="text-2xl font-medium mb-8">Table {i + 1}</p>
+                  <div
+                    className="bg-deep-blue border-2 border-brand-gold shadow-md rounded-lg p-6 flex flex-col"
+                    key={i}
+                  >
+                    <p className="text-3xl font-medium mb-8">Table {i + 1}</p>
                     <div className="mr-4 flex justify-between text-xl">
                       <p className="font-medium">Buy In: </p>
                       <p className="font-light">
@@ -247,7 +250,7 @@ const Home: NextPage = () => {
                       <p className="font-light">10</p>
                     </div>
                     <div className="mt-12 mx-4" onClick={() => tableClick(table, i + 1)}>
-                      <ActionButtonItem text={timeRemainingString(table)} color={'blue'} link={''} />
+                      <ActionButtonItem text={timeRemainingString(table)} color={'green'} link={''} />
                     </div>
                   </div>
                 );
@@ -255,7 +258,7 @@ const Home: NextPage = () => {
 
               {isConnected && (
                 <Link
-                  href={'/roulette/history'}
+                  href={'/russianroulette/history'}
                   className="cursor-pointer border border-solid border-white text-center mt-10 flex flex-col p-4"
                 >
                   View Game History

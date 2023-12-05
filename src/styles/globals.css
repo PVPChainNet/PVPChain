@@ -53,7 +53,7 @@
 }
 
 .gameBGImage {
-  @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed pointer-events-none;
+  @apply bg-game-bg-temp bg-cover bg-no-repeat bg-fixed;
 }
 .gameBGImageNoFade {
   @apply bg-game-bg-temp-no-fade bg-cover bg-no-repeat bg-fixed;
@@ -93,42 +93,48 @@
   z-index: 10;
 }
 
-.purpleTopToBottomGradient {
-  background: linear-gradient(180deg, #be68ec 0%, #be68ec00 100%);
+.yellowTopToBottomGradient {
+  /* background: linear-gradient(180deg, #be68ec 0%, #be68ec00 100%); */
+  background: linear-gradient(180deg, #f0bd64 0%, #be68ec00 100%);
 }
 
 .whiteToGreenGradient {
-  background: linear-gradient(to left, #f5f5f5 0%, #c8e1ba 100%);
+  /* background: linear-gradient(to left, #f5f5f5 0%, #c8e1ba 100%); */
+  background: linear-gradient(to left, #e1e1e1 0%, #438a6e 100%);
 }
 
 .glassyBG {
-  background: rgba(255, 255, 255, 0.19);
+  /* background: rgba(255, 255, 255, 0.19);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); */
   /* border: 1px solid rgba(255, 255, 255, 0.3); */
 }
 .glassyBG > img {
   --a: 8deg; /* control the angle of rotation (the smaller, the better) */
-  width: 250px;
+  width: 350px;
   aspect-ratio: 1;
   border-radius: 20px;
   transform: perspective(400px) rotate3d(var(--r, 1, -1), 0, calc(var(--i, 1) * var(--a)));
   -webkit-mask: linear-gradient(135deg, #000c 40%, #000, #000c 60%) 100% 100%/250% 250%;
+  mask: linear-gradient(135deg, #000c 40%, #000, #000c 60%) 100% 100%/250% 250%;
   transition: 0.4s;
   cursor: pointer;
 }
 .glassyBG > .alt {
   --r: 1, 1;
   -webkit-mask: linear-gradient(45deg, #000c 40%, #000, #000c 60%) 0 100%/250% 250%;
+  mask: linear-gradient(45deg, #000c 40%, #000, #000c 60%) 0 100%/250% 250%;
 }
 .glassyBG > img:hover {
   --i: -1;
   -webkit-mask-position: 0 0;
+  mask-position: 0 0;
 }
 .glassyBG > .alt:hover {
   -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
 }
 
 h1 {

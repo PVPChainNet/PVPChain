@@ -214,7 +214,7 @@ const Home: NextPage = () => {
           <div className="flex gap-4 align-middle mb-10">
             <h4 className="text-brand-green">Join a Table </h4>
             <select
-              className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
+              className="h-12 my-auto rounded-lg bg-deep-blue flex justify-evenly"
               placeholder="ETH"
               value={tableCurrency}
               onChange={handleTableCurrencyChange}
@@ -251,8 +251,8 @@ const Home: NextPage = () => {
                 //   );
                 // })}
                 return (
-                  <div className="bg-slate-main rounded-lg p-8 flex flex-col" key={i}>
-                    <p className="text-2xl font-medium mb-8">Table {i + 1}</p>
+                  <div className="bg-deep-blue border-2 border-brand-gold rounded-lg p-6 flex flex-col" key={i}>
+                    <p className="text-3xl font-medium mb-8">Table {i + 1}</p>
                     <div className="mr-4 flex justify-between text-xl">
                       <p className="font-medium">Total Pot: </p>
                       <p className="font-light">$20,000</p>
@@ -274,7 +274,7 @@ const Home: NextPage = () => {
                       <p className="font-light">10</p>
                     </div>
                     <div className="mt-12 mx-4" onClick={() => tableClick(table, i + 1)}>
-                      <ActionButtonItem text={timeRemainingString(table)} color={'blue'} link={''} />
+                      <ActionButtonItem text={timeRemainingString(table)} color={'green'} link={''} />
                     </div>
                   </div>
                 );

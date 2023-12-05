@@ -44,7 +44,7 @@ const Countdown: React.FC<CountdownProps> = ({targetDate, onCountdownEnd}) => {
   }, []);
 
   return (
-    <div className="bg-grey-lighter rounded-xl flex justify-center gap-6 mx-auto max-w-[450px] h-[100px] text-black-dark drop-shadow-lg">
+    <div className="bg-white-darker rounded-xl flex justify-center gap-6 mx-auto max-w-[450px] h-[100px] text-black-dark drop-shadow-lg">
       <div className="flex flex-col items-center">
         <p className="text-[40px] font-medium">{timeLeft.days}</p>
         <p className="text-[16px] font-light">Days</p>

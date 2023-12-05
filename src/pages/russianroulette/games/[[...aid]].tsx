@@ -302,7 +302,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
         {/* game window container */}
         <div className="mt-28 mx-10">
           {/* game title and meta info */}
-          <div className="bg-slate-extra h-14 rounded-t-lg px-5">
+          <div className="bg-deep-blue h-14 rounded-t-lg px-5">
             <div className="flex items-center">
               {/* left content - game title */}
               <h4 className="text-brand-green text-[24px] font-medium flex-none">Russian Roulette - Game {aid}</h4>
@@ -611,7 +611,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                   </div>
                   <hr className="my-2" />
                   <p className="font-medium text-sm">Amount to Win:</p>
-                  <p className="text-[28px] font-medium text-center mt-1 text-yellow-300">0.1218750 BNB</p>
+                  <p className="text-[28px] font-medium text-center mt-1 text-brand-gold">0.1218750 BNB</p>
                   <p className="mt-2 font-medium text-sm">Chance to Win:</p>
                   <p className="text-[28px] font-medium text-center mt-1 pb-6">
                     {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%

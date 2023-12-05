@@ -28,7 +28,7 @@ const HowItWorksCard: React.FC<howItWorksProps> = ({index, title, description, a
         {/* step number */}
         <div
           className={`flex justify-center items-center w-10 h-10 rounded-full ${
-            activeCard === index ? 'bg-black-dark' : 'bg-brand-cool-grey'
+            activeCard === index ? 'bg-brand-teal-dark' : 'bg-brand-teal-light'
           }`}
         >
           <p className="text-[16px]">{index + 1}</p>

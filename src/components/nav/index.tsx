@@ -21,7 +21,7 @@ export default function Nav() {
 
   const [showHeaderNavOnMobile, setShowHeaderNavOnMobile] = useState(true);
   const [showExpandedMobileNav, setShowExpandedMobileNav] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [prevScrollPos, setPrevScrollPos] = useState(typeof window !== 'undefined' ? window.pageYOffset : 0);
 
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
@@ -72,7 +72,7 @@ export default function Nav() {
 
       {/* desktop menu - sm and lg sidebar */}
       <nav
-        className={`hidden sm:block fixed h-full bg-slate-light transition-all duration-300 z-30 ${
+        className={`hidden sm:block fixed h-full bg-deep-blue transition-all duration-300 z-30 ${
           sidebarStateActive ? 'w-[324px] px-6' : 'w-20 px-2'
         }`}
       >
@@ -80,7 +80,7 @@ export default function Nav() {
         <div className="z-10 absolute top-8 -right-8">
           <button onClick={toggleSidebar} className="shake">
             {sidebarStateActive ? (
-              <div className="w-10 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
+              <div className="w-10 h-[44px] bg-deep-blue rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
                 <Image
                   src={'/images/icons/caret_darker_right.svg'}
                   width={10}
@@ -90,7 +90,7 @@ export default function Nav() {
                 />
               </div>
             ) : (
-              <div className="w-10 h-[44px] bg-slate-light rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
+              <div className="w-10 h-[44px] bg-deep-blue rounded-t-lg rounded-r-lg flex justify-center hover:scale-110">
                 <Image
                   src={'/images/icons/caret_darker_right.svg'}
                   width={10}
@@ -110,15 +110,18 @@ export default function Nav() {
         <div className={'transition-all'}>
           <Link href="/" className="block mt-2">
             {sidebarStateActive ? (
-              <Image src={'/images/logos/pvp_logo.svg'} width={132} height={56} alt={'PVP Logo'} />
+              <div className="flex justify-around mx-4 items-center">
+                <h4 className=" font-serif font-bold">PVP</h4>
+                <Image src={'/images/logos/new_logo.png'} width={108} height={108} alt={'PVP Logo'} />
+              </div>
             ) : (
               <div className="h-[56px] flex">
                 <Image
                   className="m-auto"
                   title="Home"
-                  src={'/images/logos/pvp_logo_no_text.svg'}
-                  width={30}
-                  height={30}
+                  src={'/images/logos/new_logo.png'}
+                  width={120}
+                  height={120}
                   alt={'PVP Logo'}
                 />
               </div>
