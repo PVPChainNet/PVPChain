@@ -24,7 +24,7 @@ const HowItWorksCard: React.FC<howItWorksProps> = ({index, title, description, a
         activeCard === index ? 'bg-slate-main' : 'bg-white-main'
       }`}
     >
-      <div className=" flex justify-start items-center gap-5">
+      <div className="flex justify-start items-center gap-5">
         {/* step number */}
         <div
           className={`flex justify-center items-center w-10 h-10 rounded-full ${
