@@ -42,24 +42,37 @@ const Home: NextPage = () => {
     {
       title: 'Public Launch',
       textItems: [
-        'Share platform details with token communities',
-        'Launch platform with PvP Games, including Russian Roulette and Winner Takes All',
-        'Listen to community feedback, continue platform development and support',
+        'Initial Launch on Binance Smart Chain',
+        '2 PvP Games, including Russian Roulette and Winner Takes All',
+        '1 House Games, Guess the Number',
+        'Token Partnership Programme',
       ],
       releaseWindow: 'December 2023',
     },
     {
-      title: 'Add NFT and Prediction Market',
+      title: 'Games and NFT',
       textItems: [
-        'Add PvP Game - Prediction Market. Prediction Market is a fun game to play at the market',
         'Add limited number of NFTs. NFT owners will receive platform benefits such as increased winnings',
+        'Add PvP Game - Prediction Market. Predict "under" or "over" for future token prices',
+        'Add House Game - Wheel of Fortune. The higher the spin cost, the greater the reward',
+        'Listen to community feedback, continue platform development and support',
       ],
       releaseWindow: 'Before 2024',
     },
     {
-      title: 'Add PvE Games',
-      textItems: ['Add PvE Games, including Slots, Coin Flip, and Wheel of Fortune', 'More info...'],
-      releaseWindow: 'January 2024',
+      title: 'Chain Expansion',
+      textItems: ['Expand to Polygon', 'New House Games, including Slots and Coin Flip', 'Custom Token Tables'],
+      releaseWindow: 'Q1 2024',
+    },
+    {
+      title: 'More Chains and Games!',
+      textItems: [
+        'Multi-Chain Expansion',
+        'New PvP and House Games',
+        'Additional Partnerships',
+        'Platform Advertising',
+      ],
+      releaseWindow: 'Q2 2024',
     },
   ];
 
@@ -288,7 +301,7 @@ const Home: NextPage = () => {
         {/* roadmap cards */}
         <div className="w-4/5 mx-auto">
           {roadmapItems.map((item, index) => (
-            <Reveal key={index}>
+            <Reveal key={index} width="100%">
               <RoadmapCard
                 title={item.title}
                 textItems={item.textItems}
