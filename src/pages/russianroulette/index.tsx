@@ -1,8 +1,8 @@
 import {NextPage} from 'next';
 
-import PageContent from '@/components/page/content';
+//import PageContent from '@/components/page/content';
 import Page from '@/components/page';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import {Game} from '../../typescript/contracts';
 import {useAccount, useContractRead, useContractWrite} from 'wagmi';
@@ -127,6 +127,12 @@ const Home: NextPage = () => {
   };
 
   const tableClick = (table: TableT, tableIndex: number) => {
+    //ensure that a currency is selected
+    if (tableCurrency === '') {
+      toast.error('Please select a currency');
+      return;
+    }
+
     if (table.numberOfPlayers === '0') {
       joinGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
@@ -135,7 +141,7 @@ const Home: NextPage = () => {
         },
       });
     } else {
-      const path = '/roulette/games/' + table.gameID;
+      const path = '/russianroulette/games/' + table.gameID;
       router.push(path);
       // joinGame?.({
       //   recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
@@ -146,9 +152,20 @@ const Home: NextPage = () => {
     }
   };
 
+  useEffect(() => {
+    // Check if there's a currency parameter in the URL
+    const {currency} = router.query;
+    // Update tableCurrency state if the currency parameter is present
+    if (currency) {
+      setTableCurrency(currency as string);
+    }
+  }, [router.query]); // Re-run the effect when the URL changes
+
   // Event handler to update the selected value
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTableCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTableCurrency(event.target.value);
+    // Update the URL with the new currency parameter
+    router.push(`/russianroulette?currency=${event.target.value}`);
   };
 
   return (
@@ -191,15 +208,15 @@ const Home: NextPage = () => {
           <div className="flex gap-4 align-middle mb-10">
             <h4 className="text-brand-green">Join a Table </h4>
             <select
-              className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
+              className="h-12 my-auto rounded-lg bg-deep-blue flex justify-evenly"
               placeholder="ETH"
               value={tableCurrency}
-              onChange={handleSelectChange}
+              onChange={handleTableCurrencyChange}
             >
               <option value="">Select a currency: </option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="BNB">BNB</option>
+              <option value="DOGE">DOGE</option>
+              <option value="ETH">ETH</option>
             </select>
           </div>
           <section
@@ -211,8 +228,11 @@ const Home: NextPage = () => {
             <div className="w-full text-xl tableGrid min-h-[280px]">
               {tables.map((table, i) => {
                 return (
-                  <div className="bg-slate-main rounded-lg p-8 flex flex-col" key={i}>
-                    <p className="text-2xl font-medium mb-8">Table {i + 1}</p>
+                  <div
+                    className="bg-deep-blue border-2 border-brand-gold shadow-md rounded-lg p-6 flex flex-col"
+                    key={i}
+                  >
+                    <p className="text-3xl font-medium mb-8">Table {i + 1}</p>
                     <div className="mr-4 flex justify-between text-xl">
                       <p className="font-medium">Buy In: </p>
                       <p className="font-light">
@@ -225,8 +245,12 @@ const Home: NextPage = () => {
                         {table.numberOfPlayers}/{table.maxPlayers}
                       </p>
                     </div>
+                    <div className="mr-4 flex justify-between text-xl">
+                      <p className="font-medium">Risk Points: </p>
+                      <p className="font-light">10</p>
+                    </div>
                     <div className="mt-12 mx-4" onClick={() => tableClick(table, i + 1)}>
-                      <ActionButtonItem text={timeRemainingString(table)} color={'blue'} link={''} />
+                      <ActionButtonItem text={timeRemainingString(table)} color={'green'} link={''} />
                     </div>
                   </div>
                 );
@@ -234,7 +258,7 @@ const Home: NextPage = () => {
 
               {isConnected && (
                 <Link
-                  href={'/roulette/history'}
+                  href={'/russianroulette/history'}
                   className="cursor-pointer border border-solid border-white text-center mt-10 flex flex-col p-4"
                 >
                   View Game History

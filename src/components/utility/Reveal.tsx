@@ -1,4 +1,4 @@
-import {motion, useInView, useAnimation} from 'framer-motion';
+import {motion, useInView, useAnimation, AnimatePresence} from 'framer-motion';
 import React from 'react';
 import {useRef, useEffect} from 'react';
 
@@ -15,7 +15,7 @@ const Reveal = ({children, width = 'fit-content', delay}: RevealProps) => {
   const mainControls = useAnimation();
 
   useEffect(() => {
-    console.log('isInView: ', isInView);
+    // console.log('isInView: ', isInView);
     if (isInView) {
       mainControls.start('visible');
     }
@@ -23,17 +23,19 @@ const Reveal = ({children, width = 'fit-content', delay}: RevealProps) => {
 
   return (
     <div ref={ref} style={{position: 'relative', width: width, overflow: 'hidden'}}>
-      <motion.div
-        variants={{
-          hidden: {opacity: 0, y: 75},
-          visible: {opacity: 1, y: 0},
-        }}
-        initial="hidden"
-        animate={mainControls}
-        transition={{duration: 1, delay: delay || 0.5}}
-      >
-        {children}
-      </motion.div>
+      <AnimatePresence mode="popLayout" initial={true}>
+        <motion.div
+          variants={{
+            hidden: {opacity: 0, y: 75},
+            visible: {opacity: 1, y: 0},
+          }}
+          initial="hidden"
+          animate={mainControls}
+          transition={{duration: 1, delay: delay || 0.5}}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

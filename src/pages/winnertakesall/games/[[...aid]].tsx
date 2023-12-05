@@ -13,6 +13,8 @@ import {MdCheckBox, MdOutlineCheckBoxOutlineBlank} from 'react-icons/md';
 import {BiMessageSquareX} from 'react-icons/bi';
 import handleAddress from '@/root/src/typescript/utils/handleAddress';
 import ActionButtonItem from '@/root/src/components/buttons/ActionButton';
+import {AnimatePresence} from 'framer-motion';
+import ResultsModal from '@/root/src/components/modals/results';
 
 type HomePagePropsT = {props: {aid: number}};
 
@@ -36,6 +38,14 @@ type TableInfoT = {
 
 const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const sidebarStateActive = useSidebar();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+  const handleResultsAction = () => {
+    console.log('results action');
+  };
+
   const {address, isConnected} = useAccount();
   const [minBuyIn, setMinBuyIn] = useState<string>('0');
 
@@ -275,11 +285,46 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
     } else return false;
   };
 
+  const generateTempTableRows = (): JSX.Element[] => {
+    const tempTableRows: JSX.Element[] = [];
+
+    for (let i = 1; i <= 50; i++) {
+      tempTableRows.push(
+        <tr>
+          <td className="">
+            <div className="h-6 w-6 drop-shadow-xl rounded-full bg-grey-main">
+              <Image
+                className="my-auto"
+                src={'/images/icons/profile-64.png'}
+                width={24}
+                height={24}
+                alt={'token'}
+              ></Image>
+            </div>
+          </td>
+          <td className="pl-3">
+            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p> {/* user address */}
+          </td>
+          <td className="pl-5">
+            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count */}
+          </td>
+        </tr>
+      );
+    }
+
+    return tempTableRows;
+  };
+
+  const tempTableRows = generateTempTableRows();
+
   return (
     <Page showConnectButton={true} showNav={false} showAppFooter={false} showAppHeader={false}>
       <div className={`${sidebarStateActive ? 'sidebarActive' : 'sidebarSmall'} min-h-screen gameBGImageNoFade`}>
+        <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+          {isModalOpen && <ResultsModal onAction={handleResultsAction} onClose={handleCloseModal} />}
+        </AnimatePresence>
         {/* game window container */}
-        <div className="mt-28 mx-10">
+        <div className="mt-28 mx-10 mb-12">
           {/* game title and meta info */}
           <div className="bg-slate-extra h-14 rounded-t-lg px-5">
             <div className="flex items-center">
@@ -341,35 +386,78 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               </div>
 
               {/* main game section */}
-              <div className="min-h-[500px] mx-10 mb-8 pt-5 bg-slate-extra rounded-lg">
+              <div className="min-h-[450px] mx-10 mb-8 pt-5 bg-slate-extra rounded-lg">
                 <div className="ml-20 mr-10">
                   {/* user entry, if joined */}
                   {/* {isUserInGame() && ( */}
-                  <div className="flex gap-9 items-center">
-                    <div className="drop-shadow-xl border-2 border-brand-green rounded-full">
+                  <div className="flex gap-9 items-center mb-2">
+                    <div className="bg-grey-main h-10 w-10 drop-shadow-xl border-2 border-brand-green rounded-full">
                       <Image
                         className="my-auto"
-                        src={'/images/icons/coinbase.svg'}
+                        src={'/images/icons/profile-64.png'}
                         width={40}
                         height={40}
                         alt={'token'}
-                      ></Image>{' '}
+                      ></Image>
                       {/* user icon */}
                     </div>
                     <p className="text-[14px] font-light text-brand-green">0xcA1551...b88C1F</p> {/* user address */}
                     <p className="text-[14px] font-light text-brand-green">12</p> {/* entry count */}
                   </div>
                   {/* )} */}
-                  {/* users-in-game table header */}
-                  <div className="my-4 ml-12 flex gap-12 w-[208px]">
-                    <p className="text-grey-main text-[16px]">Player</p>
-                    <p className="text-grey-main text-[16px]">Entries</p>
+
+                  {/* dynamic table of tables */}
+                  <div className="addressGrid">
+                    {/* users-in-game table */}
+                    <table className="table-auto border-spacing-10 ">
+                      {/* table headers */}
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th className="text-grey-main text-[16px] font-normal">Player</th>
+                          <th className="text-grey-main text-[16px] font-normal">Entries</th>
+                        </tr>
+                      </thead>
+                      {/* table body */}
+                      <tbody>
+                        {/* table rows (data) - TODO: MAP PLAYERS */}
+                        {tempTableRows}
+                        {/* <tr>
+                          <td className="">
+                            <div className="drop-shadow-xl rounded-full">
+                              <Image
+                                className="my-auto"
+                                src={'/images/icons/coinbase.svg'}
+                                width={24}
+                                height={24}
+                                alt={'token'}
+                              ></Image>
+                            </div>
+                          </td>
+                          <td className="pl-3">
+                            <p className="text-[14px] font-light text-white-main">0xcA1551...b88C1F</p>{' '}
+                            {/* user address 
+                          </td>
+                          <td className="pl-5">
+                            <p className="text-[14px] font-light text-white-main">5</p> {/* entry count 
+                          </td>
+                        </tr> */}
+                      </tbody>
+                    </table>
+                    <table className="table-auto border-spacing-10 ">
+                      {/* table headers */}
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th className="text-grey-main text-[16px] font-normal">Player</th>
+                          <th className="text-grey-main text-[16px] font-normal">Entries</th>
+                        </tr>
+                      </thead>
+                      {/* table body */}
+                      <tbody>{tempTableRows}</tbody>
+                    </table>
                   </div>
-                  {/* TODO: MAP PLAYERS */}
-                  <div className="flex gap-2 w-[208px]">
-                    <p>wallet address</p>
-                    <p className="font-bold">entry count</p>
-                  </div>
+                  {/* users-in-game table */}
 
                   {/* {gameInfo.players.map((player, i) => {
                     return (
@@ -403,7 +491,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               </div>
             </div>
 
-            <div className="basis-1/4 flex items-center">
+            <div className="basis-1/4 relative flex items-center">
               {/* game details */}
               <div className="h-1/2 w-full">
                 {/* game details table header */}
@@ -427,11 +515,25 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                   </p>
                 </div>
               </div>
+              {/* DEV: FORCE GAME START */}
+              <div className="absolute right-20 bottom-20 mt-10 w-[140px]">
+                <button
+                  onClick={() => (isModalOpen ? handleCloseModal() : handleOpenModal())}
+                  className="h-16 font-bold text-black p-2 border-2 rounded-lg bg-red-600"
+                >
+                  Force Game Start
+                </button>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </Page>
+  );
+};
 
-        {/* old info container */}
+{
+  /* old info container 
         <div className="mt-24 mx-[4.5rem]">
           <h4 className="text-brand-green mb-16">Winner Takes All - Game {aid}</h4>
           <section
@@ -439,14 +541,14 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
               sidebarStateActive ? 'contentContainerWithSidebarNoBG' : 'contentContainerWithoutSidebarNoBG'
             } mb-24`}
           >
-            {/* left column */}
+            {/* left column 
             <div className="basis-3/4">
               <h4 className="title32 mb-6">
                 Players: ({gameInfo.players.length}/{tableInfo.maxPlayers}):
               </h4>
-              {/* table of players */}
+              {/* table of players 
               <div className="addressGrid">
-                {/* temp data wheile players are none */}
+                {/* temp data wheile players are none 
                 <div className="flex gap-2 w-[208px]">
                   <p>wallet address</p>
                   <p className="font-bold">entry count</p>
@@ -477,12 +579,12 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                 })}
               </div>
             </div>
-            {/* right column */}
+            {/* right column 
             <div className="basis-1/4 mb-4">
-              {/* status section */}
+              {/* status section 
               <p className="text-[24px] font-medium mb-4">Status: </p>
               <div className="ml-9 title20 flex flex-col gap-6">
-                {/* TODO: UPDATE STATUSES */}
+                {/* TODO: UPDATE STATUSES 
                 <p>Joined - Table Full </p>
                 {gameInfo.players.length >= 2 &&
                   gameInfo.gameEnded === false &&
@@ -509,7 +611,7 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
                   </button>
                 )}
               </div>
-              {/* details section */}
+              {/* details section 
               <p className="text-[24px] font-medium mt-8 mb-4">Details: </p>
               <div className="ml-9 body18 flex flex-col gap-6">
                 <div className="flex gap-8 align-middle">
@@ -538,14 +640,14 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
         </div>
         {/* <h1 className="text-4xl font-bold absolute top-10">Winner Takes All</h1>
         <h1 className="text-3xl font-bold absolute top-24">Game {aid}</h1>
-        <hr /> */}
+        <hr /> 
         <div className="mt-10 flex flex-col text-center text-xl">
           <code className="mb-8">
             Buy In: {formatBuyIn()} {tokenName()}
           </code>
           <code className="mb-8">
             {' '}
-            {/* Make it fetch platformFee from contract */}
+            {/* Make it fetch platformFee from contract 
             Amount To Win: {getAmountToWin()}
           </code>
           <code className="mb-8">Chance To Win: {(100 / parseFloat(tableInfo.maxPlayers)).toFixed(2)}%</code>
@@ -586,11 +688,12 @@ const GamePage: NextPage = ({aid}: InferGetServerSidePropsType<typeof getServerS
 
         {/* <Link href={'/winnertakesall'} className="border border-white p-2 absolute bottom-4">
           Go Back
-        </Link> */}
+        </Link> 
       </div>
     </Page>
   );
-};
+}; */
+}
 
 export const getServerSideProps: GetServerSideProps = async function ({params}) {
   // Set default props, returning 0

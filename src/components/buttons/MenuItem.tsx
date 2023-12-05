@@ -15,7 +15,7 @@ export default function MenuItem({link, text}: MenuItemProps) {
       href={link}
       className={`flex justify-between align-middle h-[40px] w-full px-[14px] bg-slate-main rounded-lg ${
         router.pathname.includes(link)
-          ? 'bg-brand-green text-black focus:outline-none focus:ring-2 focus:ring-green-300 hover:bg-brand-green-hover'
+          ? 'bg-brand-green text-black focus:outline-none hover:bg-brand-green-hover'
           : 'hover:bg-slate-700'
       }`}
     >

@@ -1,7 +1,7 @@
 import Page from '@/components/page';
 import {useSidebar} from '@/contexts/SidebarContext';
 import ActionButtonItem from '../../components/buttons/ActionButton';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {BigNumber, ethers} from 'ethers';
 import {useAccount, useContractRead, useContractWrite} from 'wagmi';
@@ -99,6 +99,12 @@ export default function PredictionMarket() {
   });
 
   const tableClick = (table: TableT, tableIndex: number) => {
+    //ensure that a currency is selected
+    if (tableCurrency === '') {
+      toast.error('Please select a currency');
+      return;
+    }
+
     if (table.numberOfPlayers === '0') {
       joinGame?.({
         recklesslySetUnpreparedArgs: [BigNumber.from(tableIndex), BigNumber.from('0')],
@@ -126,9 +132,20 @@ export default function PredictionMarket() {
     }
   };
 
+  useEffect(() => {
+    // Check if there's a currency parameter in the URL
+    const {currency} = router.query;
+    // Update tableCurrency state if the currency parameter is present
+    if (currency) {
+      setTableCurrency(currency as string);
+    }
+  }, [router.query]); // Re-run the effect when the URL changes
+
   // Event handler to update the selected value
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleTableCurrencyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTableCurrency(event.target.value);
+    // Update the URL with the new currency parameter
+    router.push(`/predictionmarket?currency=${event.target.value}`);
   };
 
   return (
@@ -175,12 +192,12 @@ export default function PredictionMarket() {
               className="h-12 my-auto rounded-lg bg-slate-main flex justify-evenly"
               placeholder="ETH"
               value={tableCurrency}
-              onChange={handleSelectChange}
+              onChange={handleTableCurrencyChange}
             >
               <option value="">Select a currency: </option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="BNB">BNB</option>
+              <option value="DOGE">DOGE</option>
+              <option value="ETH">ETH</option>
             </select>
           </div>
           <section
@@ -215,7 +232,7 @@ export default function PredictionMarket() {
 
               {isConnected && (
                 <Link
-                  href={'/roulette/history'}
+                  href={'/russianroulette/history'}
                   className="cursor-pointer border border-solid border-white text-center mt-10 flex flex-col p-4"
                 >
                   View Game History
@@ -224,9 +241,6 @@ export default function PredictionMarket() {
             </div>
             {/* </PageContent> */}
           </section>
-          <div className="flex justify-center mx-auto max-w-[245px]">
-            <ActionButtonItem text="Enter Prediction Market" color="blue" link="predictionmarket/play" />
-          </div>
         </div>
       </div>
     </Page>
